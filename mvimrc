@@ -1,0 +1,17 @@
+set guifont=DejaVu\ Sans\ Mono\ 10
+set lines=60 columns=155
+set ruler
+set number
+
+noremap ≤ :bp
+noremap ≥ :bn
+noremap ∞ :b#
+noremap § :set tw=0
+noremap ¶ :set tw=80
+noremap • :set tw=120
+noremap õ ct_
+noremap å ggVG
+noremap £ :s/^/#/g
+noremap ™ :s/^#//g
+noremap ÷ :s/^/\/\//g
+noremap ¿ :s/^\/\///g

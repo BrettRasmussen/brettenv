@@ -1,0 +1,2 @@
+# system-specific aliases and such
+alias ls='ls -F --color=auto'
