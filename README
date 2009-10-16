@@ -1,0 +1,13 @@
+To get this working, the normal .bashrc file needs to have this line:
+
+  alias brettenv='source ~/.brettenv/bashrc'
+
+If this is your own home directory, also add the following immediately
+thereafter to set it all up by default on login:
+  
+  brettenv
+
+For other accounts you might have access to, such as root, you can symlink
+.brettenv in that account's home directory to the one in your home directory and
+add the "alias brettenv" line above to that user's normal .bashrc file.  Then
+you can call brettenv once from the command line to set it all up.
