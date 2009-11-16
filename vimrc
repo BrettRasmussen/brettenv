@@ -6,7 +6,7 @@ map! <S-Insert> <MiddleMouse>
 map  i
 map 6 :set tw=0
 map 7 :set tw=80
-map 8 :set tw=120
+map 8 :set tw=100
 map [3~ 
 imap [3~ 
 map / y:let @z = escape('^R"', '$*.^~[]\')/^Rz

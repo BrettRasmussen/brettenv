@@ -1,5 +1,5 @@
-set guifont=DejaVu\ Sans\ Mono\ 10
-set lines=60 columns=155
+set guifont=DejaVu\ Sans\ Mono\ 11
+set lines=50 columns=145
 set ruler
 set number
 
