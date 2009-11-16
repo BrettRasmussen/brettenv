@@ -16,4 +16,4 @@ noremap ¯ :s/^/\/\//g
 noremap ¿ :s/^\/\///g
 noremap ì :TlistToggle
 
-colorscheme nuvola
+colorscheme tolerable
