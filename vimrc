@@ -57,7 +57,7 @@ set softtabstop=2
 set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc
 set tabstop=2
 set termencoding=utf-8
-set textwidth=80
+set textwidth=100
 map f :set formatoptions=tcqa
 map F :set formatoptions=tcq
 

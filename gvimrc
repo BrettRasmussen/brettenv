@@ -7,7 +7,7 @@ noremap ¬ :bp
 noremap ® :bn
 noremap ¶ :set tw=0
 noremap · :set tw=80
-noremap ¸ :set tw=120
+noremap ¸ :set tw=100
 noremap ¨ ct_
 noremap á ggVG
 noremap ³ :s/^/#/g
