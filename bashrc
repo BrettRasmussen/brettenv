@@ -16,7 +16,7 @@ export PS1="\[\033[01;31m\][\u@\h:\W]\$(__git_ps1 '(%s)')$\[\033[00m\] "
 
 # various environment variables
 export EDITOR='vi -u ~/.brettenv/vimrc'
-export EMAIL=brettr@pmamediagroup.com
+export EMAIL=brett.rasmussen@twoedge.com
 
 # use vi mode for the command line
 set -o vi
