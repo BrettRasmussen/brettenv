@@ -39,6 +39,7 @@ alias vi='vim -u ~/.brettenv/vimrc'
 alias vim='vim -u ~/.brettenv/vimrc'
 alias mvim='mvim -u ~/.brettenv/vimrc -U ~/.brettenv/mvimrc'
 alias gvim='gvim -u ~/.brettenv/vimrc -U ~/.brettenv/gvimrc'
+alias ack='ack-grep'
 
 # get system-specific stuff
 if [ -f ~/.brettenv/local ]; then
