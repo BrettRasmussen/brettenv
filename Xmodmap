@@ -1,6 +1,1 @@
-remove Lock = Delete
-remove Control = Escape
-keysym Escape = Delete
 keysym Delete = Escape
-add Lock = Delete
-add Control = Escape
