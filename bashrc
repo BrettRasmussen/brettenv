@@ -25,7 +25,7 @@ export HISTTIMEFORMAT='(%F %T) '
 set -o vi
 
 # xmodmap stuff, including swapping esc and del
-xmodmap ~/.brettenv/Xmodmap
+#xmodmap ~/.brettenv/Xmodmap
 
 # use my settings (including vi mode) for programs using readline
 export INPUTRC='~/.brettenv/inputrc'
