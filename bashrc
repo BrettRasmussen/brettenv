@@ -21,9 +21,6 @@ export EMAIL=brett.rasmussen@twoedge.com
 # use vi mode for the command line
 set -o vi
 
-# xmodmap stuff, including swapping esc and del
-xmodmap ~/.brettenv/Xmodmap
-
 # use my settings (including vi mode) for programs using readline
 export INPUTRC='~/.brettenv/inputrc'
 
