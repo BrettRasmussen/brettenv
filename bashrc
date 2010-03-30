@@ -17,6 +17,7 @@ export PS1="\[\033[01;31m\][\u@\h:\W]\$(__git_ps1 '(%s)')$\[\033[00m\] "
 # various environment variables
 export EDITOR='vi -u ~/.brettenv/vimrc'
 export EMAIL=brett.rasmussen@twoedge.com
+export ACKRC='~/.brettenv/ackrc'
 
 # show timestamps for history
 export HISTTIMEFORMAT='(%F %T) '
