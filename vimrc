@@ -77,3 +77,5 @@ runtime! macros/matchit.vim
 " vim: set ft=vim :
 
 let Tlist_Exit_OnlyWindow = 1
+
+colorscheme tolerable
