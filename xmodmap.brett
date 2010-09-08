@@ -1,0 +1,3 @@
+#!/bin/sh
+
+xmodmap -e "keysym Delete = Escape"
