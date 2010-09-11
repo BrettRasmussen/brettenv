@@ -1,3 +1,36 @@
+# bashrc file to set up Brett's command-line environment, including settings for
+# tmux.  These instructions assume a home directory name of /home/brett.  On any
+# given system, install git (package is usually git-core), generate ssh keys
+# (ssh-keygen), put id_rsa.pub into github account, copy the github project
+# location, then do this in /home/brett:
+#
+# git clone git@github.com:BrettRasmussen/brettenv.git .brettenv
+#
+# (Or whatever the github project path is and desired location on the system.)
+# Then set up these aliases in the standard bashrc file (probably
+# /home/brett/.bashrc):
+#
+# alias brettenv='source ~/.brettenv/bashrc'
+# alias brettmux='source ~/.brettenv/tmux.conf'
+#
+# If you want other accounts on the same system to have access to these
+# settings, put those same two lines in those users' bashrc files as well, and
+# make a symlink /home/brett/.brettenv directory in those users' home
+# directories (note that /home/brett/.brettenv must be readable by those users;
+# if it can't be, then you'll need to put the brettenv directory somewhere
+# world-readable and link to it from all locations, including /home/brett).
+# Once this is done, you can get Brett's environment by typing "brettenv" or
+# "brettmux" from a prompt.
+#
+# If you always want a given user account to use this environment, put another
+# line in the standard bashrc file after the aliases above:
+#
+# brettenv
+#
+# See tmux.conf for an example of how to get tmux to always start up with the
+# brettenv settings turned on.
+
+
 # prompt with git branch displayed
 __git_ps1 ()
 {
