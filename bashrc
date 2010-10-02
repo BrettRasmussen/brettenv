@@ -11,7 +11,7 @@
 # /home/brett/.bashrc):
 #
 # alias brettenv='source ~/.brettenv/bashrc'
-# alias brettmux='source ~/.brettenv/tmux.conf'
+# alias bmux='source ~/.brettenv/tmux.conf'
 #
 # If you want other accounts on the same system to have access to these
 # settings, put those same two lines in those users' bashrc files as well, and
@@ -20,7 +20,7 @@
 # if it can't be, then you'll need to put the brettenv directory somewhere
 # world-readable and link to it from all locations, including /home/brett).
 # Once this is done, you can get Brett's environment by typing "brettenv" or
-# "brettmux" from a prompt.
+# "bmux" from a prompt.
 #
 # If you always want a given user account to use this environment, put another
 # line in the standard bashrc file after the aliases above:
