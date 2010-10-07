@@ -1,0 +1,31 @@
+#!/bin/sh
+
+usage="\
+Sets up ssh key-based authentication of the current user on a given remote\n
+machine by copying ~/.ssh/id_rsa.pub to the remote machine and appending it to\n
+the requested user's ~/.ssh/authorized_keys file.\n
+\n
+Usage: $0 <[user@]host | ssh_config_host> [port]" 
+
+show_usage="false"
+if [ $# -lt 1 ]; then show_usage="true"; fi
+if [ $# -gt 2 ]; then show_usage="true"; fi
+if [ $# -eq 1 ]; then
+  if [ "$1" = "--help" ]; then
+    show_usage="true"
+  fi
+fi
+if [ $show_usage = "true" ]; then
+  echo $usage
+  exit
+fi
+
+if [ -n "$2" ]; then
+  scp -P $2 ~/.ssh/id_rsa.pub $1:$USER.pub
+  ssh -p $2 $1 "cat $USER.pub >> .ssh/authorized_keys"
+  ssh -p $2 $1 "rm $USER.pub"
+else
+  scp ~/.ssh/id_rsa.pub $1:$USER.pub
+  ssh $1 "cat $USER.pub >> .ssh/authorized_keys"
+  ssh $1 "rm $USER.pub"
+fi
