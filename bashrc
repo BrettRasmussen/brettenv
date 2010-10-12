@@ -85,5 +85,10 @@ if [ -f ~/.brettenv/local ]; then
   source ~/.brettenv/local
 fi
 
-# This loads RVM into a shell session.
+# If this user is in the rvm group, enable the rvm shell script.
+if groups | grep -q rvm ; then
+  source "/usr/local/lib/rvm"
+fi
+
+# This loads RVM into a shell session.  Overrides system-wide rvm setup.
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
