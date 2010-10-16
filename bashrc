@@ -65,7 +65,7 @@ export INPUTRC='~/.brettenv/inputrc'
 shopt -s nocaseglob
 
 # portable aliases
-alias ls='ls -F'
+alias ls='ls -F --color=auto'
 alias l='ls -lFh'
 alias la='l -a'
 alias u='cd ../'
