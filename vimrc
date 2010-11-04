@@ -49,6 +49,8 @@ set ignorecase
 set incsearch
 set printoptions=paper:letter
 set ruler
+set cursorline
+":hi CursorLine   cterm=NONE ctermbg=darkgreen ctermfg=white guibg=darkgreen guifg=white
 set runtimepath=~/.brettenv/vim,~/.vim,/var/lib/vim/addons,/usr/share/vim/vimfiles,/usr/share/vim/vim72,/usr/share/vim/vimfiles/after,/var/lib/vim/addons/after,~/.vim/after,$VIMRUNTIME
 set scrolloff=5
 set shiftwidth=2
