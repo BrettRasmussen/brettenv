@@ -1,4 +1,5 @@
 require 'irb/completion'
+require 'pp'
 ARGV.concat [ "--readline", "--prompt-mode", "simple" ]
 
 module Readline
@@ -70,5 +71,15 @@ class Object
       print "   #{ANSI_LGRAY}#{item[2]}#{ANSI_RESET}\n"
     end
     data.size
+  end
+
+  def a1(reset=false)
+    @a1 = %w[a b c d e f] if @a1.nil? || reset
+    @a1
+  end
+
+  def a2(reset=false)
+    @a2 = %w[x y z] if @a1.nil? || reset
+    @a2
   end
 end
