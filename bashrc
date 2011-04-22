@@ -81,6 +81,9 @@ alias mvim='mvim -u ~/.brettenv/vimrc -U ~/.brettenv/mvimrc'
 alias gvim='gvim -u ~/.brettenv/vimrc -U ~/.brettenv/gvimrc'
 alias ack='ack-grep -a'
 alias sudo='sudo env PATH=$PATH'
+alias rss='ruby script/server'
+alias rsc='ruby script/console'
+alias rsgm='ruby script/generate migration'
 
 # get system-specific stuff
 if [ -f ~/.brettenv/local ]; then
