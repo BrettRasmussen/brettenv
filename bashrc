@@ -11,7 +11,7 @@
 # /home/brett/.bashrc):
 #
 # alias brettenv='source ~/.brettenv/bashrc'
-# alias bmux='source ~/.brettenv/tmux.conf'
+# alias bmux='tmux -f ~/.brettenv/tmux.conf -2'
 #
 # If you want other accounts on the same system to have access to these
 # settings, put those same two lines in those users' bashrc files as well, and
@@ -28,7 +28,9 @@
 # brettenv
 #
 # See tmux.conf for an example of how to get tmux to always start up with the
-# brettenv settings turned on.
+# brettenv settings turned on.  Note that the -2 in the tmux call aliased
+# above means that tmux will assume 256-color mode (useful for vi color
+# schemes, cursor highlighting, and the like).
 
 
 # prompt with git branch displayed
