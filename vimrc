@@ -81,4 +81,4 @@ let Tlist_Exit_OnlyWindow = 1
 set t_Co=256
 colorscheme tolerable
 set cursorline
-highlight CursorLine cterm=none gui=none ctermbg=59 guibg=59
+highlight CursorLine cterm=none gui=none ctermbg=236 guibg=236
