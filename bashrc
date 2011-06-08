@@ -85,6 +85,7 @@ alias ack='ack-grep -a'
 alias sudo='sudo env PATH=$PATH'
 alias rss='ruby script/server'
 alias rsc='ruby script/console'
+alias rsg='ruby script/generate'
 alias rsgm='ruby script/generate migration'
 
 # get system-specific stuff
