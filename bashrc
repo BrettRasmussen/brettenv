@@ -22,10 +22,16 @@
 # Once this is done, you can get Brett's environment by typing "brettenv" or
 # "bmux" from a prompt.
 #
-# If you always want a given user account to use this environment, put another
-# line in the standard bashrc file after the aliases above:
+# If you always want a given user account to use this environment, put the
+# following in the standard bashrc file after the aliases above:
 #
-# brettenv
+# if [[ -n "$PS1" ]]; then
+#   brettenv
+#   bmux
+# fi
+#
+# In this case, the "if" block prevents them being run if the login is
+# non-interactive.
 #
 # See tmux.conf for an example of how to get tmux to always start up with the
 # brettenv settings turned on.  Note that the -2 in the tmux call aliased
