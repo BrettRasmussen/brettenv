@@ -15,6 +15,8 @@ map u ct_
 "alt plus h/l (vim left/right) cycles through open file buffers
 map <M-h> :bp
 map <M-l> :bn
+map h :bp
+map l :bn
 
 map o Oj
 map ? :s/^\/\///g
