@@ -12,7 +12,10 @@ imap [3~ 
 map / y:let @z = escape('^R"', '$*.^~[]\')/^Rz
 map u ct_
 
-"set opt(alt) plus < or > to cycle through open file buffers
+"set alt plus left/right arrow keys to cycle through open file buffers
+"also leave alt plus < or > doing the same just in case
+map  :bp
+map  :bn
 map , :bp
 map . :bn
 
