@@ -12,12 +12,9 @@ imap [3~ 
 map / y:let @z = escape('^R"', '$*.^~[]\')/^Rz
 map u ct_
 
-"set alt plus left/right arrow keys to cycle through open file buffers
-"also leave alt plus < or > doing the same just in case
-map  :bp
-map  :bn
-map , :bp
-map . :bn
+"alt plus h/l (vim left/right) cycles through open file buffers
+map <M-h> :bp
+map <M-l> :bn
 
 map o Oj
 map ? :s/^\/\///g
