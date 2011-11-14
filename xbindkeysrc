@@ -84,6 +84,9 @@
 "/home/brett/bin/rubymine" 
   control+alt + m
 
+"/home/brett/bin/explorer" 
+  control+alt + e
+
 ##################################
 # End of xbindkeys configuration #
 ##################################
