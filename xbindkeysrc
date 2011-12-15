@@ -87,6 +87,9 @@
 "/home/brett/bin/explorer" 
   control+alt + e
 
+"/home/brett/bin/terminal" 
+  control+alt + t
+
 ##################################
 # End of xbindkeys configuration #
 ##################################
