@@ -81,6 +81,6 @@ runtime! macros/matchit.vim
 let Tlist_Exit_OnlyWindow = 1
 
 set t_Co=256
-colorscheme tolerable
+colorscheme blackburn
 set cursorline
 highlight CursorLine cterm=none gui=none ctermbg=236 guibg=236
