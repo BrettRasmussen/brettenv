@@ -69,9 +69,6 @@
 #"xterm"
 #  control + b:2
 
-"/usr/bin/chromium-browser" 
-  control+alt + c
-
 "/usr/bin/firefox" 
   control+alt + f
 
@@ -80,6 +77,9 @@
 
 "/usr/bin/kruler" 
   control+alt+shift + r
+
+"/home/brett/bin/chrome" 
+  control+alt + c
 
 "/home/brett/bin/rubymine" 
   control+alt + m
