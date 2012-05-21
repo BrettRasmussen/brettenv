@@ -72,27 +72,10 @@ export INPUTRC='~/.brettenv/inputrc'
 # case-insensitive globbing in bash
 shopt -s nocaseglob
 
-# portable aliases
-alias ls='ls -F --color=auto'
-alias l='ls -lFh'
-alias la='l -a'
-alias u='cd ../'
-alias b='cd -'
-alias pg='ping google.com'
-alias sc='script/console'
-alias rsc='ruby script/console'
-alias rss='ruby script/server'
-alias vi='vim -u ~/.brettenv/vimrc'
-alias vim='vim -u ~/.brettenv/vimrc'
-alias vib='vim -u ~/.brettenv/vimrc'
-alias mvim='mvim -u ~/.brettenv/vimrc -U ~/.brettenv/mvimrc'
-alias gvim='gvim -u ~/.brettenv/vimrc -U ~/.brettenv/gvimrc'
-alias ack='ack-grep -a'
-alias sudo='sudo env PATH=$PATH'
-alias rss='ruby script/server'
-alias rsc='ruby script/console'
-alias rsg='ruby script/generate'
-alias rsgm='ruby script/generate migration'
+# get aliases
+if [ -f ~/.brettenv/alias ]; then
+  source ~/.brettenv/alias
+fi
 
 # get system-specific stuff
 if [ -f ~/.brettenv/local ]; then
