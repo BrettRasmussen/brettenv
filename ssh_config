@@ -1,0 +1,59 @@
+ServerAliveInterval 300
+ServerAliveCountMax 3
+
+# grox
+Host grox
+  HostName aspen.twoedge.com
+  User brett
+
+# brettr-desktop
+Host m7
+  HostName internal.franklinestimating.com
+  Port 2217
+  User brett
+
+# mayurs-desktop
+Host mayur
+  HostName internal.franklinestimating.com
+  Port 2214
+  User brettr
+
+# darkknight as brettr
+Host dk-b
+  HostName darkknight.franklinestimating.com
+  Port 2218
+  User brettr
+
+# darkknight as git
+Host dk-g
+  HostName darkknight.franklinestimating.com
+  Port 2218
+  User git
+
+# darkknight as svn
+Host dk-s
+  HostName darkknight.franklinestimating.com
+  Port 2218
+  User svn
+
+# darkknight as fa
+Host dk-fa
+  HostName darkknight.franklinestimating.com
+  Port 2218
+  User fa
+
+# darkknight as franklin
+Host dk-f
+  HostName darkknight.franklinestimating.com
+  Port 2218
+  User franklin
+
+Host heroku.brettr
+  HostName heroku.com
+  IdentityFile /home/brett/.ssh/identity.heroku.brettr
+  IdentitiesOnly yes
+
+Host heroku.gregh
+  HostName heroku.com
+  IdentityFile /home/brett/.ssh/identity.heroku.gregh
+  IdentitiesOnly yes
