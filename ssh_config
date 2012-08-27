@@ -3,10 +3,15 @@ ServerAliveCountMax 3
 
 # grox
 Host grox
-  HostName aspen.twoedge.com
+  HostName home.twoedge.com
   User brett
 
-# brettr-desktop
+# jibboo
+Host jibboo
+  HostName 192.168.1.1
+  User brett
+
+# minor7th
 Host m7
   HostName internal.franklinestimating.com
   Port 2217
@@ -56,4 +61,9 @@ Host heroku.brettr
 Host heroku.gregh
   HostName heroku.com
   IdentityFile /home/brett/.ssh/identity.heroku.gregh
+  IdentitiesOnly yes
+
+Host heroku.darkerthan70
+  HostName heroku.com
+  IdentityFile /home/brett/.ssh/identity.darkerthan70
   IdentitiesOnly yes
