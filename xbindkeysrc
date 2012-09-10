@@ -72,7 +72,7 @@
 "/usr/bin/firefox" 
   control+alt + f
 
-"/usr/bin/gedit" 
+"/usr/bin/medit -n" 
   control+alt + n
 
 "/usr/bin/kruler" 
