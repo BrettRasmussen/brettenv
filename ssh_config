@@ -67,3 +67,8 @@ Host heroku.darkerthan70
   HostName heroku.com
   IdentityFile /home/brett/.ssh/identity.darkerthan70
   IdentitiesOnly yes
+
+Host jd-b
+  HostName 71.199.2.204
+  Port 2002
+  User brett
