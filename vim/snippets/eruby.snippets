@@ -1,0 +1,29 @@
+# eruby tag
+snippet r
+	<% ${1} %>
+# eruby output tag
+snippet re
+	<%= ${1} %>
+# eruby end tag
+snippet e
+	<% end %>
+# eruby do block
+snippet d
+	<% ${1} do %>
+		${2}
+	<% end %>
+# eruby do block w/param
+snippet dp
+	<% ${1} do |${2:param}| %>
+		${3}
+	<% end %>
+# eruby do block w/output
+snippet de
+	<%= ${1} do %>
+		${2}
+	<% end %>
+# eruby do block w/output & param
+snippet dep
+	<%= ${1} do |${2:param}| %>
+		${3}
+	<% end %>

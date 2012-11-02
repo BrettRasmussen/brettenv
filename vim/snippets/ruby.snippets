@@ -131,7 +131,7 @@ snippet mod module .. ClassMethods .. end
 		end
 	end
 # attr_reader
-snippet r
+snippet ar
 	attr_reader :${1:attr_names}
 # attr_writer
 snippet w
@@ -314,7 +314,7 @@ snippet optp
 
 	ARGV.options do |opts|
 		opts.banner = "Usage: #{File.basename($PROGRAM_NAME)}
-snippet opt
+snippet option
 	opts.on( "-${1:o}", "--${2:long-option-name}", ${3:String},
 	         "${4:Option description.}") do |${5:opt}|
 		${6}
@@ -418,3 +418,18 @@ snippet tas
 	task :${2:task_name => [:dependent, :tasks]} do
 		${3}
 	end
+
+
+# BRETT'S ADDITIONS ------------------------------------------------------------
+
+# hash rocket
+snippet l
+	=> 
+
+# single-quote pair
+snippet '
+	'${1}'
+
+# double-quote pair
+snippet "
+	"${1}"

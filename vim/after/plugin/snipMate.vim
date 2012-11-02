@@ -31,5 +31,9 @@ endif
 
 call GetSnippets(snippets_dir, '_') " Get global snippets
 
+" Bring in the html and ruby snippets with eruby. (eruby.snippets comes automatically)
+call ExtractSnipsFile(g:snippets_dir.'html.snippets', 'eruby')
+call ExtractSnipsFile(g:snippets_dir.'ruby.snippets', 'eruby')
+
 au FileType * if &ft != 'help' | call GetSnippets(snippets_dir, &ft) | endif
 " vim:noet:sw=4:ts=4:ft=vim
