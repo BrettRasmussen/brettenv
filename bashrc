@@ -84,7 +84,12 @@ fi
 
 # If this user is in the rvm group, enable the rvm shell script.
 if groups | grep -q rvm ; then
-  source "/usr/local/lib/rvm"
+  if [ -f "/etc/profile.d/rvm.sh" ];
+  then
+    source "/etc/profile.d/rvm.sh";
+  else
+    source "/usr/local/lib/rvm"
+  fi
 fi
 
 # This loads RVM into a shell session.  Overrides system-wide rvm setup.
