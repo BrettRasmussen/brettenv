@@ -68,6 +68,11 @@ Host heroku.darkerthan70
   IdentityFile /home/brett/.ssh/identity.darkerthan70
   IdentitiesOnly yes
 
+Host github.allisont
+  HostName github.com
+  IdentityFile /home/brett/.ssh/identity.allisont
+  IdentitiesOnly yes
+
 Host jd-b
   HostName 71.199.2.204
   Port 2002
