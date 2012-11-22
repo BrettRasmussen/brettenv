@@ -62,6 +62,9 @@ set textwidth=100
 map f :set formatoptions=tcqa
 map F :set formatoptions=tcq
 
+" launch ack.vim
+map <Leader>f :Ack! 
+
 " foldmethod options: manual|indent|marker
 set foldmethod=indent
 
