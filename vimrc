@@ -79,7 +79,7 @@ colorscheme blackburn
 set cursorline
 highlight CursorLine cterm=none gui=none ctermbg=236 guibg=236
 
-" ack.vim stuff
+" ack.vim plugin stuff
 map <Leader>f :Ack! 
 
 " Indent Guides plugin stuff
@@ -96,3 +96,5 @@ let Tlist_GainFocus_On_ToggleOpen = 1
 let Tlist_Close_On_Select = 1
 map <Leader>t :TlistToggle
 
+" buffer explorer plugin stuff
+let g:bufExplorerSortBy='number'     " Sort by the buffer's number.
