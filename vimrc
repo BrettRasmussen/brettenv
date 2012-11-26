@@ -62,15 +62,6 @@ set textwidth=100
 map f :set formatoptions=tcqa
 map F :set formatoptions=tcq
 
-" launch ack.vim
-map <Leader>f :Ack! 
-
-" foldmethod options: manual|indent|marker
-set foldmethod=indent
-
-" starting fold level; high number for all open; 0 for all closed
-set foldlevel=1000
-
 filetype plugin on
 syntax on
 map s :syntax on
@@ -78,19 +69,30 @@ map S :syntax off
 
 runtime! macros/matchit.vim
 
-" vim: set ft=vim :
+" settings for folding
+set foldmethod=indent  " foldmethod options: manual|indent|marker
+set foldlevel=1000  " starting fold level; high number for all open; 0 for all closed
 
-let Tlist_Exit_OnlyWindow = 1
-
+" theme stuff
 set t_Co=256
 colorscheme blackburn
 set cursorline
 highlight CursorLine cterm=none gui=none ctermbg=236 guibg=236
 
-" Indent Guides stuff
+" ack.vim stuff
+map <Leader>f :Ack! 
+
+" Indent Guides plugin stuff
 let g:indent_guides_auto_colors = 0
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
 hi IndentGuidesOdd ctermbg = 233
 hi IndentGuidesEven ctermbg = 235
+
+" taglist plugin stuff
+let Tlist_Exit_OnlyWindow = 1
+let Tlist_GainFocus_On_ToggleOpen = 1
+let Tlist_Close_On_Select = 1
+map <Leader>t :TlistToggle
+
