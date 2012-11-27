@@ -98,3 +98,4 @@ map <Leader>t :TlistToggle
 
 " buffer explorer plugin stuff
 let g:bufExplorerSortBy='number'     " Sort by the buffer's number.
+let g:bufExplorerShowRelativePath=1  " Show relative paths.
