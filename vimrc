@@ -69,6 +69,12 @@ map S :syntax off
 
 runtime! macros/matchit.vim
 
+" keep window position when switching buffers
+if v:version >= 700
+  au BufLeave * let b:winview = winsaveview()
+  au BufEnter * if(exists('b:winview')) | call winrestview(b:winview) | endif
+endif
+
 " settings for folding
 set foldmethod=indent  " foldmethod options: manual|indent|marker
 set foldlevel=1000  " starting fold level; high number for all open; 0 for all closed
