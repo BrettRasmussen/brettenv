@@ -104,6 +104,9 @@ let Tlist_Exit_OnlyWindow = 1
 let Tlist_GainFocus_On_ToggleOpen = 1
 let Tlist_Close_On_Select = 1
 map <Leader>t :TlistToggle
+au BufWritePost * TlistUpdate  " regen taglist tags in current buffer after each save.
+                               " note that this doesn't affect on-disk tags file since
+                               " taglist doesn't use it.
 
 " buffer explorer plugin stuff
 let g:bufExplorerSortBy='number'     " Sort by the buffer's number.
