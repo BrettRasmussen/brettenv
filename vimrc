@@ -96,6 +96,9 @@ let g:indent_guides_guide_size = 1
 hi IndentGuidesOdd ctermbg = 233
 hi IndentGuidesEven ctermbg = 235
 
+" indexer plugin stuff
+let g:indexer_disableCtagsWarning=1
+
 " taglist plugin stuff
 let Tlist_Exit_OnlyWindow = 1
 let Tlist_GainFocus_On_ToggleOpen = 1
