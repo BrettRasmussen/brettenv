@@ -76,6 +76,13 @@ runtime! macros/matchit.vim
   "au BufEnter * if(exists('b:winview')) | call winrestview(b:winview) | endif
 "endif
 
+" auto-save certain file types whenever leaving insert mode
+au InsertLeave *.rb :write
+au InsertLeave *.html :write
+au InsertLeave *.erb :write
+au InsertLeave *.js :write
+au InsertLeave *.css :write
+
 " settings for folding
 set foldmethod=indent  " foldmethod options: manual|indent|marker
 set foldlevel=1000  " starting fold level; high number for all open; 0 for all closed
