@@ -62,10 +62,13 @@ set textwidth=100
 map f :set formatoptions=tcqa
 map F :set formatoptions=tcq
 
-filetype plugin on
 syntax on
 map s :syntax on
 map S :syntax off
+
+filetype plugin on
+
+call pathogen#infect()
 
 runtime! macros/matchit.vim
 
