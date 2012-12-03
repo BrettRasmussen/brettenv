@@ -80,11 +80,11 @@ runtime! macros/matchit.vim
 "endif
 
 " auto-save certain file types whenever leaving insert mode
-au InsertLeave *.rb :write
-au InsertLeave *.html :write
-au InsertLeave *.erb :write
-au InsertLeave *.js :write
-au InsertLeave *.css :write
+"au InsertLeave *.rb :write
+"au InsertLeave *.html :write
+"au InsertLeave *.erb :write
+"au InsertLeave *.js :write
+"au InsertLeave *.css :write
 
 " settings for folding
 set foldmethod=indent  " foldmethod options: manual|indent|marker
