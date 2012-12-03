@@ -73,11 +73,10 @@ call pathogen#infect()
 runtime! macros/matchit.vim
 
 " keep window position when switching buffers
-" TODO: get this working; it currently conflicts w/taglist plugin.  :(
-"if v:version >= 700
-  "au BufLeave * let b:winview = winsaveview()
-  "au BufEnter * if(exists('b:winview')) | call winrestview(b:winview) | endif
-"endif
+if v:version >= 700
+  au BufLeave * let b:winview = winsaveview()
+  au BufEnter * if(exists('b:winview')) | call winrestview(b:winview) | endif
+endif
 
 " auto-save certain file types whenever leaving insert mode
 "au InsertLeave *.rb :write
