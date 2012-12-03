@@ -110,14 +110,12 @@ hi IndentGuidesEven ctermbg = 235
 " indexer plugin stuff
 let g:indexer_disableCtagsWarning=1
 
-" taglist plugin stuff
-let Tlist_Exit_OnlyWindow = 1
-let Tlist_GainFocus_On_ToggleOpen = 1
-let Tlist_Close_On_Select = 1
-map <Leader>t :TlistToggle
-au BufWritePost * TlistUpdate  " regen taglist tags in current buffer after each save.
-                               " note that this doesn't affect on-disk tags file since
-                               " taglist doesn't use it.
+" tagbar plugin stuff
+let g:tagbar_left = 1
+let g:tagbar_sort = 0
+let g:tagbar_autofocus = 1
+let g:tagbar_autoclose = 1
+map <Leader>t :TagbarToggle
 
 " buffer explorer plugin stuff
 let g:bufExplorerSortBy='number'     " Sort by the buffer's number.
