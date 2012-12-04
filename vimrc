@@ -62,14 +62,20 @@ set textwidth=100
 map f :set formatoptions=tcqa
 map F :set formatoptions=tcq
 
+" syntax highlighting stuff
 syntax on
 map s :syntax on
 map S :syntax off
 
+" filetype stuff
+filetype on
+filetype indent on
 filetype plugin on
 
+" pathogen plugin management stuff
 call pathogen#infect()
 
+" matchit stuff
 runtime! macros/matchit.vim
 
 " keep window position when switching buffers
