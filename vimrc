@@ -69,7 +69,7 @@ map S :syntax off
 
 " filetype stuff
 filetype on
-filetype indent on
+"filetype indent on " gotta figure this out later
 filetype plugin on
 
 " pathogen plugin management stuff
