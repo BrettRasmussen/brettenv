@@ -36,10 +36,8 @@ map <S-Insert> <MiddleMouse>
 
 let &cpo=s:cpo_save
 unlet s:cpo_save
-set autoindent
-set backspace=2
+set backspace=2  " make backspace work like in other apps (across lines, etc.)
 set clipboard=autoselect,exclude:cons\\|linux,unnamed
-set expandtab
 set fileencodings=ucs-bom,utf-8,default,latin1
 set guicursor=a:blinkon0
 set guifont=DejaVu\ Sans\ Mono\ 8
@@ -52,11 +50,7 @@ set printoptions=paper:letter
 set ruler
 set runtimepath=~/.brettenv/vim,~/.vim,/var/lib/vim/addons,/usr/share/vim/vimfiles,/usr/share/vim/vim72,/usr/share/vim/vimfiles/after,/var/lib/vim/addons/after,~/.vim/after,~/.brettenv/vim/after,$VIMRUNTIME
 set scrolloff=5
-set shiftwidth=2
-set showbreak=-->
-set softtabstop=2
 set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc
-set tabstop=2
 set termencoding=utf-8
 set textwidth=100
 map f :set formatoptions=tcqa
@@ -69,8 +63,18 @@ map S :syntax off
 
 " filetype stuff
 filetype on
-"filetype indent on " gotta figure this out later
+filetype indent on
 filetype plugin on
+
+" indentation stuff
+set cindent
+set cinoptions=l1,c4,(s,U1,w1,m1,j1,J1)
+set cinwords=if,elif,else,for,while,try,except,finally,def,class
+set expandtab
+set shiftwidth=2
+set showbreak=-->
+set softtabstop=2
+set tabstop=2
 
 " pathogen plugin management stuff
 call pathogen#infect()
