@@ -3,25 +3,25 @@ let s:cpo_save=&cpo
 set cpo&vim
 imap <Del> 
 map! <S-Insert> <MiddleMouse>
-map 6 :set tw=0
-map 7 :set tw=80
-map 8 :set tw=100
+map 6 :set tw=0<CR>
+map 7 :set tw=80<CR>
+map 8 :set tw=100<CR>
 map [3~ 
 imap [3~ 
-map / y:let @z = escape('^R"', '$*.^~[]\')/^Rz
+map / y:let @z = escape('^R"', '$*.^~[]\')<CR>/^Rz<CR>
 map u ct_
 
 "alt plus h/l (vim left/right) cycles through open file buffers
-map <M-h> :bp
-map <M-l> :bn
-map h :bp
-map l :bn
+map <M-h> :bp<CR>
+map <M-l> :bn<CR>
+map h :bp<CR>
+map l :bn<CR>
 
-map o Oj
-map ? :s/^\/\///g
-map / :s/^/\/\//g
-map # :s/^#//g
-map 3 :s/^/#/g
+map o O<CR>j
+map ? :s/^\/\///g<CR>
+map / :s/^/\/\//g<CR>
+map # :s/^#//g<CR>
+map 3 :s/^/#/g<CR>
 map a 1GVG
 noremap - $
 vmap [% [%m'gv``
@@ -30,7 +30,7 @@ vmap a% [%v]%
 nmap gx <Plug>NetrwBrowseX
 map j gj
 map k gk
-nnoremap <silent> <Plug>NetrwBrowseX :call netrw#NetBrowseX(expand("<cWORD>"),0)
+nnoremap <silent> <Plug>NetrwBrowseX :call netrw#NetBrowseX(expand("<cWORD>"),0)<CR>
 map <Del> 
 map <S-Insert> <MiddleMouse>
 
@@ -53,13 +53,13 @@ set scrolloff=5
 set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc
 set termencoding=utf-8
 set textwidth=100
-map f :set formatoptions=tcqa
-map F :set formatoptions=tcq
+map f :set formatoptions=tcqa<CR>
+map F :set formatoptions=tcq<CR>
 
 " syntax highlighting stuff
 syntax on
-map s :syntax on
-map S :syntax off
+map s :syntax on<CR>
+map S :syntax off<CR>
 
 " filetype stuff
 filetype on
@@ -130,7 +130,7 @@ let g:tagbar_left = 1
 let g:tagbar_sort = 0
 let g:tagbar_autofocus = 1
 let g:tagbar_autoclose = 1
-map <Leader>t :TagbarToggle
+map <Leader>t :TagbarToggle<CR>
 
 " buffer explorer plugin stuff
 let g:bufExplorerSortBy='number'     " Sort by the buffer's number.
