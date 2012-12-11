@@ -67,14 +67,16 @@ filetype indent on
 filetype plugin on
 
 " indentation stuff
-set cindent
-set cinoptions=l1,c4,(s,U1,w1,m1,j1,J1)
-set cinwords=if,elif,else,for,while,try,except,finally,def,class
+set autoindent " also note if "filetype indent on" is set somewhere
 set expandtab
 set shiftwidth=2
 set showbreak=-->
 set softtabstop=2
 set tabstop=2
+" The following customizes the "cindent" option, which requires "set cindent"
+" instead of "set autoindent"
+"set cinoptions=l1,c4,(s,U1,w1,m1,j1,J1)
+"set cinwords=if,elif,else,for,while,try,except,finally,def,class
 
 " pathogen plugin management stuff
 call pathogen#infect()
