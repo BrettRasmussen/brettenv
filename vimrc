@@ -135,3 +135,7 @@ map <Leader>t :TagbarToggle<CR>
 " buffer explorer plugin stuff
 let g:bufExplorerSortBy='number'     " Sort by the buffer's number.
 let g:bufExplorerShowRelativePath=1  " Show relative paths.
+
+" vim session stuff
+nmap SQ <ESC>:mksession!<CR>:wqa<CR>
+nmap SR <ESC>:source Session.vim<CR>
