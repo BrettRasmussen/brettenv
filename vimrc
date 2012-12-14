@@ -11,11 +11,9 @@ imap [3~ 
 map / y:let @z = escape('^R"', '$*.^~[]\')<CR>/^Rz<CR>
 map u ct_
 
-"alt plus h/l (vim left/right) cycles through open file buffers
-map <M-h> :bp<CR>
-map <M-l> :bn<CR>
-map h :bp<CR>
-map l :bn<CR>
+"ctrl plus h/l (vim left/right) cycles through open file buffers
+map <C-h> :bp<CR>
+map <C-l> :bn<CR>
 
 map o O<CR>j
 map ? :s/^\/\///g<CR>
