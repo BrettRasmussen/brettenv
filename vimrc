@@ -57,6 +57,9 @@ set textwidth=100
 map f :set formatoptions=tcqa<CR>
 map F :set formatoptions=tcq<CR>
 
+" F3 to toggle paste mode
+set pastetoggle=<F3>
+
 " syntax highlighting stuff
 syntax on
 map s :syntax on<CR>
