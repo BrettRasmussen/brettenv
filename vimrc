@@ -3,9 +3,6 @@ let s:cpo_save=&cpo
 set cpo&vim
 imap <Del> 
 map! <S-Insert> <MiddleMouse>
-map 6 :set tw=0<CR>
-map 7 :set tw=80<CR>
-map 8 :set tw=100<CR>
 map [3~ 
 imap [3~ 
 map / y:let @z = escape('^R"', '$*.^~[]\')<CR>/^Rz<CR>
@@ -17,6 +14,11 @@ map <C-h> :bp<CR>
 map <C-j> :bl<CR>
 map <C-k> :bf<CR>
 map <C-l> :bn<CR>
+
+"alt plus 7/8/9 set textwidth size
+map 7 :set tw=0<CR>
+map 8 :set tw=80<CR>
+map 9 :set tw=100<CR>
 
 map o O<CR>j
 map ? :s/^\/\///g<CR>
@@ -56,6 +58,9 @@ set termencoding=utf-8
 set textwidth=100
 map f :set formatoptions=tcqa<CR>
 map F :set formatoptions=tcq<CR>
+
+" F3 to toggle paste mode
+set pastetoggle=<F3>
 
 " syntax highlighting stuff
 syntax on

@@ -9,6 +9,7 @@ Host grox
 # jibboo
 Host jibboo
   HostName 192.168.1.1
+  Port 202
   User brett
 
 # minor7th
