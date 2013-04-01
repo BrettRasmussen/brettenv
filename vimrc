@@ -113,10 +113,6 @@ colorscheme blackburn
 set cursorline
 highlight CursorLine cterm=none gui=none ctermbg=236 guibg=236
 
-" autoclose plugin stuff
-let g:AutoClosePairs = {'(': ')', '{': '}', '[': ']'}
-let g:AutoCloseProtectedRegions = ["Character"]
-
 " ack.vim plugin stuff
 map <Leader>f :Ack! 
 
