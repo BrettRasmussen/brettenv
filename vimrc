@@ -114,7 +114,7 @@ set cursorline
 highlight CursorLine cterm=none gui=none ctermbg=236 guibg=236
 
 " ack.vim plugin stuff
-map <Leader>f :Ack! 
+map <Leader>f :Ack!
 
 " Indent Guides plugin stuff
 let g:indent_guides_auto_colors = 0
@@ -141,3 +141,6 @@ let g:bufExplorerShowRelativePath=1  " Show relative paths.
 " vim session stuff
 nmap SQ <ESC>:mksession!<CR>:wqa<CR>
 nmap SR <ESC>:source Session.vim<CR>
+
+" EasyMotion plugin stuff
+let g:EasyMotion_leader_key = ','
