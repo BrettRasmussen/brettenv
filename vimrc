@@ -114,7 +114,7 @@ set cursorline
 highlight CursorLine cterm=none gui=none ctermbg=236 guibg=236
 
 " ack.vim plugin stuff
-map <Leader>f :Ack!
+map <Leader>f :Ack! 
 
 " Indent Guides plugin stuff
 let g:indent_guides_auto_colors = 0
