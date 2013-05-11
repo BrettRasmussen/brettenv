@@ -3,56 +3,21 @@ ServerAliveCountMax 3
 
 # grox
 Host grox
-  HostName home.twoedge.com
+  HostName twoedge.xns01.com
+  Port 7020
   User brett
 
 # jibboo
 Host jibboo
   HostName 192.168.1.1
-  Port 202
+  Port 7001
   User brett
 
-# minor7th
-Host m7
-  HostName internal.franklinestimating.com
-  Port 2217
-  User brett
-
-# mayurs-desktop
-Host mayur
-  HostName internal.franklinestimating.com
-  Port 2214
-  User brettr
-
-# darkknight as brettr
-Host dk-b
-  HostName darkknight.franklinestimating.com
-  Port 2218
-  User brettr
-
-# darkknight as git
-Host dk-g
-  HostName darkknight.franklinestimating.com
-  Port 2218
-  User git
-
-# darkknight as svn
-Host dk-s
-  HostName darkknight.franklinestimating.com
-  Port 2218
-  User svn
-
-# darkknight as fa
-Host dk-fa
-  HostName darkknight.franklinestimating.com
-  Port 2218
-  User fa
-
-# darkknight as franklin
-Host dk-f
-  HostName darkknight.franklinestimating.com
-  Port 2218
-  User franklin
+# jibboo as sentinel
+Host jibboo-s
+  HostName 192.168.1.1
+  Port 7001
+  User sentinel
 
 Host heroku.brettr
   HostName heroku.com
