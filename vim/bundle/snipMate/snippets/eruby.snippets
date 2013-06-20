@@ -2,31 +2,47 @@
 snippet r
 	<% ${1} %>
 # eruby output tag
-snippet re
+snippet r-
 	<%= ${1} %>
 # eruby end tag
 snippet e
 	<% end %>
-# eruby else tag
-snippet el
+# eruby else tag (renamed by Brett)
+snippet rel
 	<% else %>
-# eruby do block
-snippet d
+# eruby do block (renamed by Brett)
+snippet rd
 	<% ${1} do %>
 		${2}
 	<% end %>
-# eruby do block w/param
-snippet dp
+# eruby do block w/param (renamed by Brett)
+snippet rdp
 	<% ${1} do |${2:param}| %>
 		${3}
 	<% end %>
-# eruby do block w/output
-snippet de
+# eruby do block w/output (renamed by Brett)
+snippet rd-
 	<%= ${1} do %>
 		${2}
 	<% end %>
-# eruby do block w/output & param
-snippet dep
+# eruby do block w/output & param (renamed by Brett)
+snippet rdp-
 	<%= ${1} do |${2:param}| %>
 		${3}
 	<% end %>
+# BRETT'S ADDITIONS ------------------------------------------------------------
+# eruby if block
+snippet rif
+	<% if ${1:condition} %>
+		${2}
+	<% end %>
+# eruby if/else block
+snippet rife
+	<% if ${1:condition} %>
+		${2}
+	<% else %>
+		${3}
+	<% end %>
+# eruby elsif
+snippet reli
+	<% elsif ${1:condition} %>

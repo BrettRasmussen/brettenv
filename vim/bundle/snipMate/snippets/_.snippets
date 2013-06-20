@@ -5,3 +5,18 @@ snippet c)
 	`&enc[:2] == "utf" ? "©" : "(c)"` Copyright `strftime("%Y")` ${1:`g:snips_author`}. All Rights Reserved.${2}
 snippet date
 	`strftime("%Y-%m-%d")`
+#
+# BRETT'S ADDITIONS ------------------------------------------------------------
+#
+# hash rocket
+snippet l
+	=> ${1}
+# single-quote pair
+snippet '
+	'${1}'${2}
+# double-quote pair
+snippet "
+	"${1}"${2}
+# my name
+snippet me
+	`g:snips_author`

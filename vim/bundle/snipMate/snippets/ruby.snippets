@@ -290,10 +290,11 @@ snippet sel
 	select { |${1:e}|, ${2} }
 snippet lam
 	lambda { |${1:args}| ${2} }
-snippet do
-	do |${1:variable}|
-		${2}
-	end
+# commented out by Brett
+#snippet do
+#	do |${1:variable}|
+#		${2}
+#	end
 snippet :
 	:${1:key} => ${2:"value"}${3}
 snippet ope
@@ -418,19 +419,27 @@ snippet tas
 	task :${2:task_name => [:dependent, :tasks]} do
 		${3}
 	end
+#
 # BRETT'S ADDITIONS ------------------------------------------------------------
-# hash rocket
-snippet l
-	=> ${1}
-# single-quote pair
-snippet '
-	'${1}'${2}
-# double-quote pair
-snippet "
-	"${1}"${2}
+# (also see global snippets in _.snippets)
+#
 # vertical-bar pair
 snippet |
 	|${1}|${2}
 # debugger breakpoint
 snippet db
 	require 'debugger'; debugger
+# do/end (corresponds to rd eruby snippet)
+snippet d
+	do
+		${1}
+	end
+# do with param (corresponds to rdp eruby snippet)
+snippet dp
+	do |${1:variable}|
+		${2}
+	end
+# elsif with shorter trigger
+snippet eli
+	elsif ${1:condition}
+		${2}

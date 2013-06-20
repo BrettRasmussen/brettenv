@@ -138,9 +138,15 @@ map <Leader>t :TagbarToggle<CR>
 let g:bufExplorerSortBy='number'     " Sort by the buffer's number.
 let g:bufExplorerShowRelativePath=1  " Show relative paths.
 
+" AutoClose plugin stuff
+let g:AutoClosePairs = {'(': ')', '{': '}', '[': ']'}
+
 " vim session stuff
 nmap SQ <ESC>:mksession!<CR>:wqa<CR>
 nmap SR <ESC>:source Session.vim<CR>
 
 " EasyMotion plugin stuff
 let g:EasyMotion_leader_key = ','
+
+" snipMate plugin stuff
+let g:snips_author = 'Brett Rasmussen'
