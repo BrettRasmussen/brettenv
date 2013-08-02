@@ -69,28 +69,25 @@
 #"xterm"
 #  control + b:2
 
-"/usr/bin/firefox" 
+"/usr/bin/firefox"
   control+alt + f
 
 "/usr/bin/gedit"
   control+alt + n
 
-"/usr/bin/kruler" 
+"/usr/bin/kruler"
   control+alt+shift + r
 
-"/home/brett/bin/chrome" 
+"/home/brett/bin/chrome"
   control+alt + c
 
 "/usr/bin/chromium-browser"
   control+alt+shift + c
 
-"/home/brett/bin/rubymine" 
-  control+alt + m
-
-"/home/brett/bin/explorer" 
+"/home/brett/bin/explorer"
   control+alt + e
 
-"/home/brett/bin/terminal" 
+"/home/brett/bin/terminal"
   control+alt + t
 
 ##################################
