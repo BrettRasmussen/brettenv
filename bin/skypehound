@@ -1,0 +1,25 @@
+#! /usr/bin/env ruby
+
+CMD = '/usr/bin/skype'
+
+CMD_NAME = File.basename(CMD)
+
+def is_running
+  processes = %x{ps -o pid,user,cmd -C #{CMD_NAME} h}.split("\n")  # the h suppresses the header
+  processes.any? do |p|
+    p.include?(ENV['USER']) && !p.include?('<defunct>')
+  end
+end
+
+def wrap_up
+  exec(%{/usr/bin/xmessage "#{CMD_NAME} is running" -default 'okay'}) if fork.nil?
+  exit(0)
+end
+
+wrap_up if is_running
+
+20.times do
+  exec(CMD) if fork.nil?
+  sleep 10
+  wrap_up if is_running
+end
