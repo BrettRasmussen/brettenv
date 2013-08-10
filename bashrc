@@ -72,6 +72,11 @@ export INPUTRC='~/.brettenv/inputrc'
 # case-insensitive globbing in bash
 shopt -s nocaseglob
 
+# set up ~/bin
+if [ -d ~/bin ]; then
+  export PATH=~/bin:${PATH}
+fi
+
 # get aliases
 if [ -f ~/.brettenv/alias ]; then
   source ~/.brettenv/alias
