@@ -11,10 +11,11 @@
 # /home/brett/.bashrc):
 #
 # alias brettenv='source ~/.brettenv/bashrc'
-# alias bmux='tmux -f ~/.brettenv/tmux.conf -2'
+# export TERM=screen-256color
+# alias bmux='tmux -f ~/.brettenv/tmux.conf'
 #
 # If you want other accounts on the same system to have access to these
-# settings, put those same two lines in those users' bashrc files as well, and
+# settings, put those same three lines in those users' bashrc files as well, and
 # make a symlink /home/brett/.brettenv directory in those users' home
 # directories (note that /home/brett/.brettenv must be readable by those users;
 # if it can't be, then you'll need to put the brettenv directory somewhere
@@ -23,7 +24,7 @@
 # "bmux" from a prompt.
 #
 # If you always want a given user account to use this environment, put the
-# following in the standard bashrc file after the aliases above:
+# following in the standard bashrc file after the lines above:
 #
 # if [[ -n "$PS1" ]]; then
 #   brettenv
@@ -34,10 +35,10 @@
 # non-interactive.
 #
 # See tmux.conf for an example of how to get tmux to always start up with the
-# brettenv settings turned on.  Note that the -2 in the tmux call aliased
-# above means that tmux will assume 256-color mode (useful for vi color
-# schemes, cursor highlighting, and the like).
+# brettenv settings turned on.
 
+# Used by tmux/wemux. Should also be in ~/.bashrc.
+export TERM=screen-256color
 
 # prompt with git branch displayed
 __git_ps1 ()

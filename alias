@@ -1,4 +1,6 @@
 # portable aliases
+alias brettenv='source ~/.brettenv/bashrc' # should also be defined in ~/.bashrc
+alias bmux='tmux -f ~/.brettenv/tmux.conf' # should also be defined in ~/.bashrc
 alias ls='ls -F --color=auto'
 alias l='ls -lFh'
 alias la='l -a'
@@ -20,6 +22,3 @@ alias rg='rails generate'
 alias rgm='rails generate migration'
 alias rdm='rake db:migrate --trace'
 alias qf='find . -iname'
-alias px='http_proxy="http://192.168.1.1:3128" https_proxy="http://192.168.1.1:3128"'
-alias npx='http_proxy="" https_proxy=""'
-alias heroku='/usr/bin/heroku'
