@@ -114,6 +114,9 @@ colorscheme blackburn
 set cursorline
 highlight CursorLine cterm=none gui=none ctermbg=236 guibg=236
 
+" remap leader key to comma so I can be like JD
+let mapleader=','
+
 " ack.vim plugin stuff
 map <Leader>f :Ack! 
 
@@ -122,8 +125,11 @@ let g:indent_guides_auto_colors = 0
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
-hi IndentGuidesOdd ctermbg = 233
-hi IndentGuidesEven ctermbg = 235
+function SetIndentGuidesStyles()
+  hi IndentGuidesOdd ctermbg = 233
+  hi IndentGuidesEven ctermbg = 235
+endfunction
+call SetIndentGuidesStyles()
 
 " indexer plugin stuff
 let g:indexer_disableCtagsWarning=1
@@ -144,10 +150,11 @@ let g:AutoClosePairs = {'(': ')', '{': '}', '[': ']'}
 
 " vim session stuff
 nmap SQ <ESC>:mksession!<CR>:wqa<CR>
-nmap SR <ESC>:source Session.vim<CR>
+" For some reason, session reload loses IndentGuides styles, so we reset them explicitly.
+nmap SR <ESC>:source Session.vim<CR>:call SetIndentGuidesStyles()<CR>
 
 " EasyMotion plugin stuff
-let g:EasyMotion_leader_key = ','
+let g:EasyMotion_leader_key = '\'
 
 " snipMate plugin stuff
 let g:snips_author = 'Brett Rasmussen'
