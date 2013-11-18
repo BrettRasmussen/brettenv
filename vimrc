@@ -1,3 +1,4 @@
+set term=xterm
 if &cp | set nocp | endif
 let s:cpo_save=&cpo
 set cpo&vim
@@ -15,10 +16,12 @@ map <C-j> :bl<CR>
 map <C-k> :bf<CR>
 map <C-l> :bn<CR>
 
-"alt plus 7/8/9 set textwidth size
+"alt plus 7/8/9/0 set textwidth size
 map 7 :set tw=0<CR>
 map 8 :set tw=80<CR>
 map 9 :set tw=100<CR>
+map 0 :set tw=120<CR>
+set textwidth=120
 
 map o O<CR>j
 map ? :s/^\/\///g<CR>
@@ -56,7 +59,6 @@ set runtimepath=~/.brettenv/vim,~/.vim,/var/lib/vim/addons,/usr/share/vim/vimfil
 set scrolloff=5
 set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc
 set termencoding=utf-8
-set textwidth=100
 map f :set formatoptions=tcqa<CR>
 map F :set formatoptions=tcq<CR>
 
@@ -70,7 +72,7 @@ map S :syntax off<CR>
 
 " filetype stuff
 filetype on
-filetype indent on
+"filetype indent on
 filetype plugin on
 
 " indentation stuff
@@ -129,6 +131,7 @@ function SetIndentGuidesStyles()
   hi IndentGuidesOdd ctermbg = 233
   hi IndentGuidesEven ctermbg = 235
 endfunction
+map <F5> :call SetIndentGuidesStyles()<CR>
 call SetIndentGuidesStyles()
 
 " indexer plugin stuff
@@ -139,7 +142,10 @@ let g:tagbar_left = 1
 let g:tagbar_sort = 0
 let g:tagbar_autofocus = 1
 let g:tagbar_autoclose = 1
-map <Leader>t :TagbarToggle<CR>
+map <Leader>n :TagbarToggle<CR>
+
+" CtrlP plugin stuff
+map <Leader>t :CtrlP<CR>
 
 " buffer explorer plugin stuff
 let g:bufExplorerSortBy='number'     " Sort by the buffer's number.
