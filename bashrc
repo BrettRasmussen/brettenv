@@ -73,6 +73,9 @@ export INPUTRC='~/.brettenv/inputrc'
 # case-insensitive globbing in bash
 shopt -s nocaseglob
 
+# disable ctrl-s/ctrl-q flow control
+stty -ixon
+
 # set up ~/bin
 if [ -d ~/bin ]; then
   export PATH=~/bin:${PATH}
