@@ -146,6 +146,7 @@ map <Leader>n :TagbarToggle<CR>
 
 " CtrlP plugin stuff
 map <Leader>t :CtrlP<CR>
+let g:ctrlp_by_filename = 1
 
 " buffer explorer plugin stuff
 let g:bufExplorerSortBy='number'     " Sort by the buffer's number.
