@@ -1,2 +1,13 @@
 [color]
 	ui = true
+[alias]
+  b = branch
+  r = remote -v
+  l = log
+  t = tag -l
+  s = status
+  unstage = reset HEAD
+  uncommit = reset --soft HEAD^
+  amend = commit --amend
+[gc]
+  auto=1
