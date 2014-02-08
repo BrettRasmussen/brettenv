@@ -40,6 +40,6 @@ Host github.allisont
   IdentitiesOnly yes
 
 Host jd-b
-  HostName 71.199.2.204
+  HostName 98.202.90.34
   Port 2002
   User brett
