@@ -1,7 +1,10 @@
 [color]
 	ui = true
 [alias]
+  c = commit
+  co = checkout
   b = branch
+  d = diff
   r = remote -v
   l = log
   t = tag -l
