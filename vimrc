@@ -149,7 +149,7 @@ map <Leader>t :CtrlP<CR>
 let g:ctrlp_by_filename = 1
 
 " buffer explorer plugin stuff
-let g:bufExplorerSortBy='number'     " Sort by the buffer's number.
+let g:bufExplorerSortBy='fullpath'     " Sort by the buffer's number.
 let g:bufExplorerShowRelativePath=1  " Show relative paths.
 
 " AutoClose plugin stuff
