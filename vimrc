@@ -153,7 +153,8 @@ let g:bufExplorerSortBy='fullpath'     " Sort by the buffer's number.
 let g:bufExplorerShowRelativePath=1  " Show relative paths.
 
 " AutoClose plugin stuff
-let g:AutoClosePairs = {'(': ')', '{': '}', '[': ']'}
+"let g:AutoClosePairs = {'(': ')', '{': '}', '[': ']'}
+let g:AutoClosePairs = {}  " effectively disables autoclose for now
 
 " vim session stuff
 nmap SQ <ESC>:mksession!<CR>:wqa<CR>
