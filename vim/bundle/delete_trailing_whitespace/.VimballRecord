@@ -1,0 +1,1 @@
+DeleteTrailingWhitespace-1.04.vmb: call delete('/home/brett/.brettenv/vim/bundle/delete_trailing_whitespace/autoload/DeleteTrailingWhitespace.vim')|call delete('/home/brett/.brettenv/vim/bundle/delete_trailing_whitespace/plugin/DeleteTrailingWhitespace.vim')|call delete('/home/brett/.brettenv/vim/bundle/delete_trailing_whitespace/doc/DeleteTrailingWhitespace.txt')

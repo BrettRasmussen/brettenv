@@ -120,7 +120,7 @@ highlight CursorLine cterm=none gui=none ctermbg=236 guibg=236
 let mapleader=','
 
 " ack.vim plugin stuff
-map <Leader>f :Ack! 
+map <Leader>f :Ack!
 
 " Indent Guides plugin stuff
 let g:indent_guides_auto_colors = 0
@@ -166,3 +166,8 @@ let g:EasyMotion_leader_key = '\'
 
 " snipMate plugin stuff
 let g:snips_author = 'Brett Rasmussen'
+
+" DeleteTrailingWhitespace plugin stuff
+let g:DeleteTrailingWhitespace_Action = 'ask'
+nnoremap <Leader>d :<C-u>%DeleteTrailingWhitespace<CR>
+vnoremap <Leader>d :DeleteTrailingWhitespace<CR>
