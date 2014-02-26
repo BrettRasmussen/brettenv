@@ -7,6 +7,11 @@ snippet r-
 # eruby end tag (renamed by Brett)
 snippet re
 	<% end %>
+# multiline eruby end tag
+snippet ree
+	
+		${1}
+	<% end %>
 # eruby else tag (renamed by Brett)
 snippet rel
 	<% else %>
@@ -30,7 +35,9 @@ snippet rdp-
 	<%= ${1} do |${2:param}| %>
 		${3}
 	<% end %>
+#
 # BRETT'S ADDITIONS ------------------------------------------------------------
+#
 # eruby if block
 snippet rif
 	<% if ${1:condition} %>
