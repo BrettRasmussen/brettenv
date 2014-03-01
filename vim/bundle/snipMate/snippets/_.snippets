@@ -20,27 +20,42 @@ snippet "
 # paren pair (type ()<tab>)
 snippet )
 	${1})${2}
-# multi-line paren pair
-snippet ())
-	(
+# multi-line paren pair (type ())<tab>)
+snippet ))
+
 		${1}
 	)
+# multi-line paren pair with semicolon (type ());<tab>)
+snippet ));
+
+		${1}
+	);
 # curly-brace pair (type {}<tab>)
 snippet }
 	${1}}${2}
-# multi-line curly-brace pair
-snippet {}}
-	{
+# multi-line curly-brace pair (type {}}<tab>)
+snippet }}
+
 		${1}
 	}
+# multi-line curly-brace pair with semicolon (type {}};<tab>)
+snippet }};
+
+		${1}
+	};
 # square bracket pair (type []<tab>)
 snippet ]
 	${1}]${2}
-# multi-line square bracket pair
-snippet []]
-	[
+# multi-line square bracket pair (type []]<tab>)
+snippet ]]
+
 		${1}
 	]
+# multi-line square bracket pair with semicolon (type []];<tab>)
+snippet ]];
+
+		${1}
+	];
 # my name
 snippet me
 	`g:snips_author`
