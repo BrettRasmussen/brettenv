@@ -6,7 +6,7 @@
   b = branch
   d = diff
   r = remote -v
-  l = log
+  l = log --stat
   t = tag -l
   s = status
   unstage = reset HEAD
