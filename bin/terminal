@@ -1,2 +1,2 @@
 #! /bin/bash
-exec /usr/bin/konsole &
+exec /usr/bin/konsole --nofork --geometry=1098x918 &

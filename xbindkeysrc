@@ -90,6 +90,9 @@
 "/home/brett/bin/terminal"
   control+alt + t
 
+"/home/brett/bin/terminal-dev"
+  control+alt+shift + t
+
 ##################################
 # End of xbindkeys configuration #
 ##################################
