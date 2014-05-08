@@ -4,9 +4,9 @@ let s:cpo_save=&cpo
 set cpo&vim
 imap <Del> 
 map! <S-Insert> <MiddleMouse>
-map [3~ 
-imap [3~ 
-map / y:let @z = escape('^R"', '$*.^~[]\')<CR>/^Rz<CR>
+"map [3~ 
+"imap [3~ 
+"map / y:let @z = escape('^R"', '$*.^~[]\')<CR>/^Rz<CR>
 map u ct_
 
 "ctrl plus h/j/k/l (vim left/right) cycles through open file buffers or jumps to
@@ -24,10 +24,10 @@ map 0 :set tw=120<CR>
 set textwidth=120
 
 map o O<CR>j
-map ? :s/^\/\///g<CR>
-map / :s/^/\/\//g<CR>
-map # :s/^#//g<CR>
-map 3 :s/^/#/g<CR>
+"map ? :s/^\/\///g<CR>
+"map / :s/^/\/\//g<CR>
+"map # :s/^#//g<CR>
+"map 3 :s/^/#/g<CR>
 map a 1GVG
 noremap - $
 vmap [% [%m'gv``
@@ -61,6 +61,11 @@ set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.i
 set termencoding=utf-8
 map f :set formatoptions=tcqa<CR>
 map F :set formatoptions=tcq<CR>
+
+" split window stuff ---------
+" If in a huge terminal, show 120 chars wide (124 in order to allow for line
+" numbers); otherwise, split 70/30.
+let &winwidth = &columns > 160 ? 124 : &columns * 7 / 10
 
 " F3 to toggle paste mode
 set pastetoggle=<F3>
@@ -145,8 +150,9 @@ let g:tagbar_autoclose = 1
 map <Leader>n :TagbarToggle<CR>
 
 " CtrlP plugin stuff
-map <Leader>t :CtrlP<CR>
+map <Leader>t :CtrlPMixed<CR>
 let g:ctrlp_by_filename = 1
+let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:25,results:25'
 
 " buffer explorer plugin stuff
 let g:bufExplorerSortBy='fullpath'     " Sort by the buffer's number.
