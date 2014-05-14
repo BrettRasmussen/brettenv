@@ -1,16 +1,28 @@
 [color]
 	ui = true
 [alias]
+  a = add
+  b = branch
   c = commit
   co = checkout
-  b = branch
   d = diff
-  r = remote -v
   l = log --stat
-  t = tag -l
+  r = remote -v
   s = status
+  t = tag -l
+  amend = commit --amend
+  plom = pull origin master
+  plos = pull origin staging
+  plop = pull origin production
+  plopl = pull origin playground
+  psom = push origin master
+  psos = push origin staging
+  psop = push origin production
+  psopl = push origin playground
+  sdep = push staging staging:master
+  pdep = push production production:master
+  pldep = push playground playground:master
   unstage = reset HEAD
   uncommit = reset --soft HEAD^
-  amend = commit --amend
 [gc]
   auto=1
