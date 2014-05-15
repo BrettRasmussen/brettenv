@@ -11,6 +11,8 @@
   s = status
   t = tag -l
   amend = commit --amend
+  plo = pull origin
+  pso = push origin
   plom = pull origin master
   plos = pull origin staging
   plop = pull origin production
