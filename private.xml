@@ -9,6 +9,16 @@
     <autogen>__KeyToKey__ KeyCode::FORWARD_DELETE, KeyCode::ESCAPE</autogen>
   </item>
   <item>
+    <name>Command-Option-V to Command-N in Chrome</name>
+    <identifier>private.command_option_v_to_command_n_in_chrome</identifier>
+    <only>GOOGLE_CHROME</only>
+    <autogen>
+      __KeyToKey__
+      KeyCode::V, ModifierFlag::COMMAND_R | ModifierFlag::OPTION_R,
+      KeyCode::N, ModifierFlag::COMMAND_L
+    </autogen>
+  </item>
+  <item>
     <name>Cmd+Alt F6,F7,F8 for Volume</name>
     <identifier>private.cmd_alt_function_keys_volume</identifier>
     <autogen>
