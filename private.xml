@@ -3,11 +3,22 @@
 <!-- Config file for customized keyboard mappings in KeyRemap4MacBook. -->
 
 <root>
+  <!--
+    On the Kinesis keyboard, Escape is hard to hit, but the Delete key is right
+    at the left thumb. Since I'm hitting Escape all the time in vim, terminal, etc.,
+    it's more efficient to use Delete instead of the normal Escape key.
+  -->
   <item>
     <name>Forward Delete to Escape</name>
     <identifier>private.forward_delete_to_escape</identifier>
     <autogen>__KeyToKey__ KeyCode::FORWARD_DELETE, KeyCode::ESCAPE</autogen>
   </item>
+
+  <!--
+    This one allows you to use some keyboard-shortcut app, like BetterTouchTool,
+    to set cmd-opt-c to go to the Chrome app, and then immediately hit cmd-opt-v
+    (right next to the c key) to open a new chrome window.
+  -->
   <item>
     <name>Command-Option-V to Command-N in Chrome</name>
     <identifier>private.command_option_v_to_command_n_in_chrome</identifier>
@@ -18,6 +29,8 @@
       KeyCode::N, ModifierFlag::COMMAND_L
     </autogen>
   </item>
+
+  <!-- Volume shortcuts for a keyboard without dedicated volume keys. -->
   <item>
     <name>Cmd+Alt F6,F7,F8 for Volume</name>
     <identifier>private.cmd_alt_function_keys_volume</identifier>
@@ -52,22 +65,40 @@
       KeyCode::VK_CONSUMERKEY_VOLUME_UP
     </autogen>
   </item>
+
+  <!--
+    This one requires "Select Previous Tab" and "Select Next Tab" to be mapped
+    to cmd-alt-leftarrow and cmd-opt-rightarrow in the keyboard shortcuts area
+    in System Preferences, and it sets opt-h/l to prev/next tab.
+  -->
+  <item>
+    <name>Option-H/L for Prev/Next Tab</name>
+    <identifier>private.option_hl_for_prev_next_tab</identifier>
+    <autogen>
+      __KeyToKey__
+      KeyCode::H, ModifierFlag::OPTION_L,
+      KeyCode::CURSOR_LEFT, ModifierFlag::COMMAND_R | ModifierFlag::OPTION_R
+    </autogen>
+    <autogen>
+      __KeyToKey__
+      KeyCode::L, ModifierFlag::OPTION_L,
+      KeyCode::CURSOR_RIGHT, ModifierFlag::COMMAND_R | ModifierFlag::OPTION_R
+    </autogen>
+  </item>
+
+  <!--
+    Useful to always have command and control keys in the function keys, even if they've
+    been remapped to something else in some other context.
+  -->
   <item>
     <name>Command and Control Function Keys</name>
     <identifier>private.command_and_control_function_keys</identifier>
     <autogen>__KeyToKey__ KeyCode::F2, KeyCode::COMMAND_L</autogen>
     <autogen>__KeyToKey__ KeyCode::F3, KeyCode::CONTROL_L</autogen>
   </item>
-  <item>
-    <name>Command to Control in Terminal</name>
-    <identifier>private.command_to_control_in_terminal</identifier>
-    <autogen>__KeyToKey__ KeyCode::COMMAND_L, KeyCode::CONTROL_L</autogen>
-    <autogen>__KeyToKey__ KeyCode::COMMAND_R, KeyCode::CONTROL_R</autogen>
-    <only>TERMINAL</only>
-  </item>
 
   <!--
-    The following mappings require PCKeyboardHack from the KeyRemap4MacBook people.  You must set
+    These mappings require PCKeyboardHack from the KeyRemap4MacBook people. You must set
     CapsLock in PCKeyboardHack to 110, which is the code for the PC Application key
     (PC_APPLICATION). Then you can use PC_APPLICATION for any sort of remapping here in
     KeyRemap4MacBook.
