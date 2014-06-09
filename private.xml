@@ -67,13 +67,24 @@
   </item>
 
   <!--
-    This one requires "Select Previous Tab" and "Select Next Tab" to be mapped
-    to cmd-alt-leftarrow and cmd-opt-rightarrow in the keyboard shortcuts area
-    in System Preferences, and it sets opt-h/l to prev/next tab.
+    This one requires "Select Previous Tab" and "Select Next Tab" to be mapped to cmd-alt-leftarrow
+    and cmd-opt-rightarrow in the keyboard shortcuts area in System Preferences, and it sets opt-h/l
+    to prev/next tab. Since this would clobber cmd-opt-h/l, have to explicitly set those to
+    themselves first.
   -->
   <item>
     <name>Option-H/L for Prev/Next Tab</name>
     <identifier>private.option_hl_for_prev_next_tab</identifier>
+    <autogen>
+      __KeyToKey__
+      KeyCode::H, ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L,
+      KeyCode::H, ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L
+    </autogen>
+    <autogen>
+      __KeyToKey__
+      KeyCode::L, ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L,
+      KeyCode::L, ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L
+    </autogen>
     <autogen>
       __KeyToKey__
       KeyCode::H, ModifierFlag::OPTION_L,
