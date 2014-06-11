@@ -4,4 +4,4 @@ alias fe='cd /Users/brett/projects/franklinestimating/fe/fe'
 # in system-specific file because color option differs between mac & linux
 alias ls='ls -FG'
 
-alias ack='ack -ai'
+alias ack='ack -i'
