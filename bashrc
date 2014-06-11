@@ -37,6 +37,17 @@
 # See tmux.conf for an example of how to get tmux to always start up with the
 # brettenv settings turned on.
 
+# Slightly more usable variable for type of OS than $OSTYPE, to key off of later.
+OS_TYPE=""
+case "$(uname)" in
+  Solaris*) OS_TYPE="solaris" ;;
+  Darwin*) OS_TYPE="osx" ;;
+  Linux*) OS_TYPE="linux" ;;
+  BSD*) OS_TYPE="bsd" ;;
+  Cygwin*) OS_TYPE="cygwin" ;;
+  *) OS_TYPE="unknown: $(uname)" ;;
+esac
+
 # Used by tmux/wemux. Should also be in ~/.bashrc.
 export TERM=screen-256color
 
@@ -81,14 +92,14 @@ if [ -d ~/bin ]; then
   export PATH=~/bin:${PATH}
 fi
 
-# get aliases
+# get cross-platform aliases
 if [ -f ~/.brettenv/alias ]; then
   source ~/.brettenv/alias
 fi
 
-# get system-specific stuff
-if [ -f ~/.brettenv/local ]; then
-  source ~/.brettenv/local
+# get system-specific aliases
+if [ -f ~/.brettenv/alias.$OS_TYPE ]; then
+  source ~/.brettenv/alias.$OS_TYPE
 fi
 
 # If this user is in the rvm group, enable the rvm shell script.
