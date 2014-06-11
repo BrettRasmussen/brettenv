@@ -1,0 +1,7 @@
+alias fa='cd /home/brett/projects/franklinestimating/fa/fa'
+alias fe='cd /home/brett/projects/franklinestimating/fe/fe'
+
+# in system-specific file because color option differs between mac & linux
+alias ls='ls -F --color=auto'
+
+alias ack='ack-grep -ai'
