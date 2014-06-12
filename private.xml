@@ -67,14 +67,21 @@
   </item>
 
   <!--
-    This one requires "Select Previous Tab" and "Select Next Tab" to be mapped to cmd-alt-leftarrow
-    and cmd-opt-rightarrow in the keyboard shortcuts area in System Preferences, and it sets opt-h/l
-    to prev/next tab. Since this would clobber cmd-opt-h/l, have to explicitly set those to
-    themselves first.
+    These two require "Select Previous Tab" and "Select Next Tab" to be mapped to cmd-alt-leftarrow
+    and cmd-opt-rightarrow in the keyboard shortcuts area in System Preferences, and set opt-h/l to
+    prev/next tab (shift-opt-h/l in terminal). Since this would clobber cmd-opt-h/l, have to
+    explicitly set those to themselves first.
+
+    This whole thing is here because in some apps, setting opt-h/l in Keyboard System Preferences
+    just doesn't seem to want to work correctly.
+
+    Setting Terminal to use shift-opt-h/l because I want to use opt-h/l to cycle through tmux panes
+    there.
   -->
   <item>
     <name>Option-H/L for Prev/Next Tab</name>
     <identifier>private.option_hl_for_prev_next_tab</identifier>
+    <not>TERMINAL, SYSTEM_PREFERENCES</not>
     <autogen>
       __KeyToKey__
       KeyCode::H, ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L,
@@ -93,6 +100,21 @@
     <autogen>
       __KeyToKey__
       KeyCode::L, ModifierFlag::OPTION_L,
+      KeyCode::CURSOR_RIGHT, ModifierFlag::COMMAND_R | ModifierFlag::OPTION_R
+    </autogen>
+  </item>
+  <item>
+    <name>Shift-Option-H/L for Prev/Next Tab in Terminal</name>
+    <identifier>private.shift_option_hl_for_prev_next_tab_in_terminal</identifier>
+    <only>TERMINAL</only>
+    <autogen>
+      __KeyToKey__
+      KeyCode::H, ModifierFlag::SHIFT_R | ModifierFlag::OPTION_L,
+      KeyCode::CURSOR_LEFT, ModifierFlag::COMMAND_R | ModifierFlag::OPTION_R
+    </autogen>
+    <autogen>
+      __KeyToKey__
+      KeyCode::L, ModifierFlag::SHIFT_R | ModifierFlag::OPTION_L,
       KeyCode::CURSOR_RIGHT, ModifierFlag::COMMAND_R | ModifierFlag::OPTION_R
     </autogen>
   </item>
