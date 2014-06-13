@@ -15,6 +15,16 @@
   </item>
 
   <!--
+    Similar to the above, it's nice on the Kinesis to have a two-handed alternative for escape.
+  -->
+  <item>
+    <name>Opt-Space to Escape</name>
+    <identifier>private.opt_space_to_escape</identifier>
+    <autogen> __KeyToKey__ KeyCode::SPACE, ModifierFlag::OPTION_L, KeyCode::ESCAPE</autogen>
+    <autogen> __KeyToKey__ KeyCode::SPACE, ModifierFlag::OPTION_R, KeyCode::ESCAPE</autogen>
+  </item>
+
+  <!--
     This one allows you to use some keyboard-shortcut app, like BetterTouchTool,
     to set cmd-opt-c to go to the Chrome app, and then immediately hit cmd-opt-v
     (right next to the c key) to open a new chrome window.
