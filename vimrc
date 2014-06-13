@@ -2,7 +2,6 @@ set term=xterm
 if &cp | set nocp | endif
 let s:cpo_save=&cpo
 set cpo&vim
-imap <Del> 
 map! <S-Insert> <MiddleMouse>
 "map [3~ 
 "imap [3~ 
@@ -22,6 +21,9 @@ map 8 :set tw=80<CR>
 map 9 :set tw=100<CR>
 map 0 :set tw=120<CR>
 set textwidth=120
+
+"an easier escape with a quick jk together in insert mode
+inoremap jk <Esc>
 
 map o O<CR>j
 "map ? :s/^\/\///g<CR>
