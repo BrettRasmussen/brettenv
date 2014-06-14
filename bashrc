@@ -68,9 +68,13 @@ export PS1="\[\033[01;31m\][\u@\h:\W]\$(__git_ps1 '(%s)')$\[\033[00m\] "
 #export PS1='[\u@\h:\W]$ '
 
 # various environment variables
-export EDITOR='vi -u ~/.brettenv/vimrc'
 export EMAIL=brett.rasmussen@twoedge.com
 export ACKRC='~/.brettenv/ackrc'
+
+# On mac, setting EDITOR to something like 'vim -u ~/.brettenv/vimrc' causes
+# problems when going into vim during a git commit, so it's better to just
+# use vim but have ~/.vimrc aliased to ~/.brettenv/vimrc.
+export EDITOR=vim
 
 # show timestamps for history
 export HISTTIMEFORMAT='(%F %T) '
