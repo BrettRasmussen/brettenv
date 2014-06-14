@@ -20,8 +20,18 @@
   <item>
     <name>Opt-Space to Escape</name>
     <identifier>private.opt_space_to_escape</identifier>
-    <autogen> __KeyToKey__ KeyCode::SPACE, ModifierFlag::OPTION_L, KeyCode::ESCAPE</autogen>
-    <autogen> __KeyToKey__ KeyCode::SPACE, ModifierFlag::OPTION_R, KeyCode::ESCAPE</autogen>
+    <autogen>
+      __KeyToKey__
+      KeyCode::SPACE, ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L,
+      KeyCode::SPACE, ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L
+    </autogen>
+    <autogen>
+      __KeyToKey__
+      KeyCode::SPACE, ModifierFlag::COMMAND_R | ModifierFlag::OPTION_R,
+      KeyCode::SPACE, ModifierFlag::COMMAND_R | ModifierFlag::OPTION_R
+    </autogen>
+    <autogen>__KeyToKey__ KeyCode::SPACE, ModifierFlag::OPTION_L, KeyCode::ESCAPE</autogen>
+    <autogen>__KeyToKey__ KeyCode::SPACE, ModifierFlag::OPTION_R, KeyCode::ESCAPE</autogen>
   </item>
 
   <!--
