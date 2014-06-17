@@ -36,16 +36,16 @@
 
   <!--
     This one allows you to use some keyboard-shortcut app, like BetterTouchTool,
-    to set cmd-opt-c to go to the Chrome app, and then immediately hit cmd-opt-v
-    (right next to the c key) to open a new chrome window.
+    to set cmd-opt-c to go to the Chrome app, and then immediately hit cmd-opt-c
+    again to open a new chrome window.
   -->
   <item>
-    <name>Command-Option-V to Command-N in Chrome</name>
-    <identifier>private.command_option_v_to_command_n_in_chrome</identifier>
+    <name>Command-Option-C to Command-N in Chrome</name>
+    <identifier>private.command_option_c_to_command_n_in_chrome</identifier>
     <only>GOOGLE_CHROME</only>
     <autogen>
       __KeyToKey__
-      KeyCode::V, ModifierFlag::COMMAND_R | ModifierFlag::OPTION_R,
+      KeyCode::C, ModifierFlag::COMMAND_R | ModifierFlag::OPTION_R,
       KeyCode::N, ModifierFlag::COMMAND_L
     </autogen>
   </item>
@@ -186,6 +186,10 @@
     (albeit verbose) fix to add all of the right/left-hand combinations for both types.
 
     This item also includes a mapping for command-6 to shift-control-6, the way vim on mac needs it.
+
+    It also includes a cmd-opt-t mapping to open up a new terminal, allowing you to hit cmd-opt-t,
+    mapped in an outside utility to go to Terminal, and then hit the same thing again inside terminal
+    to open a new terminal window.
 
     This is a huge mapping group, since we have to do all of these things with all the letter keys,
     and with both left and right modifier keys.
@@ -787,12 +791,12 @@
     <autogen>
       __KeyToKey__
       KeyCode::T, ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L,
-      KeyCode::T, ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L
+      KeyCode::N, ModifierFlag::COMMAND_L | ModifierFlag::SHIFT_L
     </autogen>
     <autogen>
       __KeyToKey__
       KeyCode::T, ModifierFlag::COMMAND_R | ModifierFlag::OPTION_R,
-      KeyCode::T, ModifierFlag::COMMAND_R | ModifierFlag::OPTION_R
+      KeyCode::N, ModifierFlag::COMMAND_R | ModifierFlag::SHIFT_R
     </autogen>
     <autogen>
       __KeyToKey__
