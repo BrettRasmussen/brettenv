@@ -35,9 +35,9 @@
   </item>
 
   <!--
-    This one allows you to use some keyboard-shortcut app, like BetterTouchTool,
-    to set cmd-opt-c to go to the Chrome app, and then immediately hit cmd-opt-c
-    again to open a new chrome window.
+    These ones allow you to use some keyboard-shortcut app, like BetterTouchTool,
+    to set a keyboard shortcut to go to some app and then immediately hit the same
+    shortcut again to open a new window.
   -->
   <item>
     <name>Command-Option-C to Command-N in Chrome</name>
@@ -46,6 +46,16 @@
     <autogen>
       __KeyToKey__
       KeyCode::C, ModifierFlag::COMMAND_R | ModifierFlag::OPTION_R,
+      KeyCode::N, ModifierFlag::COMMAND_L
+    </autogen>
+  </item>
+  <item>
+    <name>Command-Option-N to Command-N in TextEdit</name>
+    <identifier>private.command_option_n_to_command_n_in_textedit</identifier>
+    <only>EDITOR</only>
+    <autogen>
+      __KeyToKey__
+      KeyCode::N, ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L,
       KeyCode::N, ModifierFlag::COMMAND_L
     </autogen>
   </item>
