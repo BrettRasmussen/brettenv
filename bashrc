@@ -64,7 +64,7 @@ __git_ps1 ()
   fi
 }
 
-export PS1="\[\033[01;31m\][\u@\h:\W]\$(__git_ps1 '(%s)')$\[\033[00m\] "
+export PS1="\[\033[01;32m\][\u@\h:\W]\$(__git_ps1 '(%s)')$\[\033[00m\] "
 #export PS1='[\u@\h:\W]$ '
 
 # various environment variables
