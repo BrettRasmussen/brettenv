@@ -16,14 +16,14 @@
   plom = pull origin master
   plos = pull origin staging
   plop = pull origin production
-  plopl = pull origin playground
+  plopg = pull origin playground
   psom = push origin master
   psos = push origin staging
   psop = push origin production
-  psopl = push origin playground
+  psopg = push origin playground
   sdep = push staging staging:master
   pdep = push production production:master
-  pldep = push playground playground:master
+  pgdep = push playground playground:master
   unstage = reset HEAD
   uncommit = reset --soft HEAD^
 [gc]
