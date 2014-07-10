@@ -122,6 +122,7 @@ set t_Co=256
 colorscheme blackburn
 set cursorline
 highlight CursorLine cterm=none gui=none ctermbg=236 guibg=236
+highlight MatchParen cterm=none gui=none ctermbg=8 guibg=8
 
 " remap leader key to comma so I can be like JD
 let mapleader=','
@@ -179,3 +180,4 @@ let g:snips_author = 'Brett Rasmussen'
 let g:DeleteTrailingWhitespace_Action = 'ask'
 nnoremap <Leader>d :<C-u>%DeleteTrailingWhitespace<CR>
 vnoremap <Leader>d :DeleteTrailingWhitespace<CR>
+highlight ShowTrailingWhitespace ctermbg=Magenta guibg=Magenta
