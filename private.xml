@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<!-- Config file for customized keyboard mappings in KeyRemap4MacBook. -->
+<!-- Config file for customized keyboard mappings in Karabiner (previously KeyRemap4MacBook). -->
 
 <root>
   <!--
@@ -1015,6 +1015,16 @@
       KeyCode::Z, ModifierFlag::CONTROL_R
     </autogen>
 
+    <autogen>
+      __KeyToKey__
+      KeyCode::KEY_6, ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L,
+      KeyCode::KEY_6, ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L
+    </autogen>
+    <autogen>
+      __KeyToKey__
+      KeyCode::KEY_6, ModifierFlag::COMMAND_R | ModifierFlag::OPTION_R,
+      KeyCode::KEY_6, ModifierFlag::COMMAND_R | ModifierFlag::OPTION_R
+    </autogen>
     <autogen>
       __KeyToKey__
       KeyCode::KEY_6, ModifierFlag::COMMAND_L,
