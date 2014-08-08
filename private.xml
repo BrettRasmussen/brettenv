@@ -44,6 +44,26 @@
     <identifier>private.command_5432_window_switching</identifier>
     <autogen>
       __KeyToKey__
+      KeyCode::KEY_5, ModifierFlag::COMMAND_R | ModifierFlag::OPTION_R,
+      KeyCode::KEY_5, ModifierFlag::COMMAND_R | ModifierFlag::OPTION_R
+    </autogen>
+    <autogen>
+      __KeyToKey__
+      KeyCode::KEY_4, ModifierFlag::COMMAND_R | ModifierFlag::OPTION_R,
+      KeyCode::KEY_4, ModifierFlag::COMMAND_R | ModifierFlag::OPTION_R
+    </autogen>
+    <autogen>
+      __KeyToKey__
+      KeyCode::KEY_3, ModifierFlag::COMMAND_R | ModifierFlag::OPTION_R,
+      KeyCode::KEY_3, ModifierFlag::COMMAND_R | ModifierFlag::OPTION_R
+    </autogen>
+    <autogen>
+      __KeyToKey__
+      KeyCode::KEY_2, ModifierFlag::COMMAND_R | ModifierFlag::OPTION_R,
+      KeyCode::KEY_2, ModifierFlag::COMMAND_R | ModifierFlag::OPTION_R
+    </autogen>
+    <autogen>
+      __KeyToKey__
       KeyCode::KEY_5, ModifierFlag::COMMAND_L,
       KeyCode::TAB, ModifierFlag::COMMAND_L
     </autogen>
