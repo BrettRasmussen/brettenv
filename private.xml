@@ -35,6 +35,56 @@
   </item>
 
   <!--
+    This uses cmd-5/4 for forward/reverse app switching, and cmd-3/2 for forward/reverse
+    switching between windows of the same app. It piggy-backs on the standard mac shortcuts
+    for that behavior.
+  -->
+  <item>
+    <name>Command-5/4/3/2 for Mac-style App/Window Switching</name>
+    <identifier>private.command_5432_window_switching</identifier>
+    <autogen>
+      __KeyToKey__
+      KeyCode::KEY_5, ModifierFlag::COMMAND_L,
+      KeyCode::TAB, ModifierFlag::COMMAND_L
+    </autogen>
+    <autogen>
+      __KeyToKey__
+      KeyCode::KEY_5, ModifierFlag::COMMAND_R,
+      KeyCode::TAB, ModifierFlag::COMMAND_R
+    </autogen>
+    <autogen>
+      __KeyToKey__
+      KeyCode::KEY_4, ModifierFlag::COMMAND_L,
+      KeyCode::TAB, ModifierFlag::COMMAND_L | ModifierFlag::SHIFT_L
+    </autogen>
+    <autogen>
+      __KeyToKey__
+      KeyCode::KEY_4, ModifierFlag::COMMAND_R,
+      KeyCode::TAB, ModifierFlag::COMMAND_R | ModifierFlag::SHIFT_R
+    </autogen>
+    <autogen>
+      __KeyToKey__
+      KeyCode::KEY_3, ModifierFlag::COMMAND_L,
+      KeyCode::BACKQUOTE, ModifierFlag::COMMAND_L
+    </autogen>
+    <autogen>
+      __KeyToKey__
+      KeyCode::KEY_3, ModifierFlag::COMMAND_R,
+      KeyCode::BACKQUOTE, ModifierFlag::COMMAND_R
+    </autogen>
+    <autogen>
+      __KeyToKey__
+      KeyCode::KEY_2, ModifierFlag::COMMAND_L,
+      KeyCode::BACKQUOTE, ModifierFlag::COMMAND_L | ModifierFlag::SHIFT_L
+    </autogen>
+    <autogen>
+      __KeyToKey__
+      KeyCode::KEY_2, ModifierFlag::COMMAND_R,
+      KeyCode::BACKQUOTE, ModifierFlag::COMMAND_R | ModifierFlag::SHIFT_R
+    </autogen>
+  </item>
+
+  <!--
     These ones allow you to use some keyboard-shortcut app, like BetterTouchTool,
     to set a keyboard shortcut to go to some app and then immediately hit the same
     shortcut again to open a new window.
