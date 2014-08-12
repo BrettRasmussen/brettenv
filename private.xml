@@ -3,6 +3,153 @@
 <!-- Config file for customized keyboard mappings in Karabiner (previously KeyRemap4MacBook). -->
 
 <root>
+  <!-- Custom App Definitions -->
+  <appdef>
+    <appname>EVERNOTE</appname>
+    <equal>com.evernote.Evernote</equal>
+  </appdef>
+
+  <!--
+    App Launcher Shortcuts.
+
+    The <not> tags in these, specifying the same app that the launcher is pointing to, allow us to
+    later on define something within that same app that uses the same keyboard shortcut to do
+    something else. Usually this is launching a new window immediately after going to the app if
+    already open, but it could be anything.
+  -->
+  <item>
+    <name>Launch Finder with cmd-opt-f</name>
+    <identifier>private.launch_finder_with_cmd_opt_f</identifier>
+    <not>FINDER</not>
+    <autogen>
+      __KeyToKey__
+      KeyCode::F, ModifierFlag::COMMAND_R | ModifierFlag::OPTION_R,
+      KeyCode::VK_OPEN_URL_APP_Finder
+    </autogen>
+  </item>
+
+  <item>
+    <name>Launch Terminal with cmd-opt-t</name>
+    <identifier>private.launch_terminal_with_cmd_opt_t</identifier>
+    <not>TERMINAL</not>
+    <autogen>
+      __KeyToKey__
+      KeyCode::T, ModifierFlag::COMMAND_R | ModifierFlag::OPTION_R,
+      KeyCode::VK_OPEN_URL_APP_Terminal
+    </autogen>
+  </item>
+
+  <item>
+    <name>Launch TextEdit with cmd-opt-n</name>
+    <identifier>private.launch_textedit_with_cmd_opt_n</identifier>
+    <not>EDITOR</not>
+    <autogen>
+      __KeyToKey__
+      KeyCode::N, ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L,
+      KeyCode::VK_OPEN_URL_APP_TextEdit
+    </autogen>
+  </item>
+
+  <vkopenurldef>
+    <name>KeyCode::VK_OPEN_URL_APP_Adium</name>
+    <url type="file">/Applications/Adium.app</url>
+  </vkopenurldef>
+  <item>
+    <name>Launch Adium with cmd-opt-a</name>
+    <identifier>private.launch_adium_with_cmd_opt_a</identifier>
+    <not>ADIUMX</not>
+    <autogen>
+      __KeyToKey__
+      KeyCode::A, ModifierFlag::COMMAND_R | ModifierFlag::OPTION_R,
+      KeyCode::VK_OPEN_URL_APP_Adium
+    </autogen>
+  </item>
+
+  <vkopenurldef>
+    <name>KeyCode::VK_OPEN_URL_APP_Dashboard</name>
+    <url type="file">/Applications/Dashboard.app</url>
+  </vkopenurldef>
+  <item>
+    <name>Launch Dashboard with cmd-opt-d</name>
+    <identifier>private.launch_dashboard_with_cmd_opt_d</identifier>
+    <autogen>
+      __KeyToKey__
+      KeyCode::D, ModifierFlag::COMMAND_R | ModifierFlag::OPTION_R,
+      KeyCode::VK_OPEN_URL_APP_Dashboard
+    </autogen>
+  </item>
+
+  <vkopenurldef>
+    <name>KeyCode::VK_OPEN_URL_APP_Evernote</name>
+    <url type="file">/Applications/Evernote.app</url>
+  </vkopenurldef>
+  <item>
+    <name>Launch Evernote with cmd-opt-e</name>
+    <identifier>private.launch_evernote_with_cmd_opt_e</identifier>
+    <not>EVERNOTE</not>
+    <autogen>
+      __KeyToKey__
+      KeyCode::E, ModifierFlag::COMMAND_R | ModifierFlag::OPTION_R,
+      KeyCode::VK_OPEN_URL_APP_Evernote
+    </autogen>
+  </item>
+
+  <vkopenurldef>
+    <name>KeyCode::VK_OPEN_URL_APP_GoogleChrome</name>
+    <url type="file">/Applications/Google Chrome.app</url>
+  </vkopenurldef>
+  <item>
+    <name>Launch Google Chrome with cmd-opt-c</name>
+    <identifier>private.launch_google_chrome_with_cmd_opt_c</identifier>
+    <not>GOOGLE_CHROME</not>
+    <autogen>
+      __KeyToKey__
+      KeyCode::C, ModifierFlag::COMMAND_R | ModifierFlag::OPTION_R,
+      KeyCode::VK_OPEN_URL_APP_GoogleChrome
+    </autogen>
+  </item>
+
+  <vkopenurldef>
+    <name>KeyCode::VK_OPEN_URL_APP_SystemPreferences</name>
+    <url type="file">/Applications/System Preferences.app</url>
+  </vkopenurldef>
+  <item>
+    <name>Launch System Preferences with cmd-opt-,</name>
+    <identifier>private.launch_system_preferences_with_cmd_opt_comma</identifier>
+    <not>SYSTEM_PREFERENCES</not>
+    <autogen>
+      __KeyToKey__
+      KeyCode::COMMA, ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L,
+      KeyCode::VK_OPEN_URL_APP_SystemPreferences
+    </autogen>
+  </item>
+
+  <!--
+    These ones allow you to set a system-wide keyboard shortcut to go to some app (see the
+    application launcher shortcuts above) and then immediately hit the same shortcut again to open a
+    new window.
+  -->
+  <item>
+    <name>Command-Option-C to Command-N in Chrome</name>
+    <identifier>private.command_option_c_to_command_n_in_chrome</identifier>
+    <only>GOOGLE_CHROME</only>
+    <autogen>
+      __KeyToKey__
+      KeyCode::C, ModifierFlag::COMMAND_R | ModifierFlag::OPTION_R,
+      KeyCode::N, ModifierFlag::COMMAND_L
+    </autogen>
+  </item>
+  <item>
+    <name>Command-Option-N to Command-N in TextEdit</name>
+    <identifier>private.command_option_n_to_command_n_in_textedit</identifier>
+    <only>EDITOR</only>
+    <autogen>
+      __KeyToKey__
+      KeyCode::N, ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L,
+      KeyCode::N, ModifierFlag::COMMAND_L
+    </autogen>
+  </item>
+
   <!--
     On the Kinesis keyboard, Escape is hard to hit, but the Delete key is right
     at the left thumb. Since I'm hitting Escape all the time in vim, terminal, etc.,
@@ -101,32 +248,6 @@
       __KeyToKey__
       KeyCode::KEY_2, ModifierFlag::COMMAND_R,
       KeyCode::BACKQUOTE, ModifierFlag::COMMAND_R | ModifierFlag::SHIFT_R
-    </autogen>
-  </item>
-
-  <!--
-    These ones allow you to use some keyboard-shortcut app, like BetterTouchTool,
-    to set a keyboard shortcut to go to some app and then immediately hit the same
-    shortcut again to open a new window.
-  -->
-  <item>
-    <name>Command-Option-C to Command-N in Chrome</name>
-    <identifier>private.command_option_c_to_command_n_in_chrome</identifier>
-    <only>GOOGLE_CHROME</only>
-    <autogen>
-      __KeyToKey__
-      KeyCode::C, ModifierFlag::COMMAND_R | ModifierFlag::OPTION_R,
-      KeyCode::N, ModifierFlag::COMMAND_L
-    </autogen>
-  </item>
-  <item>
-    <name>Command-Option-N to Command-N in TextEdit</name>
-    <identifier>private.command_option_n_to_command_n_in_textedit</identifier>
-    <only>EDITOR</only>
-    <autogen>
-      __KeyToKey__
-      KeyCode::N, ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L,
-      KeyCode::N, ModifierFlag::COMMAND_L
     </autogen>
   </item>
 
