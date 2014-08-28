@@ -429,8 +429,8 @@ snippet |
 # debugger breakpoint
 snippet db
 	require 'debugger'; debugger
-# do/end (corresponds to rd eruby snippet)
-snippet d
+# do/end (corresponds to rdo eruby snippet)
+snippet do
 	do
 		${1}
 	end
@@ -446,11 +446,7 @@ snippet {|
 snippet eli
 	elsif ${1:condition}
 		${2}
-# quick 'end' (corresponds to re eruby snippet)
+# end with blank line above (corresponds to re eruby snippet)
 snippet e
-	end
-# multi-line 'end' (corresponds to ree eruby snippet)
-snippet ee
-
 		${1}
 	end
