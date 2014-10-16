@@ -1,4 +1,5 @@
 alias fa='cd /Users/brett/projects/franklinestimating/fa/fa'
+alias fap='cd /Users/brett/projects/franklinestimating/fa/fa/public/angular/projects'
 alias fe='cd /Users/brett/projects/franklinestimating/fe/fe'
 
 # in system-specific file because color option differs between mac & linux
