@@ -79,7 +79,7 @@ map S :syntax off<CR>
 
 " filetype stuff
 filetype on
-"filetype indent on
+filetype indent on
 filetype plugin on
 
 " indentation stuff
