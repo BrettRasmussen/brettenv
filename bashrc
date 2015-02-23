@@ -64,7 +64,12 @@ __git_ps1 ()
   fi
 }
 
-export PS1="\[\033[01;32m\][\u@\h:\W]\$(__git_ps1 '(%s)')$\[\033[00m\] "
+# Customized prompt.
+# To understand the color codes, see:
+# http://unix.stackexchange.com/questions/124407/what-color-codes-can-i-use-in-my-ps1-prompt
+# http://en.wikipedia.org/wiki/ANSI_escape_code#Colors
+export PS1="\[\033[38;5;222m\][\u@\h:\W]\$(__git_ps1 '(%s)')$\[\033[00m\] "
+#export PS1="\[\033[01;32m\][\u@\h:\W]\$(__git_ps1 '(%s)')$\[\033[00m\] "
 #export PS1='[\u@\h:\W]$ '
 
 # various environment variables
