@@ -10,21 +10,63 @@
   </appdef>
 
   <!--
-    App Launcher Shortcuts.
+    App Shortcuts.
 
     The <not> tags in these, specifying the same app that the launcher is pointing to, allow us to
     later on define something within that same app that uses the same keyboard shortcut to do
     something else. Usually this is launching a new window immediately after going to the app if
     already open, but it could be anything.
   -->
+  <vkopenurldef>
+    <name>KeyCode::VK_OPEN_URL_APP_Firefox</name>
+    <url type="file">/Applications/Firefox.app</url>
+  </vkopenurldef>
+  <item>
+    <name>Launch Firefox with shift-cmd-opt-f</name>
+    <identifier>private.launch_firefox_with_shift_cmd_opt_f</identifier>
+    <not>FIREFOX</not>
+    <autogen>
+      __KeyToKey__
+      KeyCode::F, ModifierFlag::SHIFT_L | ModifierFlag::COMMAND_R | ModifierFlag::OPTION_R,
+      KeyCode::VK_OPEN_URL_APP_Firefox
+    </autogen>
+  </item>
+
+  <item>
+    <name>Shift-Command-Option-F to Command-N in Firefox</name>
+    <identifier>private.shift_command_option_f_to_command_n_in_firefox</identifier>
+    <only>FIREFOX</only>
+    <autogen>
+      __KeyToKey__
+      KeyCode::F, ModifierFlag::SHIFT_L | ModifierFlag::COMMAND_R | ModifierFlag::OPTION_R,
+      KeyCode::N, ModifierFlag::COMMAND_L
+    </autogen>
+  </item>
+
   <item>
     <name>Launch Finder with cmd-opt-f</name>
     <identifier>private.launch_finder_with_cmd_opt_f</identifier>
     <not>FINDER</not>
     <autogen>
       __KeyToKey__
+      KeyCode::F, ModifierFlag::SHIFT_L | ModifierFlag::COMMAND_R | ModifierFlag::OPTION_R,
+      KeyCode::F, ModifierFlag::SHIFT_L | ModifierFlag::COMMAND_R | ModifierFlag::OPTION_R
+    </autogen>
+    <autogen>
+      __KeyToKey__
       KeyCode::F, ModifierFlag::COMMAND_R | ModifierFlag::OPTION_R,
       KeyCode::VK_OPEN_URL_APP_Finder
+    </autogen>
+  </item>
+
+  <item>
+    <name>Command-Option-F to Command-N in Finder</name>
+    <identifier>private.command_option_f_to_command_n_in_finder</identifier>
+    <only>FINDER</only>
+    <autogen>
+      __KeyToKey__
+      KeyCode::F, ModifierFlag::COMMAND_R | ModifierFlag::OPTION_R,
+      KeyCode::N, ModifierFlag::COMMAND_L
     </autogen>
   </item>
 
@@ -47,6 +89,17 @@
       __KeyToKey__
       KeyCode::N, ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L,
       KeyCode::VK_OPEN_URL_APP_TextEdit
+    </autogen>
+  </item>
+
+  <item>
+    <name>Command-Option-N to Command-N in TextEdit</name>
+    <identifier>private.command_option_n_to_command_n_in_textedit</identifier>
+    <only>EDITOR</only>
+    <autogen>
+      __KeyToKey__
+      KeyCode::N, ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L,
+      KeyCode::N, ModifierFlag::COMMAND_L
     </autogen>
   </item>
 
@@ -109,6 +162,17 @@
     </autogen>
   </item>
 
+  <item>
+    <name>Command-Option-C to Command-N in Chrome</name>
+    <identifier>private.command_option_c_to_command_n_in_chrome</identifier>
+    <only>GOOGLE_CHROME</only>
+    <autogen>
+      __KeyToKey__
+      KeyCode::C, ModifierFlag::COMMAND_R | ModifierFlag::OPTION_R,
+      KeyCode::N, ModifierFlag::COMMAND_L
+    </autogen>
+  </item>
+
   <vkopenurldef>
     <name>KeyCode::VK_OPEN_URL_APP_SystemPreferences</name>
     <url type="file">/Applications/System Preferences.app</url>
@@ -121,32 +185,6 @@
       __KeyToKey__
       KeyCode::COMMA, ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L,
       KeyCode::VK_OPEN_URL_APP_SystemPreferences
-    </autogen>
-  </item>
-
-  <!--
-    These ones allow you to set a system-wide keyboard shortcut to go to some app (see the
-    application launcher shortcuts above) and then immediately hit the same shortcut again to open a
-    new window.
-  -->
-  <item>
-    <name>Command-Option-C to Command-N in Chrome</name>
-    <identifier>private.command_option_c_to_command_n_in_chrome</identifier>
-    <only>GOOGLE_CHROME</only>
-    <autogen>
-      __KeyToKey__
-      KeyCode::C, ModifierFlag::COMMAND_R | ModifierFlag::OPTION_R,
-      KeyCode::N, ModifierFlag::COMMAND_L
-    </autogen>
-  </item>
-  <item>
-    <name>Command-Option-N to Command-N in TextEdit</name>
-    <identifier>private.command_option_n_to_command_n_in_textedit</identifier>
-    <only>EDITOR</only>
-    <autogen>
-      __KeyToKey__
-      KeyCode::N, ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L,
-      KeyCode::N, ModifierFlag::COMMAND_L
     </autogen>
   </item>
 
