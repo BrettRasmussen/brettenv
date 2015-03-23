@@ -112,8 +112,14 @@ if [ -f ~/.brettenv/alias.$OS_TYPE ]; then
 fi
 
 # Load shell files needed for chruby.
-source '/usr/local/share/chruby/chruby.sh'
-source '/usr/local/share/chruby/auto.sh'
+if [ -f /usr/local/share/chruby/chruby.sh ]; then
+  source '/usr/local/share/chruby/chruby.sh'
+fi
+if [ -f /usr/local/share/chruby/auto.sh ]; then
+  source '/usr/local/share/chruby/auto.sh'
+fi
 
 # Use the gem_home utility for gemsets.
-source '/usr/local/share/gem_home/gem_home.sh'
+if [ -f /usr/local/share/gem_home/gem_home.sh ]; then
+  source '/usr/local/share/gem_home/gem_home.sh'
+fi
