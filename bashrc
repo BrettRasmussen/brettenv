@@ -111,15 +111,9 @@ if [ -f ~/.brettenv/alias.$OS_TYPE ]; then
   source ~/.brettenv/alias.$OS_TYPE
 fi
 
-# If this user is in the rvm group, enable the rvm shell script.
-if groups | grep -q rvm ; then
-  if [ -f "/etc/profile.d/rvm.sh" ];
-  then
-    source "/etc/profile.d/rvm.sh";
-  else
-    source "/usr/local/lib/rvm"
-  fi
-fi
+# Load shell files needed for chruby.
+source '/usr/local/share/chruby/chruby.sh'
+source '/usr/local/share/chruby/auto.sh'
 
-# This loads RVM into a shell session.  Overrides system-wide rvm setup.
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+# Use the gem_home utility for gemsets.
+source '/usr/local/share/gem_home/gem_home.sh'
