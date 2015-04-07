@@ -184,3 +184,6 @@ highlight ShowTrailingWhitespace ctermbg=Magenta guibg=Magenta
 
 " rails.vim plugin stuff
 let g:rails_no_abbreviations = 1 " don't need their snippets since I have snipMate
+
+" xml-plugin (xmledit) stuff
+let xml_tag_completion_map = "<C-l>"
