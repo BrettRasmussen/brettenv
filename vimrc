@@ -187,3 +187,6 @@ let g:rails_no_abbreviations = 1 " don't need their snippets since I have snipMa
 
 " xml-plugin (xmledit) stuff
 let xml_tag_completion_map = "<C-l>"
+
+" tcomment plugin stuff
+let g:tcommentMapLeaderOp1 = ',c'
