@@ -1,5 +1,7 @@
 alias fa='cd /Users/brett/projects/franklinestimating/fa/fa; gem_home .'
-alias fap='cd /Users/brett/projects/franklinestimating/fa/fa/public/angular/projects'
+alias faj='cd /Users/brett/projects/franklinestimating/fa/fa/app/assets/javascripts/angular/job_schedule'
+alias fap='cd /Users/brett/projects/franklinestimating/fa/fa/app/assets/javascripts/angular/projects'
+alias fas='cd /Users/brett/projects/franklinestimating/fa/fa/app/assets/javascripts/angular/shared'
 alias fe='cd /Users/brett/projects/franklinestimating/fe/fe; gem_home .'
 
 # in system-specific file because color option differs between mac & linux
