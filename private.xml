@@ -326,10 +326,11 @@
   </item>
 
   <!--
-    These two require "Select Previous Tab" and "Select Next Tab" to be mapped to cmd-alt-leftarrow
-    and cmd-opt-rightarrow in the keyboard shortcuts area in System Preferences, and set opt-h/l to
-    prev/next tab (shift-opt-h/l in terminal). Since this would clobber cmd-opt-h/l, have to
-    explicitly set those to themselves first.
+    These two require "Select Previous Tab" and "Select Next Tab" (sometimes named other things in
+    various apps, like "Show Previous Tab" or "Previous Chat") to be mapped to cmd-alt-leftarrow and
+    cmd-opt-rightarrow in the keyboard shortcuts area in System Preferences, and then they set
+    opt-h/l to prev/next tab (shift-opt-h/l in terminal). Since this would clobber cmd-opt-h/l, have
+    to explicitly set those to themselves first.
 
     This whole thing is here because in some apps, setting opt-h/l in Keyboard System Preferences
     just doesn't seem to want to work correctly.
