@@ -28,11 +28,15 @@
 #
 # if [[ -n "$PS1" ]]; then
 #   brettenv
-#   bmux
+#   if [[ -z $TMUX ]]; then
+#     bmux
+#   fi
 # fi
 #
-# In this case, the "if" block prevents them being run if the login is
-# non-interactive.
+# In this case, the outer "if" block prevents them being run if the login is
+# non-interactive, and the one around the bmux call prevents launching a new
+# tmux session from within an existing one, which allows ~/.bashrc to be
+# sourced at any time without fear of getting nested tmux sessions.
 #
 # See tmux.conf for an example of how to get tmux to always start up with the
 # brettenv settings turned on.
