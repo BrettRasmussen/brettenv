@@ -1,0 +1,26 @@
+#! /usr/bin/env ruby
+
+require 'optparse'
+
+
+options = {}
+op = OptionParser.new do |opts|
+  opts.banner = "Usage: rs [options] [-- passthrough options for 'rails server']"
+  opts.on('-a', 'set DEBUG_ASSETS to false') { |o| options[:DEBUG_ASSETS] = false }
+  opts.on('-f', 'set BULLET_ADD_FOOTER to false') { |o| options[:BULLET_ADD_FOOTER] = false }
+  opts.on_tail('-h', 'Show this message') do
+    puts opts
+    exit
+  end
+end
+op.order!
+
+cmd = "rails server"
+cmd += " -b 0.0.0.0" if !ARGV.include?("-b")
+cmd += " #{ARGV.join(' ')}"
+
+options.each do |k,v|
+  cmd = "#{k.to_s}=#{v} #{cmd}"
+end
+
+exec cmd
