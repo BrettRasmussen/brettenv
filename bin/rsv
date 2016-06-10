@@ -2,10 +2,9 @@
 
 require 'optparse'
 
-
 options = {}
 op = OptionParser.new do |opts|
-  opts.banner = "Usage: rs [options] [-- passthrough options for 'rails server']"
+  opts.banner = "Usage: rsv [options] [-- passthrough options for 'rails server']"
   opts.on('-a', 'set DEBUG_ASSETS to false') { |o| options[:DEBUG_ASSETS] = false }
   opts.on('-f', 'set BULLET_ADD_FOOTER to false') { |o| options[:BULLET_ADD_FOOTER] = false }
   opts.on_tail('-h', 'Show this message') do
