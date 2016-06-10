@@ -1,8 +1,8 @@
 ServerAliveInterval 300
 ServerAliveCountMax 3
 
-# grox
-Host grox
+# glikker
+Host glikker
   HostName twoedge.xns01.com
   Port 7020
   User brett
@@ -43,3 +43,7 @@ Host jd-b
   HostName 98.202.90.34
   Port 2002
   User brett
+
+Host jenkins
+  HostName jenkins.franklinestimating.com
+  User ubuntu
