@@ -156,6 +156,7 @@ map <Leader>n :TagbarToggle<CR>
 map <Leader>t :CtrlPMixed<CR>
 let g:ctrlp_by_filename = 1
 let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:25,results:25'
+let g:ctrlp_user_command = "find %s -type f | egrep -v '/\.(git|hg|svn|gem)|solr|tmp/' | egrep -v '\.(png|exe|jpg|gif|jar|class|swp|swo|log|gitkep|keepme|so|o)$'"
 
 " buffer explorer plugin stuff
 let g:bufExplorerSortBy='fullpath'     " Sort by the buffer's number.
