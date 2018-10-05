@@ -121,8 +121,8 @@ set foldlevel=1000  " starting fold level; high number for all open; 0 for all c
 set t_Co=256
 colorscheme blackburn
 set cursorline
-highlight CursorLine cterm=none gui=none ctermbg=236 guibg=236
-highlight MatchParen cterm=none gui=none ctermbg=8 guibg=8
+highlight CursorLine cterm=none gui=none ctermbg=236
+highlight MatchParen cterm=none gui=none ctermbg=8
 
 " remap leader key to comma so I can be like JD
 let mapleader=','
