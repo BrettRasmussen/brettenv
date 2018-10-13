@@ -29,3 +29,6 @@
   uncommit = reset --soft HEAD^
 [gc]
   auto=1
+[user]
+	email = darkerthan70@gmail.com
+	name = Brett Rasmussen

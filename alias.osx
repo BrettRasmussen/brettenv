@@ -3,6 +3,9 @@ alias faj='cd /Users/brett/projects/franklinestimating/fa/fa/app/assets/javascri
 alias fap='cd /Users/brett/projects/franklinestimating/fa/fa/app/assets/javascripts/angular/projects'
 alias fas='cd /Users/brett/projects/franklinestimating/fa/fa/app/assets/javascripts/angular/shared'
 alias fe='cd /Users/brett/projects/franklinestimating/fe/fe; gem_home .'
+alias hl='cd /Users/brett/projects/hello; gem_home .'
+alias toy='cd /Users/brett/projects/toy; gem_home .'
+alias smp='cd /Users/brett/projects/sample; gem_home .'
 
 # in system-specific file because color option differs between mac & linux
 alias ls='ls -FG'
