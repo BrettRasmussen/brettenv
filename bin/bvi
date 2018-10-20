@@ -1,2 +1,26 @@
 #! /bin/bash
-exec /usr/bin/vim -u ~brett/.brettenv/vimrc $@
+
+# Designed to be copied into a system-wide bin directory so that no matter what
+# else is going on with executable paths or permissions of the current user, I
+# can always get to a vim working the way I like.
+#
+# Requires the specified vimrc to be world-accessible.
+
+VIMARGS="-u ~brett/.brettenv/vimrc $@"
+
+declare -a VIMPATHS=(
+  "$(which nvim)"
+  "/usr/local/bin/nvim"
+  "/bin/nvim"
+  "$(which vim)"
+  "/usrlocal/bin/vim"
+  "/bin/vim"
+  "$(which vi)"
+  "/bin/vi"
+)
+
+for path in "${VIMPATHS[@]}"; do
+  if [[ -f $path ]]; then
+    exec $path $VIMARGS
+  fi
+done
