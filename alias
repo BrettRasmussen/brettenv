@@ -1,6 +1,6 @@
 # portable aliases
-alias brettenv='source ~/.brettenv/bashrc' # should also be defined in ~/.bashrc
-alias bmux='tmux -f ~/.brettenv/tmux.conf' # should also be defined in ~/.bashrc
+alias brettenv='source ~/.brettenv/zshrc' # should also be defined in ~/.zshrc
+alias bmux='tmux -f ~/.brettenv/tmux.conf' # should also be defined in ~/.zshrc
 alias l='ls -lFh'
 alias la='l -a'
 alias u='cd ../'

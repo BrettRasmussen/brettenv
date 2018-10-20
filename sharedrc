@@ -1,0 +1,58 @@
+# Slightly more usable variable for type of OS than $OSTYPE, to key off of later.
+OS_TYPE=""
+case "$(uname)" in
+  Solaris*) OS_TYPE="solaris" ;;
+  Darwin*) OS_TYPE="osx" ;;
+  Linux*) OS_TYPE="linux" ;;
+  BSD*) OS_TYPE="bsd" ;;
+  Cygwin*) OS_TYPE="cygwin" ;;
+  *) OS_TYPE="unknown: $(uname)" ;;
+esac
+
+# Used by tmux/wemux. Should also be in ~/.zshrc.
+export TERM=screen-256color
+
+# various environment variables
+export EMAIL=brett.rasmussen@twoedge.com
+export ACKRC='~/.brettenv/ackrc'
+
+# show timestamps for history
+export HISTTIMEFORMAT='(%F %T) '
+
+# use my settings (including vi mode) for programs using readline
+export INPUTRC='~/.brettenv/inputrc'
+
+# disable ctrl-s/ctrl-q flow control
+stty -ixon
+
+# vi mode on the command line
+bindkey -v
+
+# On mac, setting EDITOR to something like 'vim -u ~/.brettenv/vimrc' causes
+# problems when going into vim during a git commit, so it's better to just
+# use vim but have ~/.vimrc aliased to ~/.brettenv/vimrc.
+export EDITOR=vim
+
+# get cross-platform aliases
+if [ -f ~/.brettenv/alias ]; then
+  source ~/.brettenv/alias
+fi
+
+# get system-specific aliases
+if [ -f ~/.brettenv/alias.$OS_TYPE ]; then
+  source ~/.brettenv/alias.$OS_TYPE
+fi
+
+# Load shell files needed for chruby.
+if [ -f /usr/local/share/chruby/chruby.sh ]; then
+  source '/usr/local/share/chruby/chruby.sh'
+fi
+if [ -f /usr/local/share/chruby/auto.sh ]; then
+  source '/usr/local/share/chruby/auto.sh'
+fi
+
+# Use the gem_home utility for gemsets.
+if [ -f /usr/local/share/gem_home/gem_home.sh ]; then
+  source '/usr/local/share/gem_home/gem_home.sh'
+fi
+

@@ -1,3 +1,7 @@
+# NOTE: My new preferred shell is zsh. This file is still around for use on
+# those systems where zsh might not be found, and should still work as
+# described. Normally, just ignore this file and look in zshrc instead.
+#
 # bashrc file to set up Brett's command-line environment, including settings for
 # tmux.  These instructions assume a home directory name of /home/brett.  On any
 # given system, install git (package is usually git-core), generate ssh keys
@@ -7,6 +11,7 @@
 # git clone git@github.com:BrettRasmussen/brettenv.git .brettenv
 #
 # (Or whatever the github project path is and desired location on the system.)
+#
 # Then set up these aliases in the standard bashrc file (probably
 # /home/brett/.bashrc):
 #
@@ -40,20 +45,7 @@
 #
 # See tmux.conf for an example of how to get tmux to always start up with the
 # brettenv settings turned on.
-
-# Slightly more usable variable for type of OS than $OSTYPE, to key off of later.
-OS_TYPE=""
-case "$(uname)" in
-  Solaris*) OS_TYPE="solaris" ;;
-  Darwin*) OS_TYPE="osx" ;;
-  Linux*) OS_TYPE="linux" ;;
-  BSD*) OS_TYPE="bsd" ;;
-  Cygwin*) OS_TYPE="cygwin" ;;
-  *) OS_TYPE="unknown: $(uname)" ;;
-esac
-
-# Used by tmux/wemux. Should also be in ~/.bashrc.
-export TERM=screen-256color
+#-------------------------------------------------------------------------------
 
 # prompt with git branch displayed
 __git_ps1 ()
@@ -76,54 +68,11 @@ export PS1="\[\033[38;5;222m\][\u@\h:\W]\$(__git_ps1 '(%s)')$\[\033[00m\] "
 #export PS1="\[\033[01;32m\][\u@\h:\W]\$(__git_ps1 '(%s)')$\[\033[00m\] "
 #export PS1='[\u@\h:\W]$ '
 
-# various environment variables
-export EMAIL=brett.rasmussen@twoedge.com
-export ACKRC='~/.brettenv/ackrc'
-
-# On mac, setting EDITOR to something like 'vim -u ~/.brettenv/vimrc' causes
-# problems when going into vim during a git commit, so it's better to just
-# use vim but have ~/.vimrc aliased to ~/.brettenv/vimrc.
-export EDITOR=vim
-
-# show timestamps for history
-export HISTTIMEFORMAT='(%F %T) '
-
 # use vi mode for the command line
 set -o vi
-
-# use my settings (including vi mode) for programs using readline
-export INPUTRC='~/.brettenv/inputrc'
 
 # case-insensitive globbing in bash
 shopt -s nocaseglob
 
-# disable ctrl-s/ctrl-q flow control
-stty -ixon
-
-# set up ~/bin
-if [ -d ~/bin ]; then
-  export PATH=~/bin:${PATH}
-fi
-
-# get cross-platform aliases
-if [ -f ~/.brettenv/alias ]; then
-  source ~/.brettenv/alias
-fi
-
-# get system-specific aliases
-if [ -f ~/.brettenv/alias.$OS_TYPE ]; then
-  source ~/.brettenv/alias.$OS_TYPE
-fi
-
-# Load shell files needed for chruby.
-if [ -f /usr/local/share/chruby/chruby.sh ]; then
-  source '/usr/local/share/chruby/chruby.sh'
-fi
-if [ -f /usr/local/share/chruby/auto.sh ]; then
-  source '/usr/local/share/chruby/auto.sh'
-fi
-
-# Use the gem_home utility for gemsets.
-if [ -f /usr/local/share/gem_home/gem_home.sh ]; then
-  source '/usr/local/share/gem_home/gem_home.sh'
-fi
+# Get the setup stuff shared by bash and zsh.
+source sharedrc
