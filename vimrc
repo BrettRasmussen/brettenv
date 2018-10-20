@@ -1,4 +1,3 @@
-set term=xterm
 if &cp | set nocp | endif
 let s:cpo_save=&cpo
 set cpo&vim
@@ -7,6 +6,9 @@ map! <S-Insert> <MiddleMouse>
 "imap [3~ 
 "map / y:let @z = escape('^R"', '$*.^~[]\')<CR>/^Rz<CR>
 map u ct_
+
+" make the status and command lines at bottom be the same line
+set laststatus=1
 
 "ctrl plus h/j/k/l (vim left/right) cycles through open file buffers or jumps to
 "first/last open buffer
@@ -45,7 +47,8 @@ map <S-Insert> <MiddleMouse>
 let &cpo=s:cpo_save
 unlet s:cpo_save
 set backspace=2  " make backspace work like in other apps (across lines, etc.)
-set clipboard=autoselect,exclude:cons\\|linux,unnamed
+set clipboard=unnamed
+" set clipboard=autoselect,exclude:cons\\|linux,unnamed
 set fileencodings=ucs-bom,utf-8,default,latin1
 set guicursor=a:blinkon0
 set guifont=DejaVu\ Sans\ Mono\ 8
