@@ -44,6 +44,10 @@
 #-------------------------------------------------------------------------------
 
 
+# NOTE (by Brett): oh-my-zsh is currently installed in .brettenv as a git
+# subtree. For update instructions and other understanding, see:
+# https://www.atlassian.com/blog/git/alternatives-to-git-submodule-git-subtree
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
