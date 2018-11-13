@@ -75,4 +75,4 @@ set -o vi
 shopt -s nocaseglob
 
 # Get the setup stuff shared by bash and zsh.
-source sharedrc
+source $HOME/.brettenv/sharedrc
