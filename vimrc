@@ -155,11 +155,14 @@ let g:tagbar_autofocus = 1
 let g:tagbar_autoclose = 1
 map <Leader>n :TagbarToggle<CR>
 
-" CtrlP plugin stuff
-map <Leader>t :CtrlPMixed<CR>
-let g:ctrlp_by_filename = 1
-let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:25,results:25'
-let g:ctrlp_user_command = "find %s -type f | egrep -v '/\.(git|hg|svn|gem)|solr|tmp/' | egrep -v '\.(png|exe|jpg|gif|jar|class|swp|swo|log|gitkep|keepme|so|o)$'"
+" FZF plugin stuff
+set runtimepath+=/usr/local/opt/fzf
+function! s:find_git_root()
+  return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
+endfunction
+command! ProjectFiles execute 'Files' s:find_git_root()
+" map <Leader>t :FZF<CR>
+map <Leader>t :ProjectFiles<CR>
 
 " buffer explorer plugin stuff
 let g:bufExplorerSortBy='fullpath'     " Sort by the buffer's number.
