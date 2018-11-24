@@ -28,6 +28,9 @@ stty -ixon
 # vi mode on the command line
 bindkey -v
 
+# Enable iex history across sessions.
+export ERL_AFLAGS="-kernel shell_history enabled"
+
 # On mac, setting EDITOR to something like 'vim -u ~/.brettenv/vimrc' causes
 # problems when going into vim during a git commit, so it's better to just
 # use vim but have ~/.vimrc aliased to ~/.brettenv/vimrc.
