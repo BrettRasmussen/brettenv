@@ -119,6 +119,28 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
+# Disable history sharing across concurrent shell sessions.
+unsetopt inc_append_history
+unsetopt share_history
+
+# Options for command-line history.
+setopt APPEND_HISTORY
+setopt INC_APPEND_HISTORY
+setopt HIST_EXPIRE_DUPS_FIRST
+setopt HIST_FIND_NO_DUPS
+setopt HIST_IGNORE_DUPS
+
+# Move to beginning of line on up/down.
+bindkey -M vicmd j vi-down-line-or-history
+bindkey -M vicmd k vi-up-line-or-history
+
+# Allow # comments on command-line.
+setopt INTERACTIVE_COMMENTS
+
+# Print a message on command-line when programs exit with non-zero value.
+setopt PRINT_EXIT_VALUE
+
+
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
