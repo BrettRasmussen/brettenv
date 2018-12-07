@@ -6,6 +6,7 @@ alias fe='cd /Users/brett/projects/franklinestimating/fe/fe; gem_home .'
 alias hl='cd /Users/brett/projects/hello; gem_home .'
 alias toy='cd /Users/brett/projects/toy; gem_home .'
 alias smp='cd /Users/brett/projects/sample; gem_home .'
+alias cm='cd /Users/brett/projects/elixir/chekmon'
 
 # in system-specific file because color option differs between mac & linux
 alias ls='ls -FG'
