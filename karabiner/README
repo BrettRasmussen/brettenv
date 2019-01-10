@@ -8,11 +8,17 @@ apps except the terminal. In that case, I want control keys to be control keys
 but still need the command key for menu-item stuff like opening new windows and
 tabs.
 
+command_control.json and control_key.json are mutually exclusive. Use only one
+of them.
+
+command_control.json remaps control to command universally and caps_lock to
+control universally.
+
 control_key.json remaps control to command in all apps except terminal. It also
 maps caps_lock to be a command key while using terminal and a control key
 everywhere else.
 
-Any json file, including control_key.json, in this directory can be dropped into
+Any json file in this directory can be dropped into
 ~/.config/karabiner/assets/complex_modifications. That will create a new rule or
 set of rules in the "add rule" dialog in the "Complex Modifications" tab in the
 Karabiner config gui, called Karabiner Elements. Enable the desired rules and
