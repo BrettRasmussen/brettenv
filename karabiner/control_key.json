@@ -1,0 +1,106 @@
+{
+  "title": "Control Key",
+  "rules": [
+    {
+      "description": "Change control to command except in terminals",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "left_control",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "left_command"
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_unless",
+              "bundle_identifiers": [
+                "^com\\.apple\\.Terminal$"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "right_control",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "right_command"
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_unless",
+              "bundle_identifiers": [
+                "^com\\.apple\\.Terminal$"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Map caps_lock to command in terminal",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "caps_lock"
+          },
+          "to": [
+            {
+              "key_code": "left_command"
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.apple\\.Terminal$"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Map caps_lock to control everywhere but terminal",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "caps_lock"
+          },
+          "to": [
+            {
+              "key_code": "left_control"
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_unless",
+              "bundle_identifiers": [
+                "^com\\.apple\\.Terminal$"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
