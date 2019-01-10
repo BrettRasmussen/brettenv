@@ -10,12 +10,15 @@ map u ct_
 " make the status and command lines at bottom be the same line
 set laststatus=1
 
-"ctrl plus h/j/k/l (vim left/right) cycles through open file buffers or jumps to
-"first/last open buffer
+"ctrl plus h/l (vim left/right) cycles through open file buffers
 map <C-h> :bp<CR>
-map <C-j> :bl<CR>
-map <C-k> :bf<CR>
 map <C-l> :bn<CR>
+
+"ctrl plus j/k (vim down/up) does bigger up/down jumps
+let g:BASH_Ctrl_j = 'off'
+let g:BASH_Ctrl_k = 'off'
+noremap <C-j> <C-d>
+noremap <C-k> <C-u>
 
 "alt plus 7/8/9/0 set textwidth size
 map 7 :set tw=0<CR>
