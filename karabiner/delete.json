@@ -1,0 +1,21 @@
+{
+  "title": "Delete Key",
+  "rules": [
+    {
+      "description": "Change delete key to escape",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "delete_forward"
+          },
+          "to": [
+            {
+              "key_code": "escape"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
