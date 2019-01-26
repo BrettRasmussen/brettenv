@@ -1,12 +1,11 @@
 The files in this directory are config files for Karabiner, the OSX key-mapping
 software.
 
-Because I use a Kinesis keyboard and also do tons of stuff, including
-vim editing, on the command line, life is a little tricky on OSX. Specifically,
-I want both control keys on my keyboard to act as command keys in Mac in all
-apps except the terminal. In that case, I want control keys to be control keys
-but still need the command key for menu-item stuff like opening new windows and
-tabs.
+Because I use a Kinesis keyboard and also do tons of stuff on the command line,
+including vim editing, life is a little tricky on OSX. Specifically, I want both
+control keys on my keyboard to act as command keys in Mac in all apps except the
+terminal. In that case, I want control keys to be control keys but still need
+the command key for menu-item stuff like opening new windows and tabs.
 
 command_control.json and control_key.json are mutually exclusive. Use only one
 of them.
@@ -17,6 +16,15 @@ control universally.
 control_key.json remaps control to command in all apps except terminal. It also
 maps caps_lock to be a command key while using terminal and a control key
 everywhere else.
+
+app_launchers.json sets up the shortcut keys to launch my favorite applications
+using cmd+opt+some_key. Since OSX generally distinguishes between switching to
+an app and opening up a new window in that app, I like to have the exact same
+key combinations as switch to an app also open up a new window once in that app
+(for those apps where opening up numerous windows is relevant). That way I can
+switch to an app and then immediately hit the same keys to open a window if I so
+desire. app_launchers.json sets the key combos for everywhere except within the
+given app, and app_new_window.json sets the same key combos for within it.
 
 Any json file in this directory can be dropped into
 ~/.config/karabiner/assets/complex_modifications. That will create a new rule or
