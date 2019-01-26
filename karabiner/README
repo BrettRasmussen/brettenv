@@ -1,21 +1,44 @@
-The files in this directory are config files for Karabiner, the OSX key-mapping
-software.
+The files in this directory are config files for Karabiner Elements, the OSX
+key-mapping software.
+
+Since these config files are stored in my brettenv git repo, I prefer the
+directory to be named after the app itself to help me remember what this stuff
+is for. However, for a running Karabiner instance, these contents all go in
+~/.config/karabiner/asets/complex_modifications. Don't be confused by the
+directory being named different things in different places. So to symlink, do
+this:
+
+$ ln -s ~/.brettenv/karabiner ~/.config/karabiner/assets/complex_modifications
+
+Symlinking the individual files doesn't seem to work, so do the whole directory.
+
+These are mappings of the type that Karabiner calls "complex modifications". The
+way that works is that key mappings are defined in json configuration files that
+live in ~/.config/karabiner/assets/complex_modifications. As long as the config
+files are syntactically valid (which sometimes proves a headache), the
+configuration GUI, called Karabiner Elements Preferences, will see the key
+mapping rules in that directory and allow you to turn them on and off from
+within the GUI. That looks like this: go to the "Complex Modifications" tab and
+click "Add rule". Any file in the complex_modifications directory that is
+syntactically correct will show up as a group of rules in that popup, with each
+rule defined under "rules" in the json file getting a line that can be enabled
+and disabled individually.
+
+What actually happens at the moment of "enable" is that Karabiner merges the
+enabled json configs into ~/.config/karabiner/karabiner.json, the main config
+file for a running Karabiner instance. Which means it's probably best to stick
+to separate json files in assets/complex_modifications and simply enable or
+disable from the gui, rather than editing karabiner.json directly.
 
 Because I use a Kinesis keyboard and also do tons of stuff on the command line,
 including vim editing, life is a little tricky on OSX. Specifically, I want both
-control keys on my keyboard to act as command keys in Mac in all apps except the
-terminal. In that case, I want control keys to be control keys but still need
-the command key for menu-item stuff like opening new windows and tabs.
+control keys on my keyboard to act as command keys, but that takes away the
+ability to use control keys in the terminal. My solution is to use Karabiner's
+simultaneous keypress feature to map the middle+ring lower row keys on both
+sides (x+c and comma+period) to act as control keys.
 
-command_control.json and control_key.json are mutually exclusive. Use only one
-of them.
-
-command_control.json remaps control to command universally and caps_lock to
-control universally.
-
-control_key.json remaps control to command in all apps except terminal. It also
-maps caps_lock to be a command key while using terminal and a control key
-everywhere else.
+command_control.json is for remappping control to command, middle+ring combos to
+control, and, if desired, caps_lock to control.
 
 app_launchers.json sets up the shortcut keys to launch my favorite applications
 using cmd+opt+some_key. Since OSX generally distinguishes between switching to
@@ -25,18 +48,6 @@ key combinations as switch to an app also open up a new window once in that app
 switch to an app and then immediately hit the same keys to open a window if I so
 desire. app_launchers.json sets the key combos for everywhere except within the
 given app, and app_new_window.json sets the same key combos for within it.
-
-Any json file in this directory can be dropped into
-~/.config/karabiner/assets/complex_modifications. That will create a new rule or
-set of rules in the "add rule" dialog in the "Complex Modifications" tab in the
-Karabiner config gui, called Karabiner Elements. Enable the desired rules and
-the mappings should then work.
-
-What actually happens at that moment is Karabiner merges the enabled json
-configs into ~/.config/karabiner/karabiner.json, the main config file for a
-running Karabiner instance. Which means it's probably best to stick to separate
-json files in assets/complex_modifications and simply enable or disable from the
-gui.
 
 private.xml is an old configuration file in the previous Karabiner format. It is
 useless now, but it contains a whole bunch of config stuff I had to work out,
