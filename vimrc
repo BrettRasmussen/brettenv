@@ -20,12 +20,16 @@ let g:BASH_Ctrl_k = 'off'
 noremap <C-j> <C-d>
 noremap <C-k> <C-u>
 
+"alt plus j/k scrolls up and down
+noremap <M-j> <C-e>
+noremap <M-k> <C-y>
+
 "alt plus 7/8/9/0 set textwidth size
-map 7 :set tw=0<CR>
-map 8 :set tw=80<CR>
-map 9 :set tw=100<CR>
-map 0 :set tw=120<CR>
-set textwidth=120
+map <M-7> :set tw=0<CR>
+map <M-8> :set tw=80<CR>
+map <M-9> :set tw=100<CR>
+map <M-0> :set tw=120<CR>
+set textwidth=80
 
 "an easier escape with a quick jk together in insert mode
 inoremap jk <Esc>
