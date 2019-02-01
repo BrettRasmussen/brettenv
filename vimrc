@@ -104,8 +104,25 @@ set tabstop=2
 "set cinoptions=l1,c4,(s,U1,w1,m1,j1,J1)
 "set cinwords=if,elif,else,for,while,try,except,finally,def,class
 
-" pathogen plugin management stuff
-call pathogen#infect()
+" vim-plug plugin manager
+call plug#begin('~/.brettenv/vim/plugged')
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'jlanzarotta/bufexplorer'
+Plug 'easymotion/vim-easymotion'
+Plug 'vim-scripts/ShowTrailingWhitespace'
+Plug 'vim-scripts/DeleteTrailingWhitespace'
+Plug 'junegunn/fzf.vim'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'AndrewRadev/splitjoin.vim'
+Plug 'majutsushi/tagbar'
+Plug 'tomtom/tcomment_vim'
+Plug 'elixir-editors/vim-elixir'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'sukima/xmledit'
+Plug 'mileszs/ack.vim'
+call plug#end()
 
 " matchit stuff
 runtime! macros/matchit.vim
@@ -137,8 +154,8 @@ highlight MatchParen cterm=none gui=none ctermbg=8
 " remap leader key to comma so I can be like JD
 let mapleader=','
 
-" ack.vim plugin stuff
-map <Leader>f :Ack!
+" ack.vim plugin stuff (leave the trailing space)
+map <Leader>f :Ack! 
 
 " Indent Guides plugin stuff
 let g:indent_guides_auto_colors = 0
@@ -162,6 +179,34 @@ let g:tagbar_autofocus = 1
 let g:tagbar_autoclose = 1
 map <Leader>n :TagbarToggle<CR>
 
+let g:tagbar_type_ruby = {
+    \ 'kinds' : [
+        \ 'm:modules',
+        \ 'c:classes',
+        \ 'd:describes',
+        \ 'C:contexts',
+        \ 'f:methods',
+        \ 'F:singleton methods'
+    \ ]
+\ }
+let g:tagbar_type_elixir = {
+    \ 'ctagstype' : 'elixir',
+    \ 'kinds' : [
+        \ 'f:functions',
+        \ 'functions:functions',
+        \ 'c:callbacks',
+        \ 'd:delegates',
+        \ 'e:exceptions',
+        \ 'i:implementations',
+        \ 'a:macros',
+        \ 'o:operators',
+        \ 'm:modules',
+        \ 'p:protocols',
+        \ 'r:records',
+        \ 't:tests'
+    \ ]
+\ }
+
 " FZF plugin stuff
 set runtimepath+=/usr/local/opt/fzf
 function! s:find_git_root()
@@ -175,10 +220,6 @@ map <Leader>t :ProjectFiles<CR>
 let g:bufExplorerSortBy='fullpath'     " Sort by the buffer's number.
 let g:bufExplorerShowRelativePath=1  " Show relative paths.
 
-" AutoClose plugin stuff
-"let g:AutoClosePairs = {'(': ')', '{': '}', '[': ']'}
-let g:AutoClosePairs = {}  " effectively disables autoclose for now
-
 " vim session stuff
 nmap SQ <ESC>:mksession!<CR>:wqa<CR>
 " For some reason, session reload loses IndentGuides styles, so we reset them explicitly.
@@ -187,8 +228,8 @@ nmap SR <ESC>:source Session.vim<CR>:call SetIndentGuidesStyles()<CR>
 " EasyMotion plugin stuff
 let g:EasyMotion_leader_key = '\'
 
-" snipMate plugin stuff
-let g:snips_author = 'Brett Rasmussen'
+" UltiSnips plugin stuff
+let g:UltiSnipsSnippetDirectories = ["UltiSnips", "my_ultisnips"]
 
 " DeleteTrailingWhitespace plugin stuff
 let g:DeleteTrailingWhitespace_Action = 'ask'
@@ -201,6 +242,7 @@ let g:rails_no_abbreviations = 1 " don't need their snippets since I have snipMa
 
 " xml-plugin (xmledit) stuff
 let xml_tag_completion_map = "<C-l>"
+let g:xmledit_enable_html = 1
 
 " tcomment plugin stuff
-let g:tcommentMapLeaderOp1 = ',c'
+let g:tcomment_opleader1 = ',c'

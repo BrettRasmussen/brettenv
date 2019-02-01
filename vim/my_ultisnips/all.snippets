@@ -1,0 +1,87 @@
+# This file contains snippets that are always defined.
+
+# Sligthly lower priority than everything else since specialized versions
+# should overwrite. The user needs to adjust her priority in her snippets to
+# ~-55 so that other filetypes will still overwrite.
+priority -59
+
+
+snippet l "=>"
+=> $0
+endsnippet
+
+snippet ' "single-quote pair" i
+'$1'$0
+endsnippet
+
+snippet " "double-quote pair" i
+"$1"$0
+endsnippet
+
+snippet () "paren pair" i
+($1)$0
+endsnippet
+
+snippet ()) "multi-line paren pair" i
+(
+  $1
+)$0
+endsnippet
+
+snippet ()); "multi-line paren pair with semicolon" i
+(
+  $1
+);$0
+endsnippet
+
+snippet {} "curly-brace pair" i
+{$1}$0
+endsnippet
+
+snippet {}} "multi-line curly brace pair" i
+{
+  $1
+}$0
+endsnippet
+
+snippet {}}; "multi-line curly brace pair with semicolon" i
+{
+  $1
+};$0
+endsnippet
+
+snippet {}}) "multi-line curly brace pair with closing paren" i
+{
+  $1
+})$0
+endsnippet
+
+snippet {}}); "multi-line curly brace pair with closing paren and semicolon" i
+{
+  $1
+});$0
+endsnippet
+
+snippet [] "square bracket pair" i
+[$1]$0
+endsnippet
+
+snippet []] "multi-line square bracket pair" i
+[
+  $1
+]$0
+endsnippet
+
+snippet []]; "multi-line square bracket pair with semicolon" i
+[
+  $1
+];$0
+endsnippet
+
+snippet {{ "double-curly" i
+{{ $1 }}$0
+endsnippet
+
+snippet me "my name"
+Brett Rasmussen $0
+endsnippet
