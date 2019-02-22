@@ -170,5 +170,7 @@ setopt PRINT_EXIT_VALUE
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+unalias gst
+
 # Get the setup stuff shared by bash and zsh.
 source $HOME/.brettenv/sharedrc
