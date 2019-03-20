@@ -76,8 +76,10 @@ map F :set formatoptions=tcq<CR>
 
 " split window stuff ---------
 " If in a huge terminal, show 120 chars wide (124 in order to allow for line
-" numbers); otherwise, split 70/30.
-let &winwidth = &columns > 160 ? 124 : &columns * 7 / 10
+" numbers); otherwise, split 70/30. Currently not working in neovim because
+" &columns appears not to get set by the time of setting &winwidth.
+"let &winwidth = &columns > 160 ? 124 : &columns * 7 / 10
+let &winwidth = 104
 
 " F3 to toggle paste mode
 set pastetoggle=<F3>
