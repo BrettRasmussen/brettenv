@@ -12,6 +12,8 @@
   t = tag -l
   amend = commit --amend
   fpo = fetch --prune origin
+  pl = pull
+  ps = push
   plo = pull origin
   pso = push origin
   plom = pull origin master

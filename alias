@@ -50,3 +50,7 @@ alias fap='cd ~brett/projects/franklin_estimating/fa/app/assets/javascripts/angu
 alias fas='cd ~brett/projects/franklin_estimating/fa/app/assets/javascripts/angular/shared'
 alias hl='cd ~brett/projects/elixir/hello'
 alias cm='cd ~brett/projects/elixir/chekmon'
+
+# Most git aliases come from oh-my-zsh, but I needed gst for the gemset managing
+# utility, so I'm using this for git status instead of the oh-my-zsh one.
+alias gs='git status'
