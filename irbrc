@@ -99,4 +99,9 @@ class Object
     @h2 = {:x => "xxx", :y => "yyy", :z => "zzz"} if @h2.nil? || reset
     @h2
   end
+
+  def s
+    5.times { puts }
+    nil
+  end
 end
