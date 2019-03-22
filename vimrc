@@ -217,6 +217,7 @@ endfunction
 command! ProjectFiles execute 'Files' s:find_git_root()
 " map <Leader>t :FZF<CR>
 map <Leader>t :ProjectFiles<CR>
+map <Leader>r :History<CR>
 
 " buffer explorer plugin stuff
 let g:bufExplorerSortBy='fullpath'     " Sort by the buffer's number.
