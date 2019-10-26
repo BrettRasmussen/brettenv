@@ -9,3 +9,13 @@ it "${1:spec name}" do
 	$0
 end
 endsnippet
+
+snippet b "block"
+{${1:|${2:var}| }$0}
+endsnippet
+
+snippet "\b(de)?f" "def <name>..." r
+def ${1:function_name}${2:(${3:*args})}
+	$0
+end
+endsnippet

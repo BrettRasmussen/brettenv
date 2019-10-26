@@ -40,8 +40,8 @@ alias egh='echo $GEM_HOME'
 alias egp='echo $GEM_PATH'
 
 # gst gemset utility
-alias sgi='source gst in'
-alias sgo='source gst out'
+alias sgi='source gst in; echo "GEM_HOME is now $GEM_HOME"'
+alias sgo='source gst out; echo "GEM_HOME is now $GEM_HOME"'
 
 # aliases for changing to commonly used directories
 alias fa='cd ~brett/projects/franklin_estimating/fa'

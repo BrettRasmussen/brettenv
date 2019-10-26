@@ -39,7 +39,7 @@ map o O<CR>j
 "map / :s/^/\/\//g<CR>
 "map # :s/^#//g<CR>
 "map 3 :s/^/#/g<CR>
-map a 1GVG
+map <M-a> 1GVG
 noremap - $
 vmap [% [%m'gv``
 vmap ]% ]%m'gv``
@@ -91,7 +91,7 @@ map S :syntax off<CR>
 
 " filetype stuff
 filetype on
-filetype indent on
+" filetype indent on
 filetype plugin on
 
 " indentation stuff

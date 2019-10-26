@@ -101,7 +101,7 @@ class Object
   end
 
   def s
-    5.times { puts }
+    3.times { puts }
     nil
   end
 end
