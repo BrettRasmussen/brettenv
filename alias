@@ -45,11 +45,12 @@ alias sgo='source gst out; echo "GEM_HOME is now $GEM_HOME"'
 
 # aliases for changing to commonly used directories
 alias fa='cd ~brett/projects/franklin_estimating/fa'
-alias faj='cd ~brett/projects/franklin_estimating/fa/app/assets/javascripts/angular/job_schedule'
+alias fajs='cd ~brett/projects/franklin_estimating/fa/app/assets/javascripts/angular/job_schedule'
 alias fap='cd ~brett/projects/franklin_estimating/fa/app/assets/javascripts/angular/projects'
 alias fas='cd ~brett/projects/franklin_estimating/fa/app/assets/javascripts/angular/shared'
-alias hl='cd ~brett/projects/elixir/hello'
-alias cm='cd ~brett/projects/elixir/chekmon'
+alias fajc='cd ~brett/projects/franklin_estimating/fa/app/assets/javascripts/job_ticket_creator'
+alias fajt='cd ~brett/projects/franklin_estimating/fa/app/views/job_ticket_templates'
+alias cs='cd ~brett/projects/coreself/website1'
 
 # Most git aliases come from oh-my-zsh, but I needed gst for the gemset managing
 # utility, so I'm using this for git status instead of the oh-my-zsh one.
