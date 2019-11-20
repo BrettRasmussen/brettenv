@@ -1,3 +1,8 @@
+" Whenever in vim, see all current settings like this:
+"   :set all
+" To display any part of the current environment, check out:
+"   https://vim.fandom.com/wiki/Displaying_the_current_Vim_environment
+
 if &cp | set nocp | endif
 let s:cpo_save=&cpo
 set cpo&vim
@@ -94,7 +99,26 @@ filetype on
 " filetype indent on
 filetype plugin on
 
-" indentation stuff
+" indentation stuff ---------
+" To see settings relevant to indentation:
+"   :verbose set ai? cin? cink? cino? si? inde? indk?
+" Don't forget filetype indentation, which might be turned on somewhere you're
+" not aware of. Can be disabled (bottom of vimrc to be sure):
+"   :set filetype indent off
+" Worth looking it up to understand it:
+"   :help ftplugin
+" Plugins and vimrc can set indentexpr, that sometimes is set and causing indent
+" behavoirs, but less frequently mentioned on the web:
+"   :help indentexpr
+" Can write custom indent plugins that use indentexpr.
+" If having indentation headaches, read this stuff:
+"   https://vim.fandom.com/wiki/How_to_stop_auto_indenting
+"   https://vim.fandom.com/wiki/Indenting_source_code
+"   https://www.serverwatch.com/tutorials/article.php/3845506/Automatic-Indenting-With-Vim.htm
+"   https://thoughtbot.com/blog/writing-vim-syntax-plugins
+"   http://psy.swansea.ac.uk/staff/carter/vim/vim_indent.htm
+"   google: vim auto indent
+"   google: vim indent
 set autoindent " also note if "filetype indent on" is set somewhere
 set expandtab
 set shiftwidth=2
