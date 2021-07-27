@@ -13,7 +13,7 @@ esac
 export TERM=screen-256color
 
 # various environment variables
-export EMAIL=brett.rasmussen@twoedge.com
+export EMAIL=brettras1@gmail.com
 export ACKRC='~/.brettenv/ackrc'
 
 # show timestamps for history
@@ -31,10 +31,16 @@ bindkey -v
 # Enable iex history across sessions.
 export ERL_AFLAGS="-kernel shell_history enabled"
 
-# On mac, setting EDITOR to something like 'vim -u ~/.brettenv/vimrc' causes
-# problems when going into vim during a git commit, so it's better to just
-# use vim but have ~/.vimrc aliased to ~/.brettenv/vimrc.
-export EDITOR=vim
+# Editor that gets auto-launched by some programs, including git commit.
+export EDITOR="nvim -u ~brett/.brettenv/vimrc"
+
+# Various env vars used by FranklinAnywhere.
+export DB_USERNAME=brett
+export LOAD_TEST_KEY=efbc9264-d442-4167-b3c2-af108bf7811c
+export QBWC_OVERRIDES=enabled
+export QBWC_LOGGING=enabled
+export RACK_TIMEOUT_SERVICE_TIMEOUT=120
+export PUMA_WORKER_TIMEOUT=86400
 
 # get cross-platform aliases
 if [ -f ~/.brettenv/alias ]; then

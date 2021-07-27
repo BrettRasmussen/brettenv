@@ -5,8 +5,17 @@ require 'byebug'; byebug$0
 endsnippet
 
 snippet it "rspec test"
-it "${1:spec name}" do
-	$0
+it "${1:spec name}" do$0
+end
+endsnippet
+
+snippet do "do..end block"
+do$0
+end
+endsnippet
+
+snippet dov "do..end w/variable"
+do |${1:variable}|$0
 end
 endsnippet
 
@@ -14,8 +23,73 @@ snippet b "block"
 {${1:|${2:var}| }$0}
 endsnippet
 
+snippet if "multiline if"
+if ${1:condition}$0
+end
+endsnippet
+
+snippet ife "if..else"
+if ${1:condition}$2
+else$0
+end
+endsnippet
+
+snippet eif "elsif insertion"
+elsif ${1:condition}$0
+endsnippet
+
 snippet "\b(de)?f" "def <name>..." r
-def ${1:function_name}${2:(${3:*args})}
-	$0
+def ${1:function_name}${2:(${3:*args})}$0
+end
+endsnippet
+
+snippet defr "def <name> ... rescue ..."
+def ${1:function_name}${2:(${3:*args})}$4
+rescue$0
+end
+endsnippet
+
+snippet until "until <expression> ... end"
+until ${1:expression}$0
+end
+endsnippet
+
+snippet Until "begin ... end until <expression>"
+begin$0
+end until ${1:expression}
+endsnippet
+
+snippet while "while <expression> ... end"
+while ${1:expression}$0
+end
+endsnippet
+
+snippet While "begin ... end while <expression>"
+begin$0
+end while ${1:expression}
+endsnippet
+
+snippet begin "begin ... rescue ... end"
+begin$1
+rescue$0
+end
+endsnippet
+
+snippet rescue
+rescue Exception => e
+	puts e.message
+	puts e.backtrace.inspect${0:# Rescue}
+endsnippet
+
+snippet "\b(case|sw(itch)?)" "case <variable> when <expression> ... end" r
+case ${1:variable}
+when ${2:expression}$0
+end
+endsnippet
+
+snippet class "class <class_name> def initialize ... end end"
+class ${1:class_name}
+	def initialize(${2:*args})$0
+	end
 end
 endsnippet

@@ -30,73 +30,76 @@ snippet " "double-quote pair" i
 "$1"$0
 endsnippet
 
+snippet ` "backtick pair" i
+`$1`$0
+endsnippet
+
 snippet () "paren pair" i
 ($1)$0
 endsnippet
 
-snippet ()) "multi-line paren pair" i
-(
-  $1
-)$0
+snippet ()) "multiline paren pair" i
+($0
+)
 endsnippet
 
-snippet ()); "multi-line paren pair with semicolon" i
-(
-  $1
-);$0
+snippet ()); "multiline paren pair with semicolon" i
+($0
+);
 endsnippet
 
 snippet {} "curly-brace pair" i
 {$1}$0
 endsnippet
 
-snippet {}} "multi-line curly brace pair" i
-{
-  $1
-}$0
+snippet {}- "curly-brace pair with spaces" i
+{ $1 }$0
 endsnippet
 
-snippet {}}, "multi-line curly brace pair with comma" i
-{
-  $1
-},$0
+snippet {}} "multiline curly brace pair" i
+{$0
+}
 endsnippet
 
-snippet {}}; "multi-line curly brace pair with semicolon" i
-{
-  $1
-};$0
+snippet {}}, "multiline curly brace pair with comma" i
+{$0
+},
 endsnippet
 
-snippet {}}) "multi-line curly brace pair with closing paren" i
-{
-  $1
-})$0
+snippet {}}; "multiline curly brace pair with semicolon" i
+{$0
+};
 endsnippet
 
-snippet {}}); "multi-line curly brace pair with closing paren and semicolon" i
-{
-  $1
-});$0
+snippet {}}) "multiline curly brace pair with closing paren" i
+{$0
+})
+endsnippet
+
+snippet {}}); "multiline curly brace pair with closing paren and semicolon" i
+{$0
+});
 endsnippet
 
 snippet [] "square bracket pair" i
 [$1]$0
 endsnippet
 
-snippet []] "multi-line square bracket pair" i
-[
-  $1
-]$0
+snippet []] "multiline square bracket pair" i
+[$0
+]
 endsnippet
 
-snippet []]; "multi-line square bracket pair with semicolon" i
-[
-  $1
-];$0
+snippet []]; "multiline square bracket pair with semicolon" i
+[$0
+];
 endsnippet
 
 snippet {{ "double-curly" i
+{{$1}}$0
+endsnippet
+
+snippet {{- "double-curly with spaces" i
 {{ $1 }}$0
 endsnippet
 

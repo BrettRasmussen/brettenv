@@ -1,0 +1,52 @@
+# .erb and .rhmtl files
+
+# Includes html.snippets
+extends html
+
+# Rails *****************************
+snippet ead
+<% ${1:enumerable}.each do |${2:variable}| %>$0
+<% end %>
+endsnippet
+
+snippet for
+<% for ${2:item} in ${1:enumerable} %>$0
+<% end %>
+endsnippet
+
+snippet conf
+<% content_for :${1:head} do %>$0
+<% end %>
+endsnippet
+
+snippet ff
+<%= form_for @${1:model} do |f| %>$0
+<% end %>
+endsnippet
+
+snippet ffe
+<% error_messages_for :${1:model} %>
+
+<%= form_for @${2:model} do |f| %>$0
+<% end %>
+endsnippet
+
+snippet fields
+<%= fields_for :${1:model}, @$1 do |${2:f}| %>$0
+<% end %>
+endsnippet
+
+snippet if
+<% if ${1:condition} %>$0
+<% end %>
+endsnippet
+
+snippet ife
+<% if ${1:condition} %>$2
+<% else %>$0
+<% end %>
+endsnippet
+
+snippet eif "elsif insertion"
+<% elsif ${1:condition} %>$0
+endsnippet

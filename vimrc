@@ -12,8 +12,11 @@ map! <S-Insert> <MiddleMouse>
 "map / y:let @z = escape('^R"', '$*.^~[]\')<CR>/^Rz<CR>
 map u ct_
 
-" make the status and command lines at bottom be the same line
-set laststatus=1
+" status/command lines
+set laststatus=2  "show always
+set statusline=%F\ %m\%r\%y\ buf:%n\%=line:\%l\/\%L\ (%p%%)\ col:%c
+" set ruler
+set showmode
 
 "ctrl plus h/l (vim left/right) cycles through open file buffers
 map <C-h> :bp<CR>
@@ -38,6 +41,9 @@ set textwidth=80
 
 "an easier escape with a quick jk together in insert mode
 inoremap jk <Esc>
+
+"alt-/ unhighlights search results
+map <M-/> :noh<CR>
 
 map o O<CR>j
 "map ? :s/^\/\///g<CR>
@@ -70,21 +76,25 @@ set hidden
 set ignorecase
 set incsearch
 set printoptions=paper:letter
-set ruler
 set number
-set runtimepath=~/.brettenv/vim,~/.vim,/var/lib/vim/addons,/usr/share/vim/vimfiles,/usr/share/vim/vim72,/usr/share/vim/vimfiles/after,/var/lib/vim/addons/after,~/.vim/after,~/.brettenv/vim/after,$VIMRUNTIME
+set runtimepath=~/.brettenv/vim,~/.vim,/var/lib/vim/addons,/usr/local/Cellar/neovim/0.4.4_2/share/nvim/runtime,/usr/share/vim/vimfiles,/usr/share/vim/vim72,/usr/share/vim/vimfiles/after,/var/lib/vim/addons/after,~/.vim/after,~/.brettenv/vim/after,$VIMRUNTIME
 set scrolloff=5
 set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc
 set termencoding=utf-8
+set nojoinspaces
+
 map f :set formatoptions=tcqa<CR>
 map F :set formatoptions=tcq<CR>
+
+" gV to reselect what was just pasted
+nnoremap <expr> gV    "`[".getregtype(v:register)[0]."`]"
 
 " split window stuff ---------
 " If in a huge terminal, show 120 chars wide (124 in order to allow for line
 " numbers); otherwise, split 70/30. Currently not working in neovim because
 " &columns appears not to get set by the time of setting &winwidth.
 "let &winwidth = &columns > 160 ? 124 : &columns * 7 / 10
-let &winwidth = 104
+let &winwidth = 124
 
 " F3 to toggle paste mode
 set pastetoggle=<F3>
@@ -99,6 +109,9 @@ filetype on
 " filetype indent on
 filetype plugin on
 
+" explicitly set fileype based on extension
+" autocmd BufRead,BufNewFile *.hbs setlocal filetype=html
+
 " indentation stuff ---------
 " To see settings relevant to indentation:
 "   :verbose set ai? cin? cink? cino? si? inde? indk?
@@ -111,6 +124,8 @@ filetype plugin on
 " behavoirs, but less frequently mentioned on the web:
 "   :help indentexpr
 " Can write custom indent plugins that use indentexpr.
+" Don't forget about indentkeys! It's the list of keys that cause the current
+"   line to get reindented.
 " If having indentation headaches, read this stuff:
 "   https://vim.fandom.com/wiki/How_to_stop_auto_indenting
 "   https://vim.fandom.com/wiki/Indenting_source_code
@@ -120,6 +135,8 @@ filetype plugin on
 "   google: vim auto indent
 "   google: vim indent
 set autoindent " also note if "filetype indent on" is set somewhere
+set indentexpr=""
+set indentkeys=''
 set expandtab
 set shiftwidth=2
 set showbreak=-->
@@ -130,7 +147,8 @@ set tabstop=2
 "set cinoptions=l1,c4,(s,U1,w1,m1,j1,J1)
 "set cinwords=if,elif,else,for,while,try,except,finally,def,class
 
-" vim-plug plugin manager
+" vim-plug plugin manager. After adding a plugin to this list, restart vim and
+" run :PlugInstall.
 call plug#begin('~/.brettenv/vim/plugged')
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
@@ -148,6 +166,8 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'sukima/xmledit'
 Plug 'mileszs/ack.vim'
+Plug 'mustache/vim-mustache-handlebars'
+Plug 'kchmck/vim-coffee-script'
 call plug#end()
 
 " matchit stuff
@@ -273,3 +293,7 @@ let g:xmledit_enable_html = 1
 
 " tcomment plugin stuff
 let g:tcomment_opleader1 = ',c'
+
+" format XML via python3
+com! FormatXML :%!python3 -c "import xml.dom.minidom, sys; print(xml.dom.minidom.parse(sys.stdin).toprettyxml())"
+nnoremap = :FormatXML<CR>

@@ -101,7 +101,11 @@ class Object
   end
 
   def s
-    3.times { puts }
+    2.times { puts }
     nil
+  end
+
+  def rl
+    load "./lib/data_reducer.rb"
   end
 end

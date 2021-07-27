@@ -1,0 +1,34 @@
+priority -40
+
+extends javascript
+
+
+snippet sfc "single-file component boilerplate"
+<template>
+</template>
+
+<script>
+export default {
+	name: "$0"
+}
+</script>
+
+<style scoped>
+</style>
+endsnippet
+
+snippet ms "mapState"
+...mapState(["$1"$0])
+endsnippet
+
+snippet mm "mapMutations"
+...mapMutations(["$1"$0])
+endsnippet
+
+snippet ma "mapActions"
+...mapActions(["$1"$0])
+endsnippet
+
+snippet mg "mapGetters"
+...mapGetters(["$1"$0])
+endsnippet
