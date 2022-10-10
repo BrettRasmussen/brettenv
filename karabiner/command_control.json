@@ -39,6 +39,28 @@
       ]
     },
     {
+      "description": "Map command+option+caps_lock to caps_lock",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "caps_lock",
+            "modifiers": {
+              "mandatory": [
+                "command",
+                "option"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "caps_lock"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "description": "Map caps_lock to control",
       "manipulators": [
         {

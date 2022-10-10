@@ -39,7 +39,7 @@ export DB_USERNAME=brett
 export LOAD_TEST_KEY=efbc9264-d442-4167-b3c2-af108bf7811c
 export QBWC_OVERRIDES=enabled
 export QBWC_LOGGING=enabled
-export RACK_TIMEOUT_SERVICE_TIMEOUT=120
+export RACK_TIMEOUT_SERVICE_TIMEOUT=3600
 export PUMA_WORKER_TIMEOUT=86400
 
 # get cross-platform aliases

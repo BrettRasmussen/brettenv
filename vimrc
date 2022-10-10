@@ -3,14 +3,44 @@
 " To display any part of the current environment, check out:
 "   https://vim.fandom.com/wiki/Displaying_the_current_Vim_environment
 
+" path for vim to find anything in the filesystem
+set runtimepath=~/.brettenv/vim,~/.vim,/var/lib/vim/addons,/usr/local/Cellar/neovim/0.4.4_2/share/nvim/runtime,/usr/share/vim/vimfiles,/usr/share/vim/vim72,/usr/share/vim/vimfiles/after,/var/lib/vim/addons/after,~/.vim/after,~/.brettenv/vim/after,$VIMRUNTIME
+
+" remap leader key to comma so I can be like JD
+let mapleader=','
+
+" theme stuff - at top so what's below can override
+set t_Co=256
+colorscheme blackburn
+set cursorline
+highlight CursorLine cterm=none gui=none ctermbg=236
+highlight MatchParen cterm=none gui=none ctermbg=8
+
+" vi compatibility stuff
 if &cp | set nocp | endif
 let s:cpo_save=&cpo
 set cpo&vim
-map! <S-Insert> <MiddleMouse>
-"map [3~ 
-"imap [3~ 
-"map / y:let @z = escape('^R"', '$*.^~[]\')<CR>/^Rz<CR>
-map u ct_
+
+" basic settings
+let &cpo=s:cpo_save
+unlet s:cpo_save
+set backspace=2  " make backspace work like in other apps (across lines, etc.)
+set clipboard=unnamed
+" set clipboard=autoselect,exclude:cons\\|linux,unnamed
+set fileencodings=ucs-bom,utf-8,default,latin1
+set guicursor=a:blinkon0
+set guifont=DejaVu\ Sans\ Mono\ 8
+set guioptions=airm
+set helplang=en
+set hidden
+set ignorecase
+set incsearch
+set printoptions=paper:letter
+set number
+set scrolloff=5
+set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc
+set termencoding=utf-8
+set nojoinspaces
 
 " status/command lines
 set laststatus=2  "show always
@@ -18,9 +48,12 @@ set statusline=%F\ %m\%r\%y\ buf:%n\%=line:\%l\/\%L\ (%p%%)\ col:%c
 " set ruler
 set showmode
 
-"ctrl plus h/l (vim left/right) cycles through open file buffers
-map <C-h> :bp<CR>
-map <C-l> :bn<CR>
+" some convenience maps
+map! <S-Insert> <MiddleMouse>
+"map [3~ 
+"imap [3~ 
+"map / y:let @z = escape('^R"', '$*.^~[]\')<CR>/^Rz<CR>
+map u ct_
 
 "ctrl plus j/k (vim down/up) does bigger up/down jumps
 let g:BASH_Ctrl_j = 'off'
@@ -37,7 +70,7 @@ map <M-7> :set tw=0<CR>
 map <M-8> :set tw=80<CR>
 map <M-9> :set tw=100<CR>
 map <M-0> :set tw=120<CR>
-set textwidth=80
+set textwidth=120
 
 "an easier escape with a quick jk together in insert mode
 inoremap jk <Esc>
@@ -62,27 +95,6 @@ nnoremap <silent> <Plug>NetrwBrowseX :call netrw#NetBrowseX(expand("<cWORD>"),0
 map <Del> 
 map <S-Insert> <MiddleMouse>
 
-let &cpo=s:cpo_save
-unlet s:cpo_save
-set backspace=2  " make backspace work like in other apps (across lines, etc.)
-set clipboard=unnamed
-" set clipboard=autoselect,exclude:cons\\|linux,unnamed
-set fileencodings=ucs-bom,utf-8,default,latin1
-set guicursor=a:blinkon0
-set guifont=DejaVu\ Sans\ Mono\ 8
-set guioptions=airm
-set helplang=en
-set hidden
-set ignorecase
-set incsearch
-set printoptions=paper:letter
-set number
-set runtimepath=~/.brettenv/vim,~/.vim,/var/lib/vim/addons,/usr/local/Cellar/neovim/0.4.4_2/share/nvim/runtime,/usr/share/vim/vimfiles,/usr/share/vim/vim72,/usr/share/vim/vimfiles/after,/var/lib/vim/addons/after,~/.vim/after,~/.brettenv/vim/after,$VIMRUNTIME
-set scrolloff=5
-set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc
-set termencoding=utf-8
-set nojoinspaces
-
 map f :set formatoptions=tcqa<CR>
 map F :set formatoptions=tcq<CR>
 
@@ -103,6 +115,54 @@ set pastetoggle=<F3>
 syntax on
 map s :syntax on<CR>
 map S :syntax off<CR>
+
+" customize tabline
+" function adapted from Weibing Chen's answer on
+" https://stackoverflow.com/questions/35448357/how-to-let-vim-tabs-not-display-full-file-path-and-only-display-relative-folders
+if exists("+showtabline")
+  function MyTabLine()
+    let s = ''
+    let t = tabpagenr()
+    let i = 1
+    while i <= tabpagenr('$')
+      let buflist = tabpagebuflist(i)
+      let winnr = tabpagewinnr(i)
+      let s .= '%' . i . 'T'
+      let s .= (i == t ? '%1*' : '%2*')
+      let s .= (i == t ? '%#TabLineSel#' : '%#TabLine#')
+      let file = bufname(buflist[winnr - 1])
+      let file = fnamemodify(file, ':p:t')
+      if file == ''
+        let file = '[No Name]'
+      endif
+      let file = ' ' . i . '-' . file
+      let s .= file
+      let s .= ' '
+      let i = i + 1
+    endwhile
+    let s .= '%T%#TabLineFill#%='
+    let s .= (tabpagenr('$') > 1 ? '%999XX' : 'X')
+    return s
+  endfunction
+  set stal=1
+  set tabline=%!MyTabLine()
+
+  highlight TabLineFill cterm=none ctermfg=Black ctermbg=Black
+  highlight TabLine cterm=none ctermfg=Gray ctermbg=Black
+  highlight TabLineSel cterm=none ctermfg=White ctermbg=DarkGray
+endif
+
+" ctrl plus h/l (vim left/right) cycles through open tabs
+" ctrl-n/m moves tabs
+noremap <M-y> :tabp<CR>
+noremap <M-o> :tabn<CR>
+noremap <M-n> :tabmove -<CR>
+noremap <M-m> :tabmove +<CR>
+
+" <Leader>3 jumps between two most recent tabs
+au TabLeave * let g:lasttab = tabpagenr()
+nnoremap <silent> <Leader>3 :exe "tabn ".g:lasttab<cr>
+vnoremap <silent> <Leader>3 :exe "tabn ".g:lasttab<cr>
 
 " filetype stuff
 filetype on
@@ -134,7 +194,7 @@ filetype plugin on
 "   http://psy.swansea.ac.uk/staff/carter/vim/vim_indent.htm
 "   google: vim auto indent
 "   google: vim indent
-set autoindent " also note if "filetype indent on" is set somewhere
+set autoindent " also note if 'filetype indent on' is set somewhere
 set indentexpr=""
 set indentkeys=''
 set expandtab
@@ -142,32 +202,32 @@ set shiftwidth=2
 set showbreak=-->
 set softtabstop=2
 set tabstop=2
-" The following customizes the "cindent" option, which requires "set cindent"
-" instead of "set autoindent"
+" The following customizes the 'cindent' option, which requires 'set cindent'
+" instead of 'set autoindent'
 "set cinoptions=l1,c4,(s,U1,w1,m1,j1,J1)
 "set cinwords=if,elif,else,for,while,try,except,finally,def,class
 
 " vim-plug plugin manager. After adding a plugin to this list, restart vim and
 " run :PlugInstall.
 call plug#begin('~/.brettenv/vim/plugged')
+Plug 'tomtom/tcomment_vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'easymotion/vim-easymotion'
 Plug 'vim-scripts/ShowTrailingWhitespace'
 Plug 'vim-scripts/DeleteTrailingWhitespace'
-Plug 'junegunn/fzf.vim'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'majutsushi/tagbar'
-Plug 'tomtom/tcomment_vim'
 Plug 'elixir-editors/vim-elixir'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'sukima/xmledit'
 Plug 'mileszs/ack.vim'
 Plug 'mustache/vim-mustache-handlebars'
-Plug 'kchmck/vim-coffee-script'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+Plug 'junegunn/fzf.vim'
 call plug#end()
 
 " matchit stuff
@@ -189,16 +249,6 @@ endif
 " settings for folding
 set foldmethod=indent  " foldmethod options: manual|indent|marker
 set foldlevel=1000  " starting fold level; high number for all open; 0 for all closed
-
-" theme stuff
-set t_Co=256
-colorscheme blackburn
-set cursorline
-highlight CursorLine cterm=none gui=none ctermbg=236
-highlight MatchParen cterm=none gui=none ctermbg=8
-
-" remap leader key to comma so I can be like JD
-let mapleader=','
 
 " ack.vim plugin stuff (leave the trailing space)
 map <Leader>f :Ack! 
@@ -258,10 +308,9 @@ set runtimepath+=/usr/local/opt/fzf
 function! s:find_git_root()
   return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
 endfunction
-command! ProjectFiles execute 'Files' s:find_git_root()
+command! ProjectFiles execute 'FZF' s:find_git_root()
 " map <Leader>t :FZF<CR>
 map <Leader>t :ProjectFiles<CR>
-map <Leader>r :History<CR>
 
 " buffer explorer plugin stuff
 let g:bufExplorerSortBy='fullpath'     " Sort by the buffer's number.

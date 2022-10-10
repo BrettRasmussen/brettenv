@@ -5,13 +5,17 @@ if (${1:cond}) {$0
 }
 endsnippet
 
-snippet if "multiline if-else"
+snippet ife "multiline if-else"
 if (${1:cond}) {$0
 } else {
 }
 endsnippet
 
-snippet (* "anonymous arrow function" i
+snippet (* "single-line anonymous arrow function" i
+(${1:param} => $0)
+endsnippet
+
+snippet (_ "multiline anonymous arrow function" i
 (${1:param} => {$0
 })
 endsnippet
