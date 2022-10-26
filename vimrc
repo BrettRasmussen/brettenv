@@ -9,6 +9,9 @@ set runtimepath=~/.brettenv/vim,~/.vim,/var/lib/vim/addons,/usr/local/Cellar/neo
 " remap leader key to comma so I can be like JD
 let mapleader=','
 
+" Needed towards the top of vimrc for the match-up plugin, which should override matchit.
+let g:loaded_matchit = 1
+
 " theme stuff - at top so what's below can override
 set t_Co=256
 colorscheme blackburn
@@ -223,15 +226,16 @@ Plug 'majutsushi/tagbar'
 Plug 'elixir-editors/vim-elixir'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
-Plug 'sukima/xmledit'
+Plug 'andymass/vim-matchup'
 Plug 'mileszs/ack.vim'
 Plug 'mustache/vim-mustache-handlebars'
+Plug 'mattn/emmet-vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 call plug#end()
 
 " matchit stuff
-runtime! macros/matchit.vim
+" runtime! macros/matchit.vim
 
 " keep window position when switching buffers
 if v:version >= 700
@@ -327,6 +331,9 @@ let g:EasyMotion_leader_key = '\'
 " UltiSnips plugin stuff
 let g:UltiSnipsSnippetDirectories = ["UltiSnips", "my_ultisnips"]
 
+" Emmet plugin stuff
+let g:user_emmet_leader_key = ',e'
+
 " DeleteTrailingWhitespace plugin stuff
 let g:DeleteTrailingWhitespace_Action = 'ask'
 nnoremap <Leader>d :<C-u>%DeleteTrailingWhitespace<CR>
@@ -335,10 +342,6 @@ highlight ShowTrailingWhitespace ctermbg=Magenta guibg=Magenta
 
 " rails.vim plugin stuff
 let g:rails_no_abbreviations = 1 " don't need their snippets since I have snipMate
-
-" xml-plugin (xmledit) stuff
-let xml_tag_completion_map = "<C-l>"
-let g:xmledit_enable_html = 1
 
 " tcomment plugin stuff
 let g:tcomment_opleader1 = ',c'
