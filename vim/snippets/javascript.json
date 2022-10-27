@@ -1,0 +1,31 @@
+{
+  "multiline if": {
+    "prefix": "if",
+    "body": [
+      "if (${1:cond}) {$0",
+      "}"
+    ]
+  },
+
+  "multiline if-else": {
+    "prefix": "ife",
+    "body": [
+      "if (${1:cond}) {$0",
+      "} else {",
+      "}"
+    ]
+  },
+
+  "single-line anonymous arrow function": {
+    "prefix": "(*",
+    "body": ["(${1:param} => $0)"]
+  },
+
+  "multiline anonymous arrow function": {
+    "prefix": "(_",
+    "body": [
+      "(${1:param} => {$0",
+      "})"
+    ]
+  }
+}

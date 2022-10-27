@@ -1,0 +1,143 @@
+{
+  "byebug debugging breakpoint": {
+    "prefix": "bb",
+    "body": ["require 'byebug'; byebug$0"]
+  },
+
+  "rspec test": {
+    "prefix": "it",
+    "body": [
+      "it \"${1:spec name}\" do$0",
+      "end"
+    ]
+  },
+
+  "do..end block": {
+    "prefix": "do",
+    "body": [
+      "do$0",
+      "end"
+    ]
+  },
+
+  "do..end w/variable": {
+    "prefix": "dov",
+    "body": [
+      "do |${1:variable}|$0",
+      "end"
+    ]
+  },
+
+  "block": {
+    "prefix": "b",
+    "body": ["{${1:|${2:var}| }$0}"]
+  },
+
+  "multiline if": {
+    "prefix": "if",
+    "body": [
+      "if ${1:condition}$0",
+      "end"
+    ]
+  },
+
+  "if..else": {
+    "prefix": "ife",
+    "body": [
+      "if ${1:condition}$2",
+      "else$0",
+      "end"
+    ]
+  },
+
+  "elsif insertion": {
+    "prefix": "eif",
+    "body": ["elsif ${1:condition}$0"]
+  },
+
+  "def <name>...": {
+    "prefix": "\b(de)?f",
+    "body": [
+      "def ${1:function_name}${2:(${3:*args})}$0",
+      "end"
+    ]
+  },
+
+  "def <name> ... rescue ...": {
+    "prefix": "defr",
+    "body": [
+      "def ${1:function_name}${2:(${3:*args})}$4",
+      "rescue$0",
+      "end"
+    ]
+  },
+
+  "until <expression> ... end": {
+    "prefix": "until",
+    "body": [
+      "until ${1:expression}$0",
+      "end"
+    ]
+  },
+
+  "begin ... end until <expression>": {
+    "prefix": "Until",
+    "body": [
+      "begin$0",
+      "end until ${1:expression}"
+    ]
+  },
+
+  "while <expression> ... end": {
+    "prefix": "while",
+    "body": [
+      "while ${1:expression}$0",
+      "end"
+    ]
+  },
+
+  "begin ... end while <expression>": {
+    "prefix": "While",
+    "body": [
+      "begin$0",
+      "end while ${1:expression}"
+    ]
+  },
+
+  "begin ... rescue ... end": {
+    "prefix": "begin",
+    "body": [
+      "begin$1",
+      "rescue$0",
+      "end"
+    ]
+  },
+
+  "rescue": {
+    "prefix": "rescue",
+    "body": [
+      "rescue Exception => e",
+      "  puts e.message",
+      "  puts e.backtrace.inspect${0:# Rescue}"
+    ]
+  },
+
+  "case <variable> when <expression> ... end": {
+    "prefix": "\b(case|sw(itch)?)",
+    "body": [
+      "case ${1:variable}",
+      "when ${2:expression}$0",
+      "end"
+    ]
+  },
+
+  "class <class_name> def initialize ... end end": {
+    "prefix": "class",
+    "body": [
+      "class ${1:class_name}",
+      "  def initialize(${2:*args})$0",
+      "  end",
+      "end"
+    ]
+  }
+}

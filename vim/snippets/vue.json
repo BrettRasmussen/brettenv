@@ -1,0 +1,38 @@
+{
+  "single-file component boilerplate": {
+    "prefix": "sfc",
+    "body": [
+      "<template>",
+      "</template>",
+      "",
+      "<script>",
+      "export default {",
+      "  name: \"$1\"$0",
+      "}",
+      "</script>",
+      "",
+      "<style scoped>",
+      "</style>"
+    ]
+  },
+
+  "mapState": {
+    "prefix": "ms",
+    "body": ["...mapState([\"$1\"$0])"]
+  },
+
+  "mapMutations": {
+    "prefix": "mm",
+    "body": ["...mapMutations([\"$1\"$0])"]
+  },
+
+  "mapActions": {
+    "prefix": "ma",
+    "body": ["...mapActions([\"$1\"$0])"]
+  },
+
+  "mapGetters": {
+    "prefix": "mg",
+    "body": ["...mapGetters([\"$1\"$0])"]
+  }
+}
