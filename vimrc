@@ -51,55 +51,48 @@ set statusline=%F\ %m\%r\%y\ buf:%n\%=line:\%l\/\%L\ (%p%%)\ col:%c
 " set ruler
 set showmode
 
-" some convenience maps
-map! <S-Insert> <MiddleMouse>
-"map [3~ 
-"imap [3~ 
-"map / y:let @z = escape('^R"', '$*.^~[]\')<CR>/^Rz<CR>
-map u ct_
-
-"ctrl plus j/k (vim down/up) does bigger up/down jumps
-let g:BASH_Ctrl_j = 'off'
-let g:BASH_Ctrl_k = 'off'
-noremap <C-j> <C-d>
-noremap <C-k> <C-u>
-
-"alt plus j/k scrolls up and down
-noremap <M-j> <C-e>
-noremap <M-k> <C-y>
-
-"alt plus 7/8/9/0 set textwidth size
-map <M-7> :set tw=0<CR>
-map <M-8> :set tw=80<CR>
-map <M-9> :set tw=100<CR>
-map <M-0> :set tw=120<CR>
-set textwidth=120
-
-"an easier escape with a quick jk together in insert mode
+" an easier escape with a quick jk together in insert mode
 inoremap jk <Esc>
 
-"alt-/ unhighlights search results
-map <M-/> :noh<CR>
+" Map delete key to escape (useful for kinesis keyboard).
+noremap <Del> <Esc>
 
-map o O<CR>j
-"map ? :s/^\/\///g<CR>
-"map / :s/^/\/\//g<CR>
-"map # :s/^#//g<CR>
-"map 3 :s/^/#/g<CR>
-map <M-a> 1GVG
-noremap - $
-vmap [% [%m'gv``
-vmap ]% ]%m'gv``
-vmap a% [%v]%
-nmap gx <Plug>NetrwBrowseX
-map j gj
-map k gk
-nnoremap <silent> <Plug>NetrwBrowseX :call netrw#NetBrowseX(expand("<cWORD>"),0)<CR>
-map <Del> 
-map <S-Insert> <MiddleMouse>
+" change from here to underscore
+nnoremap <Leader>u ct_
 
-map f :set formatoptions=tcqa<CR>
-map F :set formatoptions=tcq<CR>
+" ctrl plus j/k (vim down/up) does bigger up/down jumps
+let g:BASH_Ctrl_j = 'off'
+let g:BASH_Ctrl_k = 'off'
+nnoremap <C-j> <C-d>
+nnoremap <C-k> <C-u>
+
+" alt plus j/k scrolls up and down
+nnoremap <M-j> <C-e>
+nnoremap <M-k> <C-y>
+
+" Textwidth stuff: alt plus 7/8/9/0 sets textwidth size; default 120.
+nnoremap <M-7> :set tw=0<CR>
+nnoremap <M-8> :set tw=80<CR>
+nnoremap <M-9> :set tw=100<CR>
+nnoremap <M-0> :set tw=120<CR>
+set textwidth=120
+
+" alt-/ unhighlights search results
+nnoremap <M-/> :noh<CR>
+
+" Allow going up and down in the middle of wrapped lines.
+nnoremap j gj
+nnoremap k gk
+
+" Select everything with alt-a.
+nnoremap <M-a> 1GVG
+
+" Hitting hyphen jumps to end of line (single-character convenience).
+nnoremap - $
+
+" Quick enabling/disabling of auto-formatting paragraphs.
+nnoremap <M-f> :set formatoptions=tcqa<CR>
+nnoremap <M-F> :set formatoptions=tcq<CR>
 
 " gV to reselect what was just pasted
 nnoremap <expr> gV    "`[".getregtype(v:register)[0]."`]"
@@ -114,10 +107,10 @@ let &winwidth = 124
 " F3 to toggle paste mode
 set pastetoggle=<F3>
 
-" syntax highlighting stuff
+" Syntax highlighting stuff: default on, easy on/off with alt-s/S.
 syntax on
-map s :syntax on<CR>
-map S :syntax off<CR>
+nnoremap <M-s> :syntax on<CR>
+nnoremap <M-S> :syntax off<CR>
 
 " customize tabline
 " function adapted from Weibing Chen's answer on
@@ -279,7 +272,7 @@ set foldmethod=indent  " foldmethod options: manual|indent|marker
 set foldlevel=1000  " starting fold level; high number for all open; 0 for all closed
 
 " ack.vim plugin stuff (leave the trailing space)
-map <Leader>f :Ack! 
+nnoremap <Leader>f :Ack! 
 
 " Indent Guides plugin stuff
 let g:indent_guides_auto_colors = 0
@@ -290,7 +283,7 @@ function SetIndentGuidesStyles()
   hi IndentGuidesOdd ctermbg = 233
   hi IndentGuidesEven ctermbg = 235
 endfunction
-map <F5> :call SetIndentGuidesStyles()<CR>
+nnoremap <F5> :call SetIndentGuidesStyles()<CR>
 call SetIndentGuidesStyles()
 
 " indexer plugin stuff
@@ -301,7 +294,7 @@ let g:tagbar_left = 1
 let g:tagbar_sort = 0
 let g:tagbar_autofocus = 1
 let g:tagbar_autoclose = 1
-map <Leader>n :TagbarToggle<CR>
+nnoremap <Leader>n :TagbarToggle<CR>
 
 let g:tagbar_type_ruby = {
     \ 'kinds' : [
@@ -337,17 +330,16 @@ function! s:find_git_root()
   return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
 endfunction
 command! ProjectFiles execute 'FZF' s:find_git_root()
-" map <Leader>t :FZF<CR>
-map <Leader>t :ProjectFiles<CR>
+nnoremap <Leader>t :ProjectFiles<CR>
 
 " buffer explorer plugin stuff
 let g:bufExplorerSortBy='fullpath'     " Sort by the buffer's number.
 let g:bufExplorerShowRelativePath=1  " Show relative paths.
 
 " vim session stuff
-nmap SQ <ESC>:mksession!<CR>:wqa<CR>
+nnoremap SQ <ESC>:mksession!<CR>:wqa<CR>
 " For some reason, session reload loses IndentGuides styles, so we reset them explicitly.
-nmap SR <ESC>:source Session.vim<CR>:call SetIndentGuidesStyles()<CR>
+nnoremap SR <ESC>:source Session.vim<CR>:call SetIndentGuidesStyles()<CR>
 
 " EasyMotion plugin stuff
 let g:EasyMotion_leader_key = '\'
