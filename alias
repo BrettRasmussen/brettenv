@@ -52,6 +52,7 @@ alias aj='cd ./app/javascript'
 alias jf='cd ~brett/projects/franklin_estimating/fa/app/javascript/job_flow'
 alias jfl='cd ~brett/projects/franklin_estimating/fa/app/javascript/job_flow_layout'
 alias jpf='cd ~brett/projects/franklin_estimating/fa/app/javascript/job_part_flags'
+alias jps='cd ~brett/projects/franklin_estimating/fa/app/javascript/job_part_show'
 alias cs='cd ~brett/projects/coreself/website1'
 
 # Most git aliases come from oh-my-zsh, but I needed gst for the gemset managing
