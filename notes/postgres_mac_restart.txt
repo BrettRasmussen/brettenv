@@ -1,0 +1,46 @@
+This problem usually shows up with one or both of these errors:
+
+(while starting via "brew services")
+Error: Failure while executing; `/bin/launchctl bootstrap gui/501
+  /Users/brett/Library/LaunchAgents/homebrew.mxcl.postgresql@13.plist` exited with 37.
+
+(while trying to run psql)
+psql: error: could not connect to server: No such file or directory
+        Is the server running locally and accepting
+        connections on Unix domain socket "/tmp/.s.PGSQL.5432"?
+
+Typical problem is that postgresql didn't shut down properly last time and there's a PID file lying
+around and blocking a normal restart. Just gotta find that PID file and delete it.
+
+It might be in one of a few different locations because of different postgres installations, perhaps
+all through homebrew or perhaps through different mechanisms: pre-installed, Postgres.app, homebrew,
+MacPorts, whatever. Homebrew is most likely, so track down what homebrew formula is installed using
+"brew list". That will inform where the file might be found, and the brew command to restart.
+
+The following will assume an installed homebrew formula of "postgresql@13", but adjust to whatever
+you find.
+
+The PID file should be called postmaster.pid and will usually be in one of these locations:
+  /usr/local/var/postgres/postmaster.pid
+  /usr/local/var/postgresql@13/postmaster.pid
+
+Search for postmaster.pid under /usr/local/var, /usr/local, just /usr, or perhaps somewhere under
+/opt, then delete it.
+
+After deleting, run:
+  brew services restart postgresql@13
+  (or whatever the brew formula is, after the "restart")
+
+These might come in handy also:
+  brew services stop postgresql@13
+  brew services start postgresql@13
+
+There are also commands like pg_ctl and launchctl that figure into this equation. pg_ctl is specific
+to the Postgres app, more low-level, and usually not needed. launchctl interacts with Mac's launchd,
+and launches daemons via launchd config files (.plist extension), located in ~/Library/LaunchAgents
+and similarly named system-level directories. It appears that "brew services start" adds a plist
+file for the given service to a LaunchAgents directory, and that tells launchd what the service's
+config settings are, like where the exectutable is, arguments, where log files are, etc. "brew
+services start" also appears to call launchctl to register the service to be started on every boot,
+and start it immediately. So it seems the brew command is a wrapper for launchctl, so theoretically,
+"brew services start|stop|restart" *should* be all you need once the PID file is deleted.
