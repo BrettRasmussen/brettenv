@@ -35,12 +35,28 @@ These might come in handy also:
   brew services stop postgresql@13
   brew services start postgresql@13
 
-There are also commands like pg_ctl and launchctl that figure into this equation. pg_ctl is specific
-to the Postgres app, more low-level, and usually not needed. launchctl interacts with Mac's launchd,
-and launches daemons via launchd config files (.plist extension), located in ~/Library/LaunchAgents
-and similarly named system-level directories. It appears that "brew services start" adds a plist
-file for the given service to a LaunchAgents directory, and that tells launchd what the service's
-config settings are, like where the exectutable is, arguments, where log files are, etc. "brew
-services start" also appears to call launchctl to register the service to be started on every boot,
-and start it immediately. So it seems the brew command is a wrapper for launchctl, so theoretically,
-"brew services start|stop|restart" *should* be all you need once the PID file is deleted.
+--------------------------------------------------------------------------------
+
+A little more context:
+
+launchd on Mac is a service manager like init.d on a Linux system. launchd refers to daemons run by
+non-root users as "agents", and starts them on user login instead of bootup. So "service", "daemon",
+and "agent" are all basically the same thing. Config for launchd is found in "property list" XML
+files, with .plist extensions, stored in LaunchAgents and LaunchDaemons directories in a few
+locations on a Mac system, including ~/Library/LaunchAgents, where the postgres plist is found.
+
+launchctl is the command-line tool for administering launchd. Using it you can "load" plist files to
+register a service with launchd, and "start" the service if it doesn't auto-start on load (depending
+on the config in the file), as well as their opposites.
+
+Learn all about launchd at https://www.launchd.info/.
+
+"brew services" is a wrapper for launchctl. A service's plist file comes with its homebrew package,
+and "brew services" runs the launchctl commands for loading, starting, and stopping it behind the
+scenes. So theoretically, "brew services start|stop|restart" *should* be all you need once the stale
+PID file is deleted.
+
+Sometimes you'll come across the command pg_ctl, which is a postgres-specific utility for
+controlling the daemon, and kind of a low-level thing for setups where postgres isn't getting
+started by any sort of service manager like launchd or initd. On a Mac, homebrew or launchd are
+likely the way to go, so you shouldn't need pg_ctl.
