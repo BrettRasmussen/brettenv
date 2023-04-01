@@ -350,6 +350,11 @@ let g:UltiSnipsSnippetDirectories = ["UltiSnips", "my_ultisnips"]
 " Emmet plugin stuff
 let g:user_emmet_leader_key = ',e'
 
+" match-up plugin stuff
+let g:matchup_matchparen_enabled = 0
+nnoremap <Leader>m :DoMatchParen<CR>
+nnoremap <Leader>M :NoMatchParen<CR>
+
 " DeleteTrailingWhitespace plugin stuff
 let g:DeleteTrailingWhitespace_Action = 'ask'
 nnoremap <Leader>d :<C-u>%DeleteTrailingWhitespace<CR>
