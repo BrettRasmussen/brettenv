@@ -167,14 +167,15 @@
       ]
     },
     {
-      "description": "Adium cmd+opt+a",
+      "description": "FaceTime shift+cmd+opt+f",
       "manipulators": [
         {
           "type": "basic",
           "from": {
-            "key_code": "a",
+            "key_code": "f",
             "modifiers": {
               "mandatory": [
+                "shift",
                 "command",
                 "option"
               ],
@@ -185,7 +186,7 @@
           },
           "to": [
             {
-              "shell_command": "open -a 'Adium.app'"
+              "shell_command": "open -a 'FaceTime.app'"
             }
           ]
         }
