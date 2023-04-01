@@ -1,4 +1,19 @@
 {
+  "tag": {
+    "prefix": "t",
+    "body": "<% $0 %>"
+  },
+
+  "output tag": {
+    "prefix": "t-",
+    "body": "<%= $0 %>"
+  },
+
+  "end tag": {
+    "prefix": "end",
+    "body": "<%= end %>"
+  },
+
   "each do w/variable": {
     "prefix": "ead",
     "body": [
