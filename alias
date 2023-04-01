@@ -55,6 +55,22 @@ alias jpf='cd ~brett/projects/franklin_estimating/fa/app/javascript/job_part_fla
 alias jps='cd ~brett/projects/franklin_estimating/fa/app/javascript/job_part_show'
 alias cs='cd ~brett/projects/coreself/website1'
 
-# Most git aliases come from oh-my-zsh, but I needed gst for the gemset managing
-# utility, so I'm using this for git status instead of the oh-my-zsh one.
+# git aliases
+alias ga='git add'
+alias gb='git branch'
+alias gba='git branch -a'
+alias gbd='git branch -d'
+alias gbD='git branch -D'
+alias gc='git commit -v'
+alias gca='git commit -av'
+alias gcb='git checkout -b'
+alias gco='git checkout'
+alias gd='git diff'
+alias gm='git merge'
+alias gl='git pull'
+alias glg='git log'
+alias gp='git push'
 alias gs='git status'
+alias gsh='git stash'
+alias gsl='git stash list'
+alias gsp='git stash pop'

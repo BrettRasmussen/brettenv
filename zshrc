@@ -1,5 +1,5 @@
 # zshrc file to set up Brett's command-line environment, including settings for
-# tmux.  These instructions assume a home directory name of /home/brett.  On any
+# tmux. These instructions assume a home directory name of /home/brett. On any
 # given system, install git (package is usually git-core), generate ssh keys
 # (ssh-keygen), put id_rsa.pub into github account, copy the github project
 # location, then do this in /home/brett:
@@ -41,51 +41,13 @@
 #
 # See tmux.conf for an example of how to get tmux to always start up with the
 # brettenv settings turned on.
-#-------------------------------------------------------------------------------
 
 
-# NOTE (by Brett): oh-my-zsh is currently installed in .brettenv as a git
-# subtree. For update instructions and other understanding, see:
-# https://www.atlassian.com/blog/git/alternatives-to-git-submodule-git-subtree
-
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-# ZSH_THEME="robbyrussell"
-ZSH_THEME="gianu"
-
-# If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH
-
-# Path to your oh-my-zsh installation.
-export ZSH="$HOME/.brettenv/oh-my-zsh"
-
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-export UPDATE_ZSH_DAYS=90
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
+# OH MY ZSH CAPABILITIES -------------------------------------------------------
+#
+# The following were some good ideas that came with Oh My Zsh that I'd like to
+# look into getting to work now that Oh My Zsh is gone.
+#
 # Uncomment the following line to enable command auto-correction.
 # ENABLE_CORRECTION="true"
 
@@ -96,29 +58,28 @@ export UPDATE_ZSH_DAYS=90
 # under VCS as dirty. This makes repository status check for large repositories
 # much, much faster.
 # DISABLE_UNTRACKED_FILES_DIRTY="true"
+#-------------------------------------------------------------------------------
 
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
 
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
+# ZSH CONFIG -------------------------------------------------------------------
 
-# Which plugins would you like to load?
-# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(
-  git
-  vi-mode
-)
+# Set your $PATH.
+export PATH="$HOME/bin:/usr/local/opt/postgresql@13/bin:/usr/local/bin:$PATH"
 
-source $ZSH/oh-my-zsh.sh
+# Set the prompt.
+# see https://voracious.dev/blog/a-guide-to-customizing-the-zsh-shell-prompt
+# see https://arjanvandergaag.nl/blog/customize-zsh-prompt-with-vcs-info.html
+# see https://salferrarello.com/zsh-git-status-prompt/
+autoload -Uz vcs_info
+zstyle ':vcs_info:*' enable git svn
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' unstagedstr '*'
+zstyle ':vcs_info:*' stagedstr '+'
+zstyle ':vcs_info:*' formats ' (%F{green}%b%u%c%f)'
+zstyle ':vcs_info:git:*' actionformats ' (%F{green}%b|%a%u%c%f)'
+precmd() { vcs_info }
+setopt prompt_subst
+PROMPT='[%n@%m %F{red}%1~%f${vcs_info_msg_0_}]$ '
 
 # Disable history sharing across concurrent shell sessions.
 unsetopt inc_append_history
@@ -141,37 +102,16 @@ setopt INTERACTIVE_COMMENTS
 # Print a message on command-line when programs exit with non-zero value.
 setopt PRINT_EXIT_VALUE
 
+# Tab completion.
+zstyle ':completion:*' menu select
+fpath=(/usr/local/share/zsh-completions $fpath)
+zmodload zsh/complist
+autoload -Uz compinit
+compinit
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z-_}={A-Za-z_-}'
 
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
-unalias gst
+# Source the completions file.
+# source $HOME/.brettenv/zsh-completion.conf
 
 # Get the setup stuff shared by bash and zsh.
 source $HOME/.brettenv/sharedrc
