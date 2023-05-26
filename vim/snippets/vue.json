@@ -18,21 +18,21 @@
 
   "mapState": {
     "prefix": "ms",
-    "body": ["...mapState([\"$1\"$0])"]
+    "body": ["...mapState([\"$1\"$2])$0"]
   },
 
   "mapMutations": {
     "prefix": "mm",
-    "body": ["...mapMutations([\"$1\"$0])"]
+    "body": ["...mapMutations([\"$1\"$2])$0"]
   },
 
   "mapActions": {
     "prefix": "ma",
-    "body": ["...mapActions([\"$1\"$0])"]
+    "body": ["...mapActions([\"$1\"$2])$0"]
   },
 
   "mapGetters": {
     "prefix": "mg",
-    "body": ["...mapGetters([\"$1\"$0])"]
+    "body": ["...mapGetters([\"$1\"$2])$0"]
   }
 }

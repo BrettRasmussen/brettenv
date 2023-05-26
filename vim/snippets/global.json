@@ -7,7 +7,11 @@
 
   "For Loop": {
     "prefix": ["for", "for-const"],
-    "body": ["for (const ${2:element} of ${1:array}) {", "\t$0", "}"],
+    "body": [
+      "for (const ${1:element} of ${2:array}) {",
+        "\t$0",
+      "}"
+    ],
     "description": "A for loop."
   },
 
@@ -67,6 +71,21 @@
     ]
   },
 
+  "paren pair with single quotes": {
+    "prefix": "(\'",
+    "body": ["('$1')$0"]
+  },
+
+  "paren pair with double quotes": {
+    "prefix": "(\"",
+    "body": ["(\"$1\")$0"]
+  },
+
+  "paren pair with square brackets and double quotes": {
+    "prefix": "([\"",
+    "body": ["([\"$1\"])$0"]
+  },
+
   "curly-brace pair": {
     "prefix": "{}",
     "body": ["{$1}$0"]
@@ -122,6 +141,16 @@
     "body": ["[$1]$0"]
   },
 
+  "square bracket pair with single quotes": {
+    "prefix": "['",
+    "body": ["['$1']$0"]
+  },
+
+  "square bracket pair with double quotes": {
+    "prefix": "[\"",
+    "body": ["[\"$1\"]$0"]
+  },
+
   "multiline square bracket pair": {
     "prefix": "[]]",
     "body": [
@@ -146,6 +175,11 @@
   "double-curly with spaces": {
     "prefix": "{{-",
     "body": ["{{ $1 }}$0"]
+  },
+
+  "debugger": {
+    "prefix": "db",
+    "body": ["debugger"]
   },
 
   "my name": {
