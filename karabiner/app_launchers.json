@@ -243,6 +243,31 @@
       ]
     },
     {
+      "description": "Screen Ruler cmd+opt+r",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "r",
+            "modifiers": {
+              "mandatory": [
+                "command",
+                "option"
+              ],
+              "optional": [
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "open -a 'Free Ruler.app'"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "description": "System Preferences cmd+opt+,",
       "manipulators": [
         {
