@@ -72,7 +72,7 @@
   },
 
   "paren pair with single quotes": {
-    "prefix": "(\'",
+    "prefix": "('",
     "body": ["('$1')$0"]
   },
 
@@ -81,9 +81,27 @@
     "body": ["(\"$1\")$0"]
   },
 
-  "paren pair with square brackets and double quotes": {
+  "paren/square bracket pair": {
+    "prefix": "([",
+    "body": ["([$1])$0"]
+  },
+
+  "paren/square bracket pair with double quotes": {
     "prefix": "([\"",
     "body": ["([\"$1\"])$0"]
+  },
+
+  "paren/curly brace pair": {
+    "prefix": "({",
+    "body": ["({$1})$0"]
+  },
+
+  "multiline paren/curly brace pair": {
+    "prefix": "({_",
+    "body": [
+      "({$0",
+      "})"
+    ]
   },
 
   "curly-brace pair": {
@@ -117,22 +135,6 @@
     "body": [
       "{$0",
       "};"
-    ]
-  },
-
-  "multiline curly brace pair with closing paren": {
-    "prefix": "{}})",
-    "body": [
-      "{$0",
-      "})"
-    ]
-  },
-
-  "multiline curly brace pair with closing paren and semicolon": {
-    "prefix": "{}});",
-    "body": [
-      "{$0",
-      "});"
     ]
   },
 
