@@ -2,30 +2,79 @@
   "multiline if": {
     "prefix": "if",
     "body": [
-      "if (${1:cond}) {$0",
-      "}"
+      "if (${1:cond}) {",
+      "  ${2:xxx}",
+      "}$0"
     ]
   },
 
   "multiline if-else": {
     "prefix": "ife",
     "body": [
-      "if (${1:cond}) {$0",
+      "if (${1:cond}) {",
+      "  ${2:xxx}",
       "} else {",
-      "}"
+      "  ${3:xxx}",
+      "}$0"
+    ]
+  },
+
+  "for loop": {
+    "prefix": "for",
+    "body": [
+      "for (${1:const} ${2:element} of ${3:array}) {",
+      "  ${4:xxx}",
+      "},$0"
+    ]
+  },
+
+  "basic function": {
+    "prefix": "fn",
+    "body": [
+      "function ${1:name}(${2:params}) {",
+      "  ${3:xxx}",
+      "}$0"
+    ]
+  },
+
+  "object key function": {
+    "prefix": "fnk",
+    "body": [
+      "${1:name}(${2:params}) {",
+      "  ${3:xxx}",
+      "},$0"
+    ]
+  },
+
+  "object value function": {
+    "prefix": "fnv",
+    "body": [
+      "${1:name}: function(${2:params}) {",
+      "  ${3:xxx}",
+      "},$0"
+    ]
+  },
+
+  "object value arrow function": {
+    "prefix": "fna",
+    "body": [
+      "${1:name}: (${2:params}) => {",
+      "  ${3:xxx}",
+      "},$0"
     ]
   },
 
   "single-line anonymous arrow function": {
     "prefix": "(-",
-    "body": ["(${1:param} => $0)"]
+    "body": ["(${1:param} => $2)$0"]
   },
 
   "multiline anonymous arrow function": {
     "prefix": "(_",
     "body": [
-      "(${1:param} => {$0",
-      "})"
+      "(${1:param} => {",
+      "  ${2:xxx}",
+      "})$0"
     ]
   },
 

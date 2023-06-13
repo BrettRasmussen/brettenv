@@ -72,35 +72,35 @@
   },
 
   "paren pair with single quotes": {
-    "prefix": "('",
+    "prefix": ")'",
     "body": ["('$1')$0"]
   },
 
   "paren pair with double quotes": {
-    "prefix": "(\"",
+    "prefix": ")\"",
     "body": ["(\"$1\")$0"]
   },
 
   "paren/square bracket pair": {
-    "prefix": "([",
+    "prefix": "(]",
     "body": ["([$1])$0"]
   },
 
   "paren/square bracket pair with double quotes": {
-    "prefix": "([\"",
+    "prefix": "(\"]",
     "body": ["([\"$1\"])$0"]
   },
 
   "paren/curly brace pair": {
     "prefix": "({",
-    "body": ["({$1})$0"]
+    "body": ["({$1}$2)$0"]
   },
 
   "multiline paren/curly brace pair": {
     "prefix": "({_",
     "body": [
-      "({$0",
-      "})"
+      "({$1",
+      "}$2)$0"
     ]
   },
 
@@ -109,7 +109,7 @@
     "body": ["{$1}$0"]
   },
 
-  "curly-brace pair with spaces": {
+  "curly-brace pair with space": {
     "prefix": "{}-",
     "body": ["{ $1 }$0"]
   },
@@ -138,18 +138,28 @@
     ]
   },
 
+  "double-curly": {
+    "prefix": "{{",
+    "body": ["{{$1}}$0"]
+  },
+
+  "double-curly with space": {
+    "prefix": "{{-",
+    "body": ["{{ $1 }}$0"]
+  },
+
   "square bracket pair": {
     "prefix": "[]",
     "body": ["[$1]$0"]
   },
 
   "square bracket pair with single quotes": {
-    "prefix": "['",
+    "prefix": "]'",
     "body": ["['$1']$0"]
   },
 
   "square bracket pair with double quotes": {
-    "prefix": "[\"",
+    "prefix": "]\"",
     "body": ["[\"$1\"]$0"]
   },
 
@@ -167,16 +177,6 @@
       "[$0",
       "];"
     ]
-  },
-
-  "double-curly": {
-    "prefix": "{{",
-    "body": ["{{$1}}$0"]
-  },
-
-  "double-curly with spaces": {
-    "prefix": "{{-",
-    "body": ["{{ $1 }}$0"]
   },
 
   "debugger": {

@@ -25,7 +25,6 @@
   psop = push origin production
   psopg = push origin playground
   sdep = push staging staging:master
-  pdep = push production production:master
   pgdep = push playground playground:master
   unstage = reset HEAD
   uncommit = reset --soft HEAD^

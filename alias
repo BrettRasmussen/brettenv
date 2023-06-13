@@ -44,16 +44,19 @@ alias sgi='source gst in; echo "GEM_HOME is now $GEM_HOME"'
 alias sgo='source gst out; echo "GEM_HOME is now $GEM_HOME"'
 
 # aliases for changing to commonly used directories
-alias fa='cd ~brett/projects/franklin_estimating/fa'
+alias cs='cd ~brett/projects/coreself/website1'
 alias am='cd ./app/models'
 alias ac='cd ./app/controllers'
 alias av='cd ./app/views'
 alias aj='cd ./app/javascript'
+alias fa='cd ~brett/projects/franklin_estimating/fa'
 alias jf='cd ~brett/projects/franklin_estimating/fa/app/javascript/job_flow'
 alias jfl='cd ~brett/projects/franklin_estimating/fa/app/javascript/job_flow_layout'
 alias jpf='cd ~brett/projects/franklin_estimating/fa/app/javascript/job_part_flags'
 alias jps='cd ~brett/projects/franklin_estimating/fa/app/javascript/job_part_show'
-alias cs='cd ~brett/projects/coreself/website1'
+alias faa='cd ~brett/projects/franklin_estimating/fa/app/assets/javascripts/angular'
+alias fap='cd ~brett/projects/franklin_estimating/fa/app/assets/javascripts/angular/projects'
+alias fas='cd ~brett/projects/franklin_estimating/fa/app/assets/javascripts/angular/shared'
 
 # git aliases
 alias ga='git add'

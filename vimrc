@@ -253,6 +253,7 @@ xmap        S   <Plug>(vsnip-cut-text)
 let g:vsnip_filetypes = {}
 let g:vsnip_filetypes.javascriptreact = ['javascript']
 let g:vsnip_filetypes.typescriptreact = ['typescript']
+let g:vsnip_filetypes.vue = ['vue', 'javascript', 'html']
 
 " keep window position when switching buffers
 if v:version >= 700
