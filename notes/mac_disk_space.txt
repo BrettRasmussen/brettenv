@@ -1,0 +1,29 @@
+When the mac runs out of disk space on its own, it's likely that a large part of that is because of
+Mac's habit of caching things.
+
+kernel_task and mds_stores are two things that come with Mac that do something of that nature. Some
+of what kernel_task does appears to be swapping to disk when the machine is running hot, or
+something like that. It might also be writing metadata for some resource-intensive processes or the
+like. Hard to really know what all it's about without digging in more.
+
+  https://apple.stackexchange.com/questions/325716/kernel-task-writes-huge-amounts-of-data-to-disk-1tb-how-to-diagnose
+
+Whatever the cause, much of what gets written goes to /private/var/folders, so try this:
+
+$ sudo su
+$ cd /private/var/folders
+$ du -hd 1
+
+Then delete huge subdirectories, and probably reboot the machine.
+
+In those subdirectories there will be a "C" directory, which is some sort of cache for some program.
+Deleting the cache might mess up operations for the related program if it's running, but it should
+be fine after that program restarts.
+
+The reboot is because Mac does a good amount of cleaning up its own caches on reboot, so the
+combination of clearing out those caches and rebooting should free up a bunch of space.
+
+If the machine is running so slowly because it's already gotten to unusability due to lack of disk
+space, just the reboot should clear up enough to start working with it again.
+
+  https://superuser.com/questions/892647/it-is-safe-delete-osxs-private-var-folders-at-reboot
