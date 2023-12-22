@@ -28,10 +28,28 @@
     ]
   },
 
-  "basic function": {
+  "anonymous function": {
     "prefix": "fn",
     "body": [
+      "function(${1:params}) {",
+      "  ${2:xxx}",
+      "}$0"
+    ]
+  },
+
+  "named function": {
+    "prefix": "fnn",
+    "body": [
       "function ${1:name}(${2:params}) {",
+      "  ${3:xxx}",
+      "}$0"
+    ]
+  },
+
+  "anonymous function assigned by equals": {
+    "prefix": "fne",
+    "body": [
+      "${1:name} = function(${2:params}) {",
       "  ${3:xxx}",
       "}$0"
     ]
@@ -55,21 +73,39 @@
     ]
   },
 
-  "object value arrow function": {
+  "multiline arrow function": {
     "prefix": "fna",
     "body": [
-      "${1:name}: (${2:params}) => {",
+      "${1:param} => {",
+      "  ${2:xxx}",
+      "},$0"
+    ]
+  },
+
+  "single-line arrow function": {
+    "prefix": "fns",
+    "body": [
+      "${1:param} => $0"
+    ]
+  },
+
+  "object key & value arrow function": {
+    "prefix": "fnr",
+    "body": [
+      "${1:name}: ${2:param} => {",
       "  ${3:xxx}",
       "},$0"
     ]
   },
 
-  "single-line anonymous arrow function": {
+  "single-line anonymous arrow argument function": {
     "prefix": "(-",
-    "body": ["(${1:param} => $2)$0"]
+    "body": [
+      "(${1:param} => $2)$0"
+    ]
   },
 
-  "multiline anonymous arrow function": {
+  "multiline anonymous arrow argument function": {
     "prefix": "(_",
     "body": [
       "(${1:param} => {",
@@ -78,8 +114,40 @@
     ]
   },
 
+  "2nd-argument multiline function": {
+    "prefix": "(&",
+    "body": [
+      "(${1:arg}, function(${2:arg}) {",
+      "  ${3:xxx}",
+      "})$0"
+    ]
+  },
+
+  "switch statement": {
+    "prefix": "switch",
+    "body": [
+      "switch (${1:expression}) {",
+      "  case ${2:condition}:",
+      "    ${3:xxx}",
+      "    break",
+      "}$0"
+    ]
+  },
+
+  "case in switch": {
+    "prefix": "case",
+    "body": [
+      "case ${1:condition}:",
+      "  ${2:xxx}",
+      "  break",
+      "}$0"
+    ]
+  },
+
   "console log line": {
     "prefix": "cl",
-    "body": ["console.log(`$1`)$0"]
+    "body": [
+      "console.log(`$1`)$0"
+    ]
   }
 }

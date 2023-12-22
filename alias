@@ -39,17 +39,13 @@ alias ep='echo $PATH'
 alias egh='echo $GEM_HOME'
 alias egp='echo $GEM_PATH'
 
-# gst gemset utility
-alias sgi='source gst in; echo "GEM_HOME is now $GEM_HOME"'
-alias sgo='source gst out; echo "GEM_HOME is now $GEM_HOME"'
-
 # aliases for changing to commonly used directories
 alias cs='cd ~brett/projects/coreself/website1'
 alias am='cd ./app/models'
 alias ac='cd ./app/controllers'
 alias av='cd ./app/views'
 alias aj='cd ./app/javascript'
-alias fa='cd ~brett/projects/franklin_estimating/fa'
+alias fa='cd ~brett/projects/franklin_estimating/fa; gst-oi'
 alias jf='cd ~brett/projects/franklin_estimating/fa/app/javascript/job_flow'
 alias jfl='cd ~brett/projects/franklin_estimating/fa/app/javascript/job_flow_layout'
 alias jpf='cd ~brett/projects/franklin_estimating/fa/app/javascript/job_part_flags'
@@ -74,6 +70,18 @@ alias gl='git pull'
 alias glg='git log'
 alias gp='git push'
 alias gs='git status'
-alias gsh='git stash'
-alias gsl='git stash list'
-alias gsp='git stash pop'
+alias gsh='git show'
+alias gst='git stash'
+alias gstl='git stash list'
+alias gstp='git stash pop'
+
+# gst gemset utility -----
+# I want "gst" as an alias for git stash, but that's also the name of the gemset utility I use. So
+# here are some aliases that use the utility's full path so as not to conflict with the git alias.
+# The gst utility is just a simple shell script, mostly for setting gem-related environment
+# variables, and it must be sourced on the commands that actually set those variables. Note that the
+# paths in these aliases will need to change if the location of the gst script ever does.
+alias gst-init='/usr/local/bin/gst init'
+alias gst-in='source /usr/local/bin/gst in; echo "GEM_HOME is now $GEM_HOME"'
+alias gst-out='source /usr/local/bin/gst out; echo "GEM_HOME is now $GEM_HOME"'
+alias gst-oi='source /usr/local/bin/gst out; source /usr/local/bin/gst in; echo "GEM_HOME is now $GEM_HOME"'

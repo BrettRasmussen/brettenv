@@ -11,7 +11,7 @@
 
   "end tag": {
     "prefix": "end",
-    "body": "<%= end %>"
+    "body": "<% end %>"
   },
 
   "each do w/variable": {

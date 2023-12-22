@@ -41,6 +41,8 @@ export QBWC_OVERRIDES=enabled
 export QBWC_LOGGING=enabled
 export RACK_TIMEOUT_SERVICE_TIMEOUT=3600
 export PUMA_WORKER_TIMEOUT=86400
+export QUIET_CLASS_INSPECT=true
+export KEEP_COMPANIES="27,31,61"
 
 # get cross-platform aliases
 if [ -f ~/.brettenv/alias ]; then
