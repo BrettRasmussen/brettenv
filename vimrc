@@ -38,7 +38,6 @@ set helplang=en
 set hidden
 set ignorecase
 set incsearch
-set printoptions=paper:letter
 set number
 set scrolloff=5
 set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc

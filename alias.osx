@@ -3,4 +3,4 @@
 alias ack='ack -i'
 
 # ls color option differs between mac & linux
-alias ls='ls -FG'
+alias ls='ls -F'

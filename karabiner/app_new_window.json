@@ -74,7 +74,7 @@
       ]
     },
     {
-      "description": "Terminal new window cmd+opt+t",
+      "description": "iTerm2 new window cmd+opt+t",
       "manipulators": [
         {
           "type": "basic",
@@ -102,7 +102,7 @@
             {
               "type": "frontmost_application_if",
               "bundle_identifiers": [
-                "^com\\.apple\\.Terminal$"
+                "^com\\.googlecode\\.iterm2$"
               ]
             }
           ]
