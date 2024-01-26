@@ -44,6 +44,11 @@ export PUMA_WORKER_TIMEOUT=86400
 export QUIET_CLASS_INSPECT=true
 export KEEP_COMPANIES="27,31,61"
 
+# Some ruby code, like the Puma version used by FA, stopped running after a Mac upgrade. Though I
+# have no idea why, this seems to fix it.
+# See https://www.jdeen.com/blog/fix-ruby-macos-nscfconstantstring-initialize-error
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+
 # get cross-platform aliases
 if [ -f ~/.brettenv/alias ]; then
   source ~/.brettenv/alias
@@ -73,3 +78,8 @@ if [ -f /usr/local/share/gem_home/gem_home.sh ]; then
   source '/usr/local/share/gem_home/gem_home.sh'
 fi
 
+# After installing nvm from homebrew or whatever package manager, installation of any version of
+# NodeJS is done via the nvm shell script. Note: ~/.nvm needs to exist and can be created by hand.
+export NVM_DIR="$HOME/.nvm"
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"
+[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"
