@@ -69,12 +69,12 @@ nnoremap <C-k> <C-u>
 nnoremap <M-j> <C-e>
 nnoremap <M-k> <C-y>
 
-" Textwidth stuff: alt plus 7/8/9/0 sets textwidth size; default 120.
+" Textwidth stuff: alt plus 7/8/9/0 sets textwidth to the size as shown below. Default: 100.
 nnoremap <M-7> :set tw=0<CR>
 nnoremap <M-8> :set tw=80<CR>
 nnoremap <M-9> :set tw=100<CR>
 nnoremap <M-0> :set tw=120<CR>
-set textwidth=120
+set textwidth=100
 
 " alt-/ unhighlights search results
 nnoremap <M-/> :noh<CR>
