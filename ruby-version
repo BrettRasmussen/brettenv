@@ -1,0 +1,6 @@
+# This file is just a reminder to create a .ruby-version file in $HOME with the
+# version number of the most recent ruby in chruby, so that chruby will see it
+# as the default ruby to use when not specified otherwise.
+#
+# ex.:
+# 2.3.7

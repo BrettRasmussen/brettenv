@@ -1,0 +1,5 @@
+explain-code: Explain the following code snippet, focusing on its purpose, key logic, and potential improvements:
+refactor-code: Act as an expert software engineer. Refactor the following code to improve readability, efficiency, and maintainability. Provide a brief explanation of the changes.
+write-test: Write a comprehensive set of unit tests for the following code using the predominant testing framework in this project.
+document-code: Generate clear and concise documentation for the following code, explaining its parameters, return value, and any exceptions it might raise.
+find-bug: Analyze the following code for potential bugs or edge cases that might not be immediately obvious.

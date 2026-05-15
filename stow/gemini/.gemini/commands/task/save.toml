@@ -1,0 +1,9 @@
+description = "Save task state to the filesystem to remember across sessions."
+prompt = """
+1. Review the structure described in my global "Current Tasks" instructions.
+2. Save your to-do list to the proper file under the current task's subdirectory.
+    a. Use sqaure brackets to make checkboxes.
+    b. Use an "x" to check off the completed items.
+3. According to the "Current Tasks" instructions, record changes as needed in changes.md.
+4. According to the "Current Tasks" instructions, record notes for yourself, if needed, in notes.md.
+"""

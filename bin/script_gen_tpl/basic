@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+
+# xxx_coding. This script was copied from the script_gen "basic" template. Search for "xxx" for
+# hints about what to code up at various places in the script. Make sure all the "xxx_whatever"
+# things are gone, and delete this comment when you're done.
+
+# Help to show the user. Nice to have at the top of the script for reference while coding.
+do_show_help () {
+echo "
+  xxx_script_name: xxx_description
+
+  Usage:
+    $ xxx_script_name [OPTIONS] [ARGS]
+
+  Arguments:
+    xxx_ARG: xxx_arg_desc.
+
+  Options:
+    -xxx_opt: xxx_opt_desc.
+    -h: Show this help text.
+"
+}
+
+# Display to the user a command-line command we're about to run, and run it. Ex:
+#   cmd="command_to_call hard_coded_arg ${dynamic_arg}"
+#   showrun_cmd "$cmd}" <- need the quotes
+showrun_cmd () {
+  cmd=${1}
+  echo "executing: ${cmd}"
+  eval $cmd
+}
+
+# Display an error and exit. Ex:
+#   error_exit "Something bad happened."
+error_exit () {
+  msg=${1}
+  echo $msg
+  exit
+}
+
+# Defaults possibly overridden by user input.
+MODE=xxx_default_mode
+
+# Process command-line arguments provided by the user.
+if [[ $1 =~ ^- ]]; then
+  while getopts "xxx_opt_letters" opt; do
+    case "${opt}" in
+      xxx_when) xxx_set_mode_or_var;;
+      h) do_show_help && exit;;
+    esac
+  done
+  shift $((OPTIND - 1))
+fi
+
+# Complete the initialization. Get non-flag CLI args, finalize MODE, set variables used later, final
+# default overrides, etc.
+$xxx_arg=$1
+[[ $xxx_MODE == "xxx_some_mode" ]] && xxx_set_something
+[[ $xxx_some_var == "xxx_some_val" ]] && xxx_set_something
+
+# Exit if correct conditions not provided.
+[[ -z $xxx_arg ]] && error_exit "xxx_need_arg"
+
+# Main logic for the task of this script, utilizing what's set above.
+xxx_code

@@ -1,0 +1,96 @@
+{
+  "tag": {
+    "prefix": "t",
+    "body": "<% $0 %>"
+  },
+
+  "output tag": {
+    "prefix": "t-",
+    "body": "<%= $0 %>"
+  },
+
+  "end tag": {
+    "prefix": "end",
+    "body": "<% end %>"
+  },
+
+  "each do w/variable": {
+    "prefix": "ead",
+    "body": [
+      "<% ${1:xxx_enum}.each do |${2:xxx_elem}| %>$0",
+      "<% end %>"
+    ]
+  },
+
+  "for item in enumerable": {
+    "prefix": "for",
+    "body": [
+      "<% for ${2:xxx_elem} in ${1:xxx_enum} %>$0",
+      "<% end %>"
+    ]
+  },
+
+  "content_for block": {
+    "prefix": "conf",
+    "body": [
+      "<% content_for :${1:head} do %>$0",
+      "<% end %>"
+    ]
+  },
+
+  "form_tag block": {
+    "prefix": "ft",
+    "body": [
+      "<%= form_tag \"${1:xxx_url}\" do |f| %>$0",
+      "<% end %>"
+    ]
+  },
+
+  "form_for block": {
+    "prefix": "ff",
+    "body": [
+      "<%= form_for @${1:xxx_model} do |f| %>$0",
+      "<% end %>"
+    ]
+  },
+
+  "form_for with error messages": {
+    "prefix": "ffe",
+    "body": [
+      "<% error_messages_for :${1:xxx_model} %>",
+      "",
+      "<%= form_for @${2:xxx_model} do |f| %>$0",
+      "<% end %>"
+    ]
+  },
+
+  "fields_for block": {
+    "prefix": "fields",
+    "body": [
+      "<%= fields_for :${1:xxx_model}, @$1 do |f| %>$0",
+      "<% end %>"
+    ]
+  },
+
+  "if statement": {
+    "prefix": "if",
+    "body": [
+      "<% if ${1:xxx_cond} %>$0",
+      "<% end %>"
+    ]
+  },
+
+  "if/else statement": {
+    "prefix": "ife",
+    "body": [
+      "<% if ${1:xxx_cond} %>$2",
+      "<% else %>$0",
+      "<% end %>"
+    ]
+  },
+
+  "elsif insertion": {
+    "prefix": "elf",
+    "body": ["<% elsif ${1:xxx_cond} %>$0"]
+  }
+}

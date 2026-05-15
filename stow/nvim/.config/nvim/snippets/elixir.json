@@ -1,0 +1,9 @@
+{
+  "pry debugging breakpoint": {
+    "prefix": "pry",
+    "body": [
+      "require IEx; IEx.pry$0"
+    ],
+    "description": "pry debugging breakpoint"
+  }
+}

@@ -1,0 +1,7 @@
+description = "Save a note with user-provided content."
+prompt = """
+Remind yourself of my global "Notes" instructions and save an "args"-style note with the following
+content:
+
+{{args}}
+"""

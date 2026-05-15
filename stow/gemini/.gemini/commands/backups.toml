@@ -1,0 +1,12 @@
+description = "Run backups on current working files."
+prompt = """
+# Instructions
+1. Review my Core Instructions on Backups, including timestamp and backup filename formats.
+2. Review the structure described in my global "Current Tasks" instructions.
+3. Review the list(s) of working files for the current task, as well as any other files we have been
+   working with in this session.
+4. For each file in the lists, compare its last-modified time with that of its most recent backup
+   under .devinfo/backups/.
+5. If the file has been modified since its last backup, store a new backup using the correct
+   filename and timestamp formats.
+"""

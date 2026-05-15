@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+# Get the group provided on the command line and check it for validity.
+group="${1}"
+shift
+if [[ -z $group ]]; then
+  echo "Please provide a group."
+  exit
+fi
+group_found=0
+for user_group in $(groups); do
+  if [[ $user_group == $group ]]; then
+    group_found=1
+    break
+  fi
+done
+if [[ $group_found == 0 ]]; then
+  echo "${group} is not a group you belong to."
+  exit
+fi
+
+# Make sure the group has a shared directory wherein to put the socket file.
+socket_dir="/tmp/tmux-${group}"
+[[ ! -d "${socket_dir}" ]] && mkdir $socket_dir
+
+# Make sure the socket directory is owned by the group and has the setgid bit on.
+socket_dir_group=$(stat -f %Sg $socket_dir)
+[[ $socket_dir_group != $group ]] && chgrp $group $socket_dir
+
+# Make sure the socket directory is group readable/writable.
+socket_dir_perms=$(stat -f %A $socket_dir)
+[[ $socket_dir_perms != "2770" ]] && chmod 2770 $socket_dir
+
+# Launch the tmux session with a session file in the above socket directory.
+socket_file="${socket_dir}/default"
+cmd="tmux -S ${socket_file} ${@}"
+$cmd

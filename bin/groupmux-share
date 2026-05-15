@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+# Initial values to be used later.
+target_socket_perms="770"
+
+# Get the current permissions on the tmux session's socket.
+socket=$(echo $TMUX | cut -f1 -d',')
+echo "tmux socket: ${socket}"
+socket_perms=$(stat -f "%A" $socket)
+echo "socket's permissions: ${socket_perms}"
+
+# Make the socket group readable/writable if not already.
+if [[ $socket_perm != $target_socket_perms ]]; then
+  echo "changing permissions to ${target_socket_perms}"
+  chmod $target_socket_perms $socket
+  new_socket_perms=$(stat -f "%A" $socket)
+
+  if [[ $new_socket_perms != $target_socket_perms ]]; then
+    echo "failed"
+    exit
+  fi
+fi
+
+# Accepts a group as the one argument and returns all members of that group.
+members () {
+  dscl . -list /Users | while read user; do
+    printf "$user "
+    dsmemberutil checkmembership -U "$user" -G "$*"
+  done | grep "is a member" | cut -d " " -f 1
+}
+
+# Get the group from the socket.
+socket_group=$(stat -f %Sg $socket)
+echo "socket's group: ${socket_group}"
+
+# Give all other group members access to the current tmux session.
+current_user=$(whoami)
+for member in $(members $socket_group); do
+  if [[ $member != $current_user ]]; then
+    echo "adding ${member}"
+    tmux server-access -a $member
+  fi
+done

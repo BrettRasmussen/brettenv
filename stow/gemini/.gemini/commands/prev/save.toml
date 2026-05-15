@@ -1,0 +1,7 @@
+description = "Save the last AI query/response to .devinfo."
+prompt = """
+Take my very most recent query and your entire response, format them in clearly structured markdown
+format, and save the results to a file under .devinfo/ with a ".md" extension. If I provide a
+filename for "args", use that for the portion before the ".md". Otherwise, make one up that seems
+sensible to you. Filename: {{args}}
+"""

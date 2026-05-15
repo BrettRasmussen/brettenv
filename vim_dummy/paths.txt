@@ -1,0 +1,10 @@
+/var/log/syslog
+/opt/atlassian/jira/atlassian-jira/WEB-INF/classes/jira-application.properties
+/usr/local/bin/script.sh
+/home/user/.bashrc
+/var/lib/docker/containers/1234567890abcdef1234567890abcdef/config.v2.json
+/etc/passwd
+/tmp/session_data.txt
+/usr/share/nginx/html/wp-content/themes/twentytwentythree/templates/index.html
+/dev/null
+/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation

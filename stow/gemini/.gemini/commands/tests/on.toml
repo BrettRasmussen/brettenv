@@ -1,0 +1,5 @@
+description = "Instruct the AI to work with tests as it goes."
+prompt = """
+For now, please edit and create the related test, spec, and factory files as you develop the main
+code. Continue this practice until either I say otherwise or the session ends.
+"""

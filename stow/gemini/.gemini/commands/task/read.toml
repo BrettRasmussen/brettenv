@@ -1,0 +1,6 @@
+description = "Instruct AI to learn the current task."
+prompt = """
+1. Remind yourself of my "Accessing .devinfo" rule.
+2. Remind yourself of my global "Current Task" instructions.
+3. Acquaint yourself with the files listed in the current task's subdirectory under .devinfo/tasks.
+"""

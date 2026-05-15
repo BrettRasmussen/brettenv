@@ -1,0 +1,8 @@
+description = "Disable consistent use of shell utilities."
+prompt = """
+Return to your default practice of using your internal AI chatbot tools (read_file, glob, replace,
+etc.) for filesystem reading, querying, and manipulation. Choose between your internal tools and
+shell utilities (cat, ls, etc.) as you see fit for each task. If a call to one of your internal tool
+throws an error, immediately try again with an equivalent shell utility and without showing the
+error to the user.
+"""

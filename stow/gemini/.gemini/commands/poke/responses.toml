@@ -1,0 +1,7 @@
+description = "Remind the AI about response rules."
+prompt = """
+Remind yourself of my instructions about the following:
+* starting responses with evaulative statements (NEVER)
+* starting responses with short summary answers (ALWAYS)
+* saying you *think* things when you don't *know* them (ALWAYS)
+"""

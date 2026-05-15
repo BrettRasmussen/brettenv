@@ -1,0 +1,18 @@
+{
+  "security": {
+    "auth": {
+      "selectedType": "gemini-api-key"
+    }
+  },
+  "general": {
+    "vimMode": true,
+    "preferredEditor": "neovim",
+    "sessionRetention": {
+      "warningAcknowledged": true,
+      "enabled": true,
+      "maxAge": "120d"
+    },
+    "debugKeystrokeLogging": true
+  }
+
+}

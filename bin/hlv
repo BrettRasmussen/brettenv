@@ -1,0 +1,194 @@
+#!/usr/bin/env bash
+
+show_help () {
+echo "
+  hlv: heroku log view. Calls 'heroku log -n 1500 -a heroku_app' on the
+  user-specified heroku app and shows the output in a local text reader or
+  editor (default: EDITOR env var or 'less'). Stores the log file locally
+  before viewing it if desired. If so, names it 'heroku_app-timestamp.log' and
+  puts it in the user-specified log_directory or './log' (as in off of a rails
+  root). Speed up repeated usage by setting environment variables.
+
+  Usage:
+    $ hlv [options] <heroku_app>
+    $ HLV_HEROKU_APP=<heroku_app> ... hlv [options]
+
+  Options:
+    -d: Directory in which to store the log file if -s or -S are specified.
+      Default: './log'. Alt: HLV_LOG_DIR env var.
+    -t: Specify a text reader/editor to use. What the app uses is prioritized
+      as follows: -t, HLV_READER env var, EDITOR env var, 'less'.
+    -s: Save the log file locally before viewing it. Alt: env var
+      HLV_MODE=save_and_view.
+    -S: Save the log file and don't view it at all. Alt: env var
+      HLV_MODE=save_and_exit.
+    -l: List log files matching the current options and don't call 'heroku
+      logs' at all.
+    -v: View the latest saved log file and don't call 'heroku logs' at all.
+    -E: Show environment variables used by this script and current values.
+    -n: Just do a dry run without actually doing the download.
+    -h: Show this help text.
+"
+exit
+}
+
+# A function just for helping with development. Put it anywhere in the code below to view the state
+# of the script at that point during execution.
+debug () {
+  echo "MODE=${MODE}"
+  echo "HEROKU_APP=${HEROKU_APP}"
+  echo "LOG_DIR=${LOG_DIR}"
+  echo "TIMESTAMP=${TIMESTAMP}"
+  echo "LOG_READER=${LOG_READER}"
+  echo "logfile=${logfile}"
+  exit
+}
+
+# Function to exit with a message when needed.
+error_exit () {
+  echo "hlv error: ${1} Exiting."
+  exit 1
+}
+
+showrun_cmd () {
+  echo "Executing: ${1} ..."
+  sleep ${2:-1}
+  eval ${1}
+  echo "Done."
+}
+
+# Defaults for the main inputs. HEROKU_APP doesn't get a default. Others do but get overridden if
+# there's an env var. Can't use the ${VAR:=val} syntax because it messes up the SHOW_ENV routine.
+DRY_RUN=false
+MODE=quick_view
+if [[ ! -z ${HLV_MODE} ]]; then MODE=${HLV_MODE}; fi
+if [[ ! -z ${HLV_HEROKU_APP} ]]; then HEROKU_APP=${HLV_HEROKU_APP}; fi
+LOG_DIR=./log
+if [[ ! -z ${HLV_LOG_DIR} ]]; then LOG_DIR=${HLV_LOG_DIR}; fi
+LOG_READER="less"
+if [[ ! -z ${HLV_LOG_READER} ]]; then
+  LOG_READER=${HLV_LOG_READER}
+elif [[ ! -z ${EDITOR} ]]; then
+  LOG_READER=${EDITOR}
+fi
+
+# Parse any provided command-line flag options, overriding defaults or values taken from environment
+# variables above.
+if [[ $1 =~ ^- ]]; then
+  while getopts "d:r:sSlvEnh" opt; do
+    case "${opt}" in
+      d) LOG_DIR=${OPTARG};;
+      t) LOG_READER=${OPTARG};;
+      s) MODE=save_and_view;;
+      S) MODE=save_and_exit;;
+      l) MODE=list_saved;;
+      v) MODE=view_latest;;
+      E) MODE=show_env;;
+      n) DRY_RUN=true;;
+      h) show_help;;
+    esac
+  done
+  shift $((OPTIND - 1))
+fi
+
+# If they've requested, show the user the current state of the outside environment variables used by
+# this script, and then exit. Needs to be after the option parsing so we can know if they've
+# requested it, but meaningless to proceed after this if they have.
+if [[ "${MODE}" == "show_env" ]]; then
+  echo "HLV_MODE=${HLV_MODE}"
+  echo "HLV_HEROKU_APP=${HLV_HEROKU_APP}"
+  echo "HLV_LOG_DIR=${HLV_LOG_DIR}"
+  echo "HLV_LOG_READER=${HLV_LOG_READER}"
+  echo "EDITOR=${EDITOR}"
+  exit
+fi
+
+# Parse the non-flag arguments passed on the command line after the flag options, overriding any
+# values we might have taken from environment variables above.
+if [[ -n "${1}" ]] && [[ -n "${2}" ]]; then
+  HEROKU_APP=$1
+  LOG_DIR=$2
+elif [[ -d "${1}" ]]; then
+  LOG_DIR=$1
+elif [[ -n "${1}" ]]; then
+  HEROKU_APP=$1
+fi
+
+# Check for necessary inputs from the user, and exit with a message if missing.
+if [ -z "${HEROKU_APP}" ]; then
+  error_exit "You must specify a heroku app (via either HLV_HEROKU_APP or CLI)."
+fi
+if [ ! ${MODE} == "quick_view" ] && [ ! -d "${LOG_DIR}" ]; then
+  error_exit "${LOG_DIR} isn't a directory."
+fi
+if [[ -z "${LOG_READER}" ]]; then
+  less_path=$(which less)
+  if [[ ! -x "${less_path}" ]]; then
+    error_exit "Please specify a text reader via -r or the EDITOR env var, or ensure 'less' is in your PATH."
+  fi
+fi
+
+# Establish the logfile path and filename for saving modes.
+if [[ "${MODE}" == "view_latest" ]]; then
+  logfile=$(ls -t ${LOG_DIR}/${HEROKU_APP}-*.log | head -1)
+else
+  timestamp=$(date '+%Y%m%d%H%M%S')
+  logfile="${LOG_DIR}/${HEROKU_APP}-${timestamp}.log"
+fi
+
+# Define the commands to be used by the stages later on.
+quick_view_cmd="heroku logs -n 1500 -a ${HEROKU_APP} | ${LOG_READER}"
+save_logfile_cmd="heroku logs -n 1500 -a ${HEROKU_APP} > ${logfile}"
+list_saved_cmd="ls -lh ${LOG_DIR}/${HEROKU_APP}-*.log"
+view_saved_cmd="${LOG_READER} ${logfile}"
+
+# Set which stages will run below based on what the user asked for.
+case ${MODE} in
+  quick_view) stages=(quick_view);;
+  save_and_view) stages=(save_logfile view_saved);;
+  save_and_exit) stages=(save_logfile);;
+  list_saved) stages=(list_saved);;
+  view_latest) stages=(view_saved);;
+esac
+
+# Show the dry_run output and exit if dry_run requested.
+if [[ "${DRY_RUN}" == true ]]; then
+  echo "Would run:"
+  for cmd in ${stages[@]}; do
+    run_cmd="${cmd}_cmd"
+    echo ${!run_cmd}
+  done
+  exit
+fi
+
+# Run the quick_view stage (the default).
+if [[ ${stages[@]} =~ "quick_view" ]]; then
+  showrun_cmd "${quick_view_cmd}"
+fi
+
+# Run the save stage if requested.
+if [[ ${stages[@]} =~ "save_logfile" ]]; then
+  showrun_cmd "${save_logfile_cmd}"
+  save_exit_status=$?
+
+  # If the storing failed, it might have left an empty log file. Delete it.
+  if [[ -f ${logfile} ]]; then
+    logfile_size=$(stat -f '%z' ${logfile})
+    if [[ ${logfile_size} == 0 ]]; then rm ${logfile}; fi
+  fi
+
+  # If the save command's exit status isn't 0 or there's no log file, it failed. Exit.
+  if [[ ! "${save_exit_status}" == 0 ]] || [[ ! -f ${logfile} ]]; then
+    error_exit "Downloading or writing the log failed."
+  fi
+fi
+
+# Run the list_saved stage if requested.
+if [[ ${stages[@]} =~ "list_saved" ]]; then
+  showrun_cmd "${list_saved_cmd}" 0
+fi
+
+# Run the view_saved stage if requested.
+if [[ ${stages[@]} =~ "view_saved" ]]; then
+  showrun_cmd "${view_saved_cmd}"
+fi

@@ -1,0 +1,4 @@
+description = "Redo the last command but with tests."
+prompt = """
+Revisit your last command, but make sure you work with test, spec, and factory files as necessary.
+"""

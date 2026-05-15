@@ -1,0 +1,5 @@
+# Template for ~/.zshrc.local
+# Copy this file to ~/.zshrc.local for any machine-specific zsh configuration.
+# This file is sourced by zshrc.main and should NOT be committed to the repo.
+
+# alias ll='ls -l'

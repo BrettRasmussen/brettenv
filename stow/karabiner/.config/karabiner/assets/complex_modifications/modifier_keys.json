@@ -1,0 +1,254 @@
+{
+  "title": "Modifier Keys",
+  "rules": [
+    {
+      "description": "Change delete key to escape",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "delete_forward"
+          },
+          "to": [
+            {
+              "key_code": "escape"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Map simultaneous k+l to Escape",
+      "manipulators": [
+        {
+          "from": {
+            "simultaneous": [
+              { "key_code": "k" },
+              { "key_code": "l" }
+            ],
+            "simultaneous_options": {
+              "detect_key_down_uninterruptedly": false,
+              "key_down_order": "insensitive",
+              "key_up_order": "insensitive",
+              "key_up_when": "any"
+            }
+          },
+          "to": [
+            { "key_code": "escape" }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "Change control to command",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "left_control",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "left_command"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "right_control",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "right_command"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Map command+option+caps_lock to caps_lock",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "caps_lock",
+            "modifiers": {
+              "mandatory": [
+                "command",
+                "option"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "caps_lock"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Map caps_lock to control",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "caps_lock"
+          },
+          "to": [
+            {
+              "key_code": "left_control"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Map lower-row ring-middle-index to control+option",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "simultaneous": [
+              {
+                "key_code": "x"
+              },
+              {
+                "key_code": "c"
+              },
+              {
+                "key_code": "v"
+              }
+            ]
+          },
+          "to": [
+            {
+              "key_code": "left_control",
+              "modifiers": [
+                "left_option"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "simultaneous": [
+              {
+                "key_code": "period"
+              },
+              {
+                "key_code": "comma"
+              },
+              {
+                "key_code": "m"
+              }
+            ]
+          },
+          "to": [
+            {
+              "key_code": "right_control",
+              "modifiers": [
+                "right_option"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Map lower-row ring+middle to control",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "simultaneous": [
+              {
+                "key_code": "x"
+              },
+              {
+                "key_code": "c"
+              }
+            ]
+          },
+          "to": [
+            {
+              "key_code": "left_control"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "simultaneous": [
+              {
+                "key_code": "comma"
+              },
+              {
+                "key_code": "period"
+              }
+            ]
+          },
+          "to": [
+            {
+              "key_code": "right_control"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Map lower-row middle+index to option",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "simultaneous": [
+              {
+                "key_code": "c"
+              },
+              {
+                "key_code": "v"
+              }
+            ]
+          },
+          "to": [
+            {
+              "key_code": "left_option"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "simultaneous": [
+              {
+                "key_code": "comma"
+              },
+              {
+                "key_code": "m"
+              }
+            ]
+          },
+          "to": [
+            {
+              "key_code": "right_option"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

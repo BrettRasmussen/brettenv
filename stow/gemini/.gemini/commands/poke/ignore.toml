@@ -1,0 +1,5 @@
+description = "Remind the AI to ignore the ignores."
+prompt = """
+Remind yourself of my rules about the following:
+* "Ignoring the Ignores", aka disregarding ignore patterns (ALWAYS)
+"""

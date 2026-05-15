@@ -1,0 +1,39 @@
+# horizontal line to help visually separate command outputs
+export HLINE="--------------------------------------------------------------------------------"
+
+# email address for whenever some program needs one
+# EMAIL should be exported in ~/.secrets.local or ~/.local.env instead
+
+# editor that gets auto-launched by some programs, including git commit and some brettenv scripts
+export EDITOR=nvim
+
+# editor that zsh-vi-mode zsh plugin will use
+ZVM_VI_EDITOR=nvim
+
+# pager to be used by default
+export PAGER=less
+
+# pager to be used by man pages
+export MANPAGER=less
+
+# settings for the "less" pager
+export LESS='-iRFMx4'
+
+# colors for ls output
+export LSCOLORS="GxFxCxDxBxegedabagacad"
+
+# prevent homebrew from updating is package list on install/upgrade. setting this is typically
+# paired with setting a nightly cron job to run a "brew update".
+export HOMEBREW_NO_AUTO_UPDATE=1
+
+# enable elixir iex history across sessions
+export ERL_AFLAGS="-kernel shell_history enabled"
+
+# vars for tmx
+export TMX_GLOBAL_APW=124
+export TMX_GLOBAL_APH=35
+
+# some ruby code, like the Puma version used by FA, stopped running after a Mac upgrade. though I
+# have no idea why, this seems to fix it.
+# See https://www.jdeen.com/blog/fix-ruby-macos-nscfconstantstring-initialize-error
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES

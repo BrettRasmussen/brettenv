@@ -1,0 +1,4 @@
+description = "Show whether backups are currently on or off."
+prompt = """
+Tell me whether your internal backups setting is currently set to on or off.
+"""

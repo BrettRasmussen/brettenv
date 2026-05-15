@@ -1,0 +1,25 @@
+description = "Set development/implementation mode."
+prompt = """
+We're now in "quick development" mode. Switch your persona to expert developer.
+
+This mode includes both a quick planning phase and a quick development phase.
+
+Remind yourself of my instructions about the following:
+* Coding Conventions
+* Backups
+* Backup Filename Format
+
+IGNORE the following from my normal workflow unless instructed otherwise:
+* "Current Task" instructions
+* SESSION_KEY
+* TASKNAME
+
+Then do the following:
+1. Acknowledge you are now in "quick development" mode and ready to converse with me about a plan.
+2. Converse with me about a quick plan.
+3. DO NOT implement until I say so.
+4. Implement when I say so, employing these practices:
+  a. DO store normal backups per my "Backups" instructions.
+  b. DO NOT maintain plan, notes, or to-dos on the filesystem.
+  c. DO NOT write, edit, or run tests.
+"""

@@ -1,0 +1,110 @@
+# --------------------------------------------------------------------------------------------------
+# My environment config for the zsh shell. To speed up zsh startup, I'm now splitting the config
+# into two files: this file for just the essential and quick stuff, and zshrc.extra for slower stuff
+# that's not always needed. This way, I can have an alias to source the extras, and put up with that
+# slowdown only in those cases.
+#---------------------------------------------------------------------------------------------------
+
+
+# vim mode with the zsh-vi-mode plugin -------------------------------------------------------------
+# load the plugin
+source $(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+
+# zsh-vi-mode is sort of a jerk with keybindings, but to play nicely with other plugins, it will run
+# this callback after it has done all its own setup.
+function zvm_after_init() {
+  # always go to insert mode for new commands. seems to have to happen after sourcing the plugin.
+  export ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
+
+  # enable fzf shortcuts. disable alt+c for subdir cd and assign it to ctrl+e.
+  source <(fzf --zsh)
+  bindkey -M viins -r "^[c"
+  bindkey -M vicmd -r "^[c"
+  bindkey -M viins "^E" fzf-cd-widget
+  bindkey -M vicmd "^E" fzf-cd-widget
+
+  # Move to beginning of line on up/down.
+  bindkey -M vicmd j vi-down-line-or-history
+  bindkey -M vicmd k vi-up-line-or-history
+}
+
+
+# source other config files ------------------------------------------------------------------------
+# Get the aliases.
+[[ -f "${HOME}/.brettenv/aliases" ]] && source "${HOME}/.brettenv/aliases"
+
+# Get the environment variables.
+[[ -f "${HOME}/.brettenv/env_vars" ]] && source "${HOME}/.brettenv/env_vars"
+
+# Source local files if they exist (secrets)
+[[ -f "${HOME}/.secrets.local" ]] && source "${HOME}/.secrets.local"
+
+
+# set the prompt -----------------------------------------------------------------------------------
+eval "$(starship init zsh)"
+
+
+# zsh-defer loading --------------------------------------------------------------------------------
+# Load zsh-defer plugin
+source "${HOME}/.brettenv/vendor/zsh-defer.plugin.zsh"
+# Defer the slow extras
+zsh-defer source "${HOME}/.brettenv/zshrc.extra"
+
+
+# Update the prompt timestamp at the moment of hitting Enter ---------------------------------------
+update_timestamp_on_enter() {
+  zle .reset-prompt
+  zle .accept-line
+}
+zle -N accept-line update_timestamp_on_enter
+
+precmd() {
+  # Put a space after every command if the $PROMPT_SPACE env var is set.
+  if [[ "${PROMPT_SPACE}" == true ]] || [[ "${PROMPT_SPACE}" == t ]]; then
+    print ""
+    print ""
+  fi
+}
+
+
+# basic useful zsh options -------------------------------------------------------------------------
+# disable ctrl-s/ctrl-q flow control
+unsetopt flow_control
+
+# Disable history sharing across concurrent shell sessions.
+unsetopt inc_append_history
+unsetopt share_history
+
+# Options for command-line history.
+setopt APPEND_HISTORY
+setopt INC_APPEND_HISTORY
+setopt HIST_EXPIRE_DUPS_FIRST
+setopt HIST_FIND_NO_DUPS
+setopt HIST_IGNORE_DUPS
+setopt EXTENDED_HISTORY
+
+# Allow # comments on command-line.
+setopt INTERACTIVE_COMMENTS
+
+# Print a message on command-line when programs exit with non-zero value.
+setopt PRINT_EXIT_VALUE
+
+# Allow enhanced globbing.
+setopt EXTENDED_GLOB
+
+
+# mdfind without the "loading keywords and predicates" debug messages ------------------------------
+mdfind() {
+  /usr/bin/mdfind "$@" 2>&1 | grep -v '\[UserQueryParser\]'
+}
+
+
+# case-insensitive tab completion ------------------------------------------------------------------
+autoload -Uz +X compinit && compinit
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'm:{a-zA-Z}={A-Za-z} r:|=*' 'm:{a-zA-Z}={A-Za-z} l:|=* r:|=*'
+zstyle ':completion:*' menu select
+zstyle ':completion::complete:cd::paths' accept-exact-dirs true
+
+
+# run all ruby-related commands through rbenv ------------------------------------------------------
+eval "$(rbenv init - --no-rehash zsh)"

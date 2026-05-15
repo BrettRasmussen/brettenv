@@ -1,0 +1,8 @@
+description = "Remind the AI about backups."
+prompt = """
+Remind yourself of my instructions about the following:
+* backing up a file before changing it (ALWAYS)
+* backup directory
+* timestamp format
+* backup filename format
+"""

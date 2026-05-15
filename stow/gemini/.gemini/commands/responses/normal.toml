@@ -1,0 +1,7 @@
+description = "Set response lengths to normal."
+prompt = """
+For the time being, return to your default habits for determining how long of answers to give me.
+This directive overrides any previous "/responses" commands that may have indicated response length.
+Continue on with your default habits until either you receive a "/responses" command that specifies
+a different response length or the current session ends.
+"""

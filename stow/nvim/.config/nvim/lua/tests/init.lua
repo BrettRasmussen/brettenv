@@ -1,0 +1,2 @@
+-- This file can be used for test-wide setup, but is not needed for basic plenary tests.
+-- Leaving it empty for now.

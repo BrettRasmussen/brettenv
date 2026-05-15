@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+
+do_show_help () {
+echo "
+  script_gen: Create a new bash script with either basic or robust boilerplate
+  code, and make it exectuble.
+
+  Usage:
+    $ script_gen [OPTIONS] FILENAME
+
+  Arguments:
+    FILENAME: Name of script file to create. Can include relative path.
+
+  Options:
+    -f: Create the file with the full template instead of the basic one.
+    -h: Show this help text.
+"
+}
+
+MODE=basic
+
+if [[ $1 =~ ^- ]]; then
+  while getopts "fh" opt; do
+    case "${opt}" in
+      f) MODE=full;;
+      h) do_show_help && exit;;
+    esac
+  done
+  shift $((OPTIND - 1))
+fi
+
+NEW_SCRIPT=$1
+[[ $MODE == "full" ]] && echo_exit "Full mode not implemented yet."
+[[ -z $NEW_SCRIPT ]] && echo_exit "Need a filename."
+
+echo_exit () {
+  echo $1
+  exit
+}
+
+showrun_cmd () {
+  echo "executing: ${1}"
+  eval $1
+}
+
+SCRIPT_DIR=$(dirname $(readlink -f "$0"))
+template="${SCRIPT_DIR}/script_gen_tpl/${MODE}"
+
+showrun_cmd "cp ${template} ${NEW_SCRIPT}"
+showrun_cmd "chmod +x ${NEW_SCRIPT}"

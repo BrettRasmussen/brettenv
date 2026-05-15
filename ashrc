@@ -1,0 +1,45 @@
+# Simple shell config file retaining the basics of my shell customizations for systems where bash or
+# zsh aren't available. Works with /bin/sh in Docker images based on Alpine Linux.
+
+
+# Aliases ------------------------------------------------------------------------------------------
+# unix conveniences
+alias ls='ls -F --color=auto'
+alias l='ls -lh'
+alias la='l -a'
+alias ld='l -d'
+alias u='cd ../'
+alias b='cd -'
+alias c='echo -e "-\n-\n"; clear'
+alias s='echo -e "\n"'
+alias pg='ping google.com'
+# rails stuff
+alias ac='cd ./app/controllers'
+alias am='cd ./app/models'
+alias aj='cd ./app/javascript'
+alias aser='cd ./app/serializers'
+alias asv='cd ./app/services'
+alias av='cd ./app/views'
+alias be='bundle exec'
+alias ber='bundle exec rake'
+alias rc='bundle exec rails console'
+alias rdm='bundle exec rake db:migrate --trace'
+alias rg='bundle exec rails generate'
+alias rgm='bundle exec rails generate migration'
+alias rs='bundle exec rails server -b 0.0.0.0'
+
+
+# Shell Config -----------------------------------------------------------------
+# use vi mode for the command line
+set -o vi
+
+# Set the prompt.
+export PS1="\[\033[38;5;222m\][\u@\h:\W]\$()$\[\033[00m\] "
+
+# Color scheme for the output of "ls -G".
+export LSCOLORS="GxFxCxDxBxegedabagacad"
+
+# If rbenv is available, hook it into both interactive and non-interactive shells.
+if command -v rbenv &> /dev/null; then
+  eval "$(rbenv init - --no-rehash bash)"
+fi

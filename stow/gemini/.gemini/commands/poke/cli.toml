@@ -1,0 +1,6 @@
+description = "Remind the AI about CLI conventions."
+prompt = """
+Remind yourself of my instructions about the following:
+* generated CLI commands
+* zsh compatibility
+"""

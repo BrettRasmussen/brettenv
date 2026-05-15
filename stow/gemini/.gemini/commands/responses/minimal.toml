@@ -1,0 +1,6 @@
+description = "Set response lengths to minimal."
+prompt = """
+For the time being, make all responses as short as possible while still reasonably addressing the
+query. Continue on with this practice until either you receive a "/responses" command that specifies
+a different response length or the current session ends.
+"""

@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+do_show_help () {
+echo "
+  rp: Read a colon-separated path string, one line per directory.
+
+  Usage:
+    $ rp [OPTIONS] [TEXT]
+
+  Arguments:
+    TEXT: Text, file, or environment variable to display. Default: \$PATH.
+
+  Options:
+    -t: Pipe output into \$EDITOR instead of STDOUT.
+    -h: Show this help text.
+"
+exit
+}
+
+if [[ $1 =~ ^- ]]; then
+  while getopts "th" opt; do
+    case "${opt}" in
+      t) OUTPUT_TO=editor;;
+      h) do_show_help && exit;;
+    esac
+  done
+  shift $((OPTIND - 1))
+fi
+
+INPUT=${1:-${PATH}}
+[[ -f ${INPUT} ]] && INPUT=$(cat ${INPUT})
+
+output=$(echo $INPUT | sed 's/:/\\n/g')
+
+if [[ ${OUTPUT_TO} == "editor" ]]; then
+  echo -e $output | $EDITOR
+else
+  echo -e $output
+fi

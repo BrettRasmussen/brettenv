@@ -1,0 +1,107 @@
+# ~/.config/starship.toml
+add_newline = true
+palette = "volcanic_yellow"
+
+# ROOT configurations MUST be defined before any tables!
+
+# Define the custom Powerline format
+format = """
+[ $username@$hostname ](bg:color_user fg:color_fg)\
+[](fg:color_user bg:color_time)\
+[ $time ](bg:color_time fg:color_fg)\
+[](fg:color_time bg:color_dir)\
+$directory\
+[](fg:color_dir bg:color_git)\
+$git_branch\
+$git_status\
+$character"""
+
+[palettes.vibrant_mosaic]
+color_user = "#9A348E"
+color_time = "#D08770"
+color_dir  = "#3B76F0"
+color_git  = "#2EA043"
+color_char = "#3B76F0"
+color_fg   = "#E4E4E4"
+
+[palettes.desert_sun]
+color_user = "#F2B705"
+color_time = "#F28705"
+color_dir  = "#F25C05"
+color_git  = "#D90416"
+color_char = "#F2B705"
+color_fg   = "#000000"
+
+[palettes.jewel_tones]
+color_user = "#9B111E"
+color_time = "#6C3082"
+color_dir  = "#0047AB"
+color_git  = "#046307"
+color_char = "#9B111E"
+color_fg   = "#E4E4E4"
+
+[palettes.forest_depth]
+color_user = "#1A1A1A"
+color_time = "#0D2611"
+color_dir  = "#1B3D2F"
+color_git  = "#4A7856"
+color_char = "#4A7856"
+color_fg   = "#E4E4E4"
+
+[palettes.volcanic]
+color_user = "#0D0D0D"
+color_time = "#5E0B0B"
+color_dir  = "#A31621"
+color_git  = "#E36414"
+color_char = "#E36414"
+color_fg   = "#E4E4E4"
+
+[palettes.volcanic_yellow]
+color_user = "#F2C40F"
+color_time = "#5E0B0B"
+color_dir  = "#A31621"
+color_git  = "#E36414"
+color_char = "#E36414"
+color_fg   = "#0D0D0D"
+
+# Configure the username module
+[username]
+show_always = true
+format = "$user"
+
+# Configure the hostname module
+[hostname]
+ssh_only = false
+format = "$hostname"
+
+# Configure the time module
+[time]
+disabled = false
+format = "$time"
+time_format = "%-m/%-d·%-H:%M"
+
+# Configure the directory module (Blue background)
+[directory]
+style = "bg:color_dir fg:color_fg"
+format = "[ $path ]($style)"
+truncation_length = 2
+truncate_to_repo = false
+truncation_symbol = "…/"
+
+# Configure the Git branch module (Green background)
+[git_branch]
+symbol = "git:"
+style = "bg:color_git fg:color_fg"
+format = "[ $symbol$branch ]($style)"
+
+# Configure the Git status module (Green background)
+[git_status]
+style = "bg:color_git fg:color_fg"
+format = "[$all_status$ahead_behind ]($style)"
+
+# Configure the character module (The final pointer)
+[character]
+success_symbol = "[](fg:color_git)"
+error_symbol = "[](fg:bold red)"
+vimcmd_symbol = "[](fg:color_git)"
+

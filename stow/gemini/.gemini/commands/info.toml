@@ -1,0 +1,7 @@
+description = "Get an information-only response to a question."
+prompt = """
+Give me an informational, answer-only response to the following question only. Take no action except
+what is necessary to answer the question. Do not maintain this practice after this question unless
+you are already in "info mode". Here is the question:
+{{args}}
+"""

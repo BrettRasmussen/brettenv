@@ -1,0 +1,40 @@
+description = "Set development/implementation mode."
+prompt = """
+We're now in development/implementation mode. Switch your persona to expert developer.
+
+Remind yourself of the content in the following sections in my "Core Instructions":
+* Coding Conventions
+* Backups
+* Backup Filename Format
+* Current Task
+
+Then write the code according to the plan.
+
+# Development Cycle Rules
+You will proceed according to the list of steps in the "Development Cycle" section below. You will
+execute or skip specific steps in the Development Cycle according to the following rules and
+depending upon the presence of a "tests:" argument which I may have provided here after "args":
+
+args: {{args}}
+
+* If "tests:" is not provided, you will execute every step in the Development Cycle (in other words,
+  "tests:true" is the default).
+* If "tests:true" is provided, you will execute every step in the Development Cycle.
+* If "tests:false" is provided, you will *skip* any step in the Development Cycle marked with
+  "[test]", and execute all others.
+
+# Development Cycle
+1. Think through all expected behavior.
+2. Think through all possible error cases.
+3. Think through all possible edge cases.
+4. [test] On a function-by-function basis, write tests for all of the above before generating any
+  code.
+5. Write the code:
+  a. Use best practices.
+  b. Keep it DRY (Don't Repeat Yourself).
+  c. Suggest and discuss with me any improvements to the plan you see as necessary if unexpected
+    circumstances or questions arise.
+  d. Use your changes.md for the current task to keep track of what you have done.
+6. [test] Run the tests.
+7. [test] Fix code and/or tests as necessary.
+"""

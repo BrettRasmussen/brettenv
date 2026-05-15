@@ -1,0 +1,6 @@
+description = "Remind the AI about procedures for the .devinfo directory."
+prompt = """
+Remind yourself of my rules about the following:
+* .devinfo/
+* Current Task
+"""

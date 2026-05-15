@@ -1,0 +1,44 @@
+# Rule for basic read-only and standard tools
+[[rule]]
+toolName = "run_shell_command"
+commandPrefix = [
+  "ls", "cat", "echo", "head", "tail", "sed", "wc", "file", "stat", "find", "tree", "pwd",
+  "grep", "egrep", "fgrep",
+  "git status", "git diff", "git log", "git show", "git branch",
+  "date", "whoami", "uname", "df", "du", "ps",
+  "ruby", "node", "npm", "yarn", "bundle", "gem", "rails", "rake -T",
+  "awk", "sort", "uniq", "jq", "yq", "column", "base64",
+  "which", "whereis", "type", "readlink", "realpath", "basename", "dirname",
+  "env", "printenv", "hostname", "id", "uptime", "diff",
+  "md5", "shasum", "md5sum", "sha256sum", "lsof",
+  "brew list", "brew info",
+  "pip list", "pip show"
+]
+decision = "allow"
+priority = 100
+
+# Allow creating directories and files under .devinfo/backups/
+[[rule]]
+toolName = "run_shell_command"
+commandRegex = "\\b(mkdir|cp|touch)\\b.*\\.devinfo/backups/"
+decision = "allow"
+priority = 110
+
+# Allow echo and cat with redirection or piping
+[[rule]]
+toolName = "run_shell_command"
+commandRegex = "^\\s*(echo|cat)\\s.*[<>|]"
+decision = "allow"
+priority = 120
+
+# Allow ls with redirection when redirected to /dev/null
+# Failed previous regexes:
+# commandRegex = "^ls(?:\\s+[^>]+)?\\s+>\\s*/dev/null(?:\\s+2>&1)?$"
+# commandRegex = "^ls\\b[^>]*>\\s*/dev/null(?:\\s+2>&1)?$"
+# commandRegex = "^ls(?:\\s+[-a-zA-Z0-9_./*]+)*\\s*>\\s*/dev/null(?:\\s+2>&1)?$"
+# commandRegex = "(ls|cat|grep|head|tail)( .*)?( [|>].*)?"
+# [[rule]]
+# toolName = "run_shell_command"
+# commandRegex = "(ls|cat|grep|head|tail)( .*)?( [|>].*)?"
+# decision = "allow"
+# priority = 130

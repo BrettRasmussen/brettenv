@@ -1,0 +1,19 @@
+# --------------------------------------------------------------------------------------------------
+# Config file for MacOS's libedit (aka editline).
+# --------------------------------------------------------------------------------------------------
+# Explanation:
+# MacOS doesn't ship with a full GNU readline implementation because of licensing issues. Instead,
+# it provides its own, partially compatible line editing library, called libedit and frequently
+# referred to as editline. Various programs use libedit, and various system libraries are linked
+# against it, so some things that you might expect to honor ~/.inputrc won't. When using zsh, the
+# line editor is ZLE, so a lot of this is hidden to zsh users, but it'll pop up in programs written
+# to work with libedit. I especially want vi mode all the time, which normally comes from the
+# "set editing-mode vi" line in ~/.inputrc, but it disappears in these libexec cases.
+#
+# MacOS's system ruby installation falls in this category, which means that running irb under the
+# system ruby doesn't get vi mode, but this file should fix that. Note that irb under
+# rbenv-installed rubies uses readline and ~/.inputrc, so it works in those cases.
+# --------------------------------------------------------------------------------------------------
+
+# set vi mode
+bind -v

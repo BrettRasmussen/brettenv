@@ -1,0 +1,6 @@
+description = "Enable automatic backing up of files."
+prompt = """
+From now on, make a backup of each file you're about to modify, according to my global "Backups"
+rules. Maintain this practice until either you receive the "/backups:off" command or we reach the
+end of the session.
+"""

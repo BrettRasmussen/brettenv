@@ -1,0 +1,35 @@
+# --------------------------------------------------------------------------------------------------
+# A file containing the zsh config that's slower to load than the essentials. To be loaded by means
+# of an alias in whatever shell needs these abilities at the moment, or perhaps tacked cleverly onto
+# some command that get used frequently but is expected to be slow anyway. See the comment at the
+# top of zshrc.
+#---------------------------------------------------------------------------------------------------
+
+# Match already entered text on up or down in command history.
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+bindkey "${terminfo[kcuu1]}" up-line-or-beginning-search
+bindkey "${terminfo[kcud1]}" down-line-or-beginning-search
+
+# # Tab completion.
+# zstyle ':completion:*' menu select
+# fpath=(/usr/local/share/zsh-completions $fpath)
+# zmodload zsh/complist
+# autoload -Uz compinit
+# compinit
+# zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z-_}={A-Za-z_-}'
+
+# enable zmv
+autoload zmv
+
+# heroku autocomplete setup
+HEROKU_AC_ZSH_SETUP_PATH=$HOME/Library/Caches/heroku/autocomplete/zsh_setup && test -f $HEROKU_AC_ZSH_SETUP_PATH && source $HEROKU_AC_ZSH_SETUP_PATH;
+
+# After installing nvm from homebrew or whatever package manager, installation of any version of
+# NodeJS is done via the nvm shell script. Note: ~/.nvm needs to exist and can be created by hand.
+export NVM_DIR="$HOME/.nvm"
+[ -s "$(brew --prefix nvm)/nvm.sh" ] && . "$(brew --prefix nvm)/nvm.sh"
+[ -s "$(brew --prefix nvm)/etc/bash_completion.d/nvm" ] && . "$(brew --prefix nvm)/etc/bash_completion.d/nvm"
+
+# Source the completions file.
+# source $HOME/.brettenv/zsh-completion.conf

@@ -1,0 +1,16 @@
+# Crontab configuration file, using standard crontab syntax. To load up:
+#   prompt$ crontab crontab
+# (First "crontab" is the system command; second is this file.)
+#
+# Each line is five time fields followed by the command to run:
+#   minute(0-59) hour(0-23) day_of_month(1-31) month(1-12) day_of_week(0-7) command
+#
+# Time field values can be zero-padded or not, and take the following forms:
+#   x: only at <fieldname> x
+#   x,y: only at <fieldname>s x and y
+#   x-y: every <fieldname> from x to y
+#   */x: every x <fieldname>s
+#   *: every <fieldname>
+
+# Update the hombrew package list and upgrade installed packages every night at 3am.
+0 3 * * * /opt/homebrew/bin/brew update && /opt/homebrew/bin/brew upgrade

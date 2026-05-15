@@ -1,0 +1,5 @@
+description = "Re-do previous with max 120-character textwidth"
+prompt = """
+Re-execute or resume, as appropriate, your most recent action, but making sure that all code lines
+are limited to 120 characters in width, except in cases where it's not possible.
+"""

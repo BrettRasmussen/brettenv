@@ -1,0 +1,21 @@
+#!/bin/sh
+#
+# gemini-cli doesn't handle the .devinfo directory very well if it's in .gitignore, but we
+# definitely don't want it in the repo, so this script seems like the best compromise for now. It's
+# simply a hook to prevent the .devinfo directory from being committed.
+#
+# Every developer on the team must run the following for this to work:
+#   git config core.hooksPath .githooks
+
+DIR_TO_CHECK=".devinfo/"
+
+# Check if any staged files are within the .devinfo/ directory
+if git diff --cached --name-only | grep -q "^$DIR_TO_CHECK"; then
+  echo "Warning: Staged files were found in the '$DIR_TO_CHECK' directory."
+  # Un-stage the directory
+  git reset HEAD "$DIR_TO_CHECK"
+  echo "'$DIR_TO_CHECK' has been automatically unstaged. The commit will proceed without it."
+fi
+
+# Exit with 0 to allow the commit to proceed
+exit 0

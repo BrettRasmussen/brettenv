@@ -1,0 +1,5 @@
+description = "Instruct the AI to ignore tests and specs."
+prompt = """
+For now, disregard any test, spec, and factory files as you develop the main code. Continue to
+ignore them until either I say otherwise or the session ends.
+"""

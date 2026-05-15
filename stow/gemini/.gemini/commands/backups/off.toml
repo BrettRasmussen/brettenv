@@ -1,0 +1,6 @@
+description = "Disable automatic backing up of files."
+prompt = """
+From now on, do not make any backups of files you're about to modify. Just proceed with your
+modifications. Maintain this practice until either you receive the "/backups:on" command or we reach
+the end of the session.
+"""

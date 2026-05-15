@@ -1,0 +1,5 @@
+description = "Redo the last command with shell utilities."
+prompt = """
+Redo the last command using only native shell utilities (cat, ls, etc.) instead of internal AI
+chatbot filesystem tools (read_file, glob, replace, etc.).
+"""

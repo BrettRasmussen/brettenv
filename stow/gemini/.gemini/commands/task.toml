@@ -1,0 +1,44 @@
+description = "Switch the active task for the current terminal pane."
+prompt = """
+We are now switching to work on the following task: {{args}}.
+
+Glossary:
+* ${TASKNAME}: The name of the task to which we are switching, as provided on the previous line.
+* ${TASK_SUBDIR}: .devinfo/tasks/${TASKNAME}/
+* "Current Task" instructions: The section from my global "Core Instructions" entitled "Current
+  Task". DO NOT READ these unless instructed to below.
+
+Now do the steps under ONE of the following bullet points, based on which conditions match for
+${TASKNAME} and ${TASK_SUBDIR}:
+
+* If ${TASKNAME} is "new":
+  1. DO NOT look for a ${TASK_SUBDIR} nor read any files unless explicitly instructed to.
+  2. Ignore "Current Task" instructions.
+  3. Switch to "quick development" mode:
+    a. Acknowledge you are now in "quick development" mode and ready to converse with me about
+      architecture and implementation details.
+    b. Converse with me about a quick architecture and its details.
+    c. DO NOT implement until I say so.
+    d. Implement when I say so, employing these practices:
+      i. DO store normal backups per my "Backups" instructions.
+      ii. DO NOT maintain architecture, notes, or to-do documents on the filesystem.
+      iii. DO NOT write, edit, or run tests.
+
+* If ${TASKNAME} is not "new" and ${TASK_SUBDIR} exists:
+  1. Follow the "Current Task" instructions to switch to the new task and identify it.
+  2. Read all files under ${TASK_SUBDIR}.
+  3. Switch to and strictly maintain yourself in architecture mode:
+    a. Immediately remind yourself of my instructions under "Core Instructions > Modes > Specific
+      Mode Instructions > Architecture Mode".
+    b. Abide by those rules until I switch you to a different mode.
+
+* If ${TASKNAME} is not "new" and ${TASK_SUBDIR} does not exist:
+  1. Create ${TASK_SUBDIR}.
+  2. Follow the "Current Task" instructions to switch to the new task.
+  3. Use ${TASK_SUBDIR} as described in the "Current Task" instructions while we work out the
+     architecture and its details.
+  4. Switch to and strictly maintain yourself in architecture mode:
+    a. Immediately remind yourself of my instructions under "Core Instructions > Modes > Specific
+      Mode Instructions > Architecture Mode".
+    b. Abide by those rules until I switch you to a different mode.
+"""

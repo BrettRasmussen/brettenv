@@ -1,0 +1,106 @@
+# brettenv-based aliases for some quick conveniences.
+BRETTENV_DIR="${HOME}/.brettenv"
+[[ -d "${BRETTENV_PATH}" ]] && BRETTENV_DIR=$BRETTENV_PATH
+rlenv() {
+  echo -n 'reloading environment...'
+  source "${HOME}/.zshrc"
+  [[ $? == 0 ]] && echo 'done'
+}
+
+# unix conveniences
+alias ls='ls -F --color=auto'
+alias l='ls -lh'
+alias la='l -a'
+alias ld='l -d'
+alias lda='l -da'
+alias u='cd ../'
+alias b='cd -'
+alias c='echo -e "-\n-\n"; clear'
+alias pg='ping google.com'
+
+# spaces and lines for visual separation
+alias s='echo -e "\n"'
+alias st='export PROMPT_SPACE=true'
+alias sf='export PROMPT_SPACE=false'
+alias ss='echo $PROMPT_SPACE'
+alias hl='echo $HLINE'
+
+# quick find
+alias qf='find . -iname'
+
+# include timestamps with command history
+alias history='history -f'
+
+# tmux stuff
+alias tmx7='tmx -W 6 -S 1,2,5,6'
+alias k='tmx -b'
+
+# make ack case insensitive. different between mac and linux
+[[ "${OSTYPE}" =~ "darwin" ]] && alias ack='ack -i'
+[[ "${OSTYPE}" =~ "linux" ]] && alias ack='ack-grep -i'
+
+# aliases for changing to commonly used directories
+alias hbe="cd ${BRETTENV_DIR}"
+alias ht='cd ~/tmp'
+alias htl='cd ~/tmp/loop'
+
+# neovim stuff
+alias nv='nvim'
+
+# docker stuff
+alias dk='dkr'
+
+# git aliases
+alias ga='git add'
+alias gaa='git-add-all'
+alias gb='git branch'
+alias gc='git commit -v'
+alias gca='git commit -av'
+alias gco='git checkout'
+alias gcp='git cherry-pick'
+alias gd='git diff'
+alias gds='git diff --staged'
+alias gl='git log'
+alias glg="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+alias glq="git log --pretty=format:'%C(#FF1493)%as %C(auto)%h%d %s'"
+alias gm='git merge'
+alias gmv='git mv'
+alias gpl='git pull'
+alias gpz='git push'
+alias grm='git rm'
+alias grs='git restore'
+alias gs='git status'
+alias gsh='git show'
+alias gst='git stash'
+alias gstl='git stash list'
+alias gstp='git stash pop'
+
+# echo commonly looked-at ruby-related environment variables
+alias sgh='echo $GEM_HOME'
+alias sgp='echo $GEM_PATH'
+
+# rails/sinatra stuff
+alias ac='cd ./app/controllers'
+alias am='cd ./app/models'
+alias aj='cd ./app/javascript'
+alias aser='cd ./app/serializers'
+alias asv='cd ./app/services'
+alias av='cd ./app/views'
+alias be='bundle exec'
+alias ber='bundle exec rake'
+bes() { hl; bundle exec rspec $1; hl }
+alias rc='bundle exec rails console'
+alias rdm='bundle exec rake db:migrate --trace'
+alias rg='bundle exec rails generate'
+alias rgm='bundle exec rails generate migration'
+alias rs='bundle exec rails server -b 0.0.0.0'
+alias sin='be rackup -p 4567'
+alias vbg='cd ./vendor/bundle/ruby/*/gems'
+
+# firing up rack apps with puma or rake.
+alias pum1='WEB_CONCURRENCY=1 bundle exec puma'
+alias pum9='WEB_CONCURRENCY=9 bundle exec puma'
+alias rjw='bundle exec rake jobs:work'
+
+# make possible the vim bindings in elixir's iex
+alias iex='rlwrap -a foo iex'

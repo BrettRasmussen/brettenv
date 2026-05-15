@@ -1,0 +1,5 @@
+description = "Re-do but with humble responses."
+prompt = """
+Remind yourself of my global "Humility" rule and then re-answer my most recent question in language
+that adheres to that rule.
+"""

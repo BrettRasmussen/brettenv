@@ -1,0 +1,57 @@
+#!/bin/bash
+
+# A script to add all modified and untracked files to the git staging area,
+# except for those matching a list of specified exclusions.
+
+# --- Configuration ---
+# Add paths to files or directories to exclude.
+# - For directories, do NOT add a trailing slash.
+# - Paths are relative to the git repository root.
+EXCLUDES=(
+  ".devinfo"
+  "tmp"
+  "log"
+  "config/database.yml"
+)
+# --- End Configuration ---
+
+# 1. Get all modified and untracked files, respecting .gitignore.
+all_files=$(git ls-files --others --modified --exclude-standard)
+
+if [[ -z "$all_files" ]]; then
+  echo "No modified or untracked files to stage."
+  exit 0
+fi
+
+# 2. Build a single extended grep pattern from the EXCLUDES array.
+#    This is more efficient than looping and running grep multiple times.
+grep_pattern=""
+for item in "${EXCLUDES[@]}"; do
+  # If the exclude path exists and is a directory, match the path itself
+  # and anything inside it.
+  if [[ -d "$item" ]]; then
+    # Pattern: ^dir/ or ^dir$
+    grep_pattern+="|^${item}/|^${item}$"
+  else
+    # Otherwise, it's treated as a file, match the exact path.
+    # Pattern: ^file$
+    grep_pattern+="|^${item}$"
+  fi
+done
+# Remove the leading '|' from the pattern string
+grep_pattern="${grep_pattern#|}"
+
+# 3. Filter the list of files using the generated pattern.
+#    `grep -E` uses extended regular expressions.
+#    `grep -v` inverts the match.
+files_to_add=$(echo "$all_files" | grep -E -v "($grep_pattern)")
+
+# 4. Check if there are any files left to add.
+if [[ -n "$files_to_add" ]]; then
+  # 5. Add the filtered list of files.
+  echo "$files_to_add" | xargs git add
+  echo "Staged files:"
+  echo "$files_to_add"
+else
+  echo "No files to stage after applying exclusions."
+fi

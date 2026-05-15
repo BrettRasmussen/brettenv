@@ -1,0 +1,30 @@
+{
+  "<% %>": {
+    "prefix": "%",
+    "body": [
+      "<% $0 %>"
+    ],
+    "description": "<% %>"
+  },
+  "<%= %>": {
+    "prefix": "=",
+    "body": [
+      "<%= $0 %>"
+    ],
+    "description": "<%= %>"
+  },
+  "<% end %>": {
+    "prefix": "end",
+    "body": [
+      "<% end %>"
+    ],
+    "description": "<% end %>"
+  },
+  "link": {
+    "prefix": "lin",
+    "body": [
+      "<%= link ${1:\"${2:Submit}\"}, to: ${3:\"${4:/users}\"}, method: ${5::delete} %>"
+    ],
+    "description": "link"
+  }
+}

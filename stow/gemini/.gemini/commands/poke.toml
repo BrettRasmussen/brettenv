@@ -1,0 +1,10 @@
+description = "Remind the AI of important instructions."
+prompt = """
+Remind yourself of my core instructions about the following:
+* Humility
+* .devinfo
+* Coding Conventions
+* Timestamp Format
+* Backups
+* Backup Filename Format
+"""

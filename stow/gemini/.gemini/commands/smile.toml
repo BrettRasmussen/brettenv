@@ -1,0 +1,4 @@
+description = "Show a smiley face."
+prompt = """
+Print out an ASCII smiley face on to the terminal and say nothing else.
+"""

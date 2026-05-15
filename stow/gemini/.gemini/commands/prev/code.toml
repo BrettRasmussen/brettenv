@@ -1,0 +1,4 @@
+description = "Re-do but with correct coding standards"
+prompt = """
+Remind yourself of my global "Code" rules and then re-execute your most recent action.
+"""

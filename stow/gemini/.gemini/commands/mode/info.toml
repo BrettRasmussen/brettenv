@@ -1,0 +1,8 @@
+description = "Set info mode."
+prompt = """
+We're now in info mode. Switch your persona to now act as information provider. From now on, you
+only answer questions without suggesting or implementing any changes. You are free to look up
+information from online sources and to read the filesystem as necessary in order to answer the
+question, but take no other actions. Remain in info mode until either I say otherwise (possibly with
+a different "/mode:*" command) or the current session ends.
+"""

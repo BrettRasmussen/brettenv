@@ -1,0 +1,19 @@
+[color]
+	ui = true
+[alias]
+  fpo = fetch --prune origin
+  sdep = push staging staging:master
+  pgdep = push playground playground:master
+  unstage = reset HEAD
+  uncommit = reset --soft HEAD^
+[gc]
+  auto=1
+[include]
+	path = ~/.gitconfig.local
+[core]
+	editor = nvim
+	hooksPath = ~/.githooks
+[pull]
+	rebase = false
+[init]
+	defaultBranch = main

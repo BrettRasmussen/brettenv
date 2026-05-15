@@ -1,0 +1,7 @@
+description = "Get a minimal response to a query."
+prompt = """
+To the following query only, give me the quickest summary response that reasonably addresses it. Do
+not maintain this practice after this query unless you're already in "minimal mode". Here is the
+question:
+{{args}}
+"""

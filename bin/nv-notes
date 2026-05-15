@@ -1,0 +1,3 @@
+#!/bin/zsh
+export NV_MODE="notes";
+nvim "$@";

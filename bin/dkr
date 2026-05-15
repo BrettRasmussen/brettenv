@@ -1,0 +1,222 @@
+#! /bin/bash
+
+help_text=$(cat << EOF
+  dkr: git-aware wrapper for "docker", "docker compose" and "heroku". Uses
+  environment variables in env files you create to construct and run output
+  commands common in Docker-image development. The env files can be specific to
+  the git branch, so images get automatically named and pushed correctly. Uses
+  "docker compose" for running images locally and getting service names.
+
+  TERMINOLOGY
+    DKR_DIR: Directory where dkr will look for env files. First found of:
+      \$DKR_DIR, ./dkr (recommended), ./.dkr.
+    BRANCH: The current git branch.
+    SVC or SVCS (plural): Service or services defined in compose.yml. Specified
+      on the command line via trailing args or -P. Multiples usually allowed.
+    \$HEROKU_APP: Env var with the name of the heroku app to use with "--app".
+    \$REPO_BASE: Env var with partial heroku registry name, to which "/SVC" will
+      be appended automatically.
+    Env Files (in the order read by dkr): DKR_DIR/all.env, DKR_DIR/BRANCH.env.
+
+  THE BASIC WORK-CYCLE (these dkr commands can also take -P; eg. "dkr -bP all")
+    1. Edit Dockerfile.
+    2. dkr -b: Build image(s) named "BRANCH/SVC" with "docker buildx".
+    3. dkr -u: Run images (as SVCS) with "docker compose" to test.
+    4. Rinse and repeat as necessary.
+    4. dkr -t: Tag image(s) for heroku repos (using \$REPO_BASE).
+    5. dkr -p: Push image(s) to heroku repos using "docker push".
+    6. dkr -k: Release on heroku using "heroku:container release".
+
+  OPTIONS (will pass --env-file(s) to "docker compose" where appropriate)
+    -a: Run script at DKR_DIR/pre-build.
+    -b: "docker buildx build --target=SVC -t BRANCH/SVC --provenance=false .".
+    -c: "docker container list".
+    -C: "docker container list --all".
+    -i: "docker image list".
+    -I: "docker image list --digests".
+    -k: "heroku container:release SVCS --app \$HEROKU_APP".
+    -p: "docker push \$REPO_BASE/\$SERVICE".
+    -P PROFILE: Get SVC(S) from PROFILE in compose.yml.
+    -r SVC: Run image: "docker compose run --remove-orphans SVC".
+    -R "SVC[:SHELL]": Interactive run of image using --entrypoint, as such:
+      "docker compose run -i --entrypoint SHELL --remove-orphans SVC".
+      SHELL is first found of "SHELL", \$DKR_SHELL, "sh".
+    -t: "docker tag BRANCH/SVC \$REPO_BASE/\$SVC"
+    -u: "docker compose up --watch".
+    -x: "docker container prune -f; docker image prune -f".
+    -n: Do a dkr dry run to see what command(s) would be run.
+    -E: Show environment variables used by this script and current values.
+    -h: Show this help text.
+EOF
+)
+
+ALL_ARGV=("$@")
+if [[ $1 =~ ^-[abcCiIkpPrRuxnEht] ]]; then
+  while getopts "abcCiIkpP:r:R:uxnEht" opt; do
+    case "${opt}" in
+      a) stages=(dkr_dir pre_build);;
+      b) stages=(services explicit_build);;
+      c) stages=(container_list);;
+      C) stages=(container_list) && AUGMENT=true;;
+      i) stages=(image_list);;
+      I) stages=(image_list) && AUGMENT=true;;
+      k) stages=(dkr_dir env_files services heroku_release);;
+      p) stages=(dkr_dir env_files services explicit_push);;
+      P) PROFILE=${OPTARG};;
+      r) stages=(dkr_dir env_files explicit_run) && SERVICE=${OPTARG};;
+      R) stages=(dkr_dir env_files interactive) && INTERACTIVE=${OPTARG};;
+      t) stages=(dkr_dir env_files services tag_services);;
+      u) stages=(dkr_dir env_files explicit_up);;
+      x) stages=(prune);;
+      n) DRY_RUN=true;;
+      E) stages=(show_env);;
+      h) stages=(show_help);;
+    esac
+  done
+  shift $((OPTIND - 1))
+fi
+[[ -z $stages ]] && stages=(dkr_dir env_files run_compose)
+EXTRA_ARGV=("$@")
+
+branch=$(git branch --show-current)
+compose_base="GIT_BRANCH=${branch} docker compose"
+[[ ${PROFILE} ]] && profile_arg="--profile ${PROFILE}"
+
+error_exit () {
+  echo "dkr error: ${1} Exiting."
+  exit 1
+}
+
+showrun_cmd () {
+  cmd=$(echo "${1}" | tr -s " ")
+  [[ ! $2 == "false" ]] && echo "----- cmd: ${cmd} -----"
+  [[ ! $DRY_RUN == "true" ]] && eval $cmd
+}
+
+[[ ${stages[@]} =~ "show_help" ]] && do_show_help () {
+  echo "${help_text}"
+}
+
+[[ ${stages[@]} =~ "show_env" ]] && do_show_env () {
+  echo "env vars -----"
+  echo "  DKR_DIR=${DKR_DIR}"
+  echo "  DKR_SHELL=${DKR_SHELL}"
+  echo "  HEROKU_APP=${HEROKU_APP}"
+  echo "  REPO_BASE=${REPO_BASE}"
+  echo "debug --------"
+  echo "  ALL_ARGV: ${ALL_ARGV[@]}"
+  echo "  EXTRA_ARGV: ${EXTRA_ARGV[@]}"
+}
+
+[[ ${stages[@]} =~ "dkr_dir" ]] && do_dkr_dir () {
+  dirs=("${DKR_DIR}" "./dkr" "./.dkr")
+  for dir in ${dirs[@]}; do
+    if [[ -d $dir ]]; then
+      dkr_dir=$dir
+      break
+    fi
+  done
+  [[ ! -d ${dkr_dir} ]] && error_exit "No dkr dir found."
+}
+
+[[ ${stages[@]} =~ "env_files" ]] && do_env_files () {
+  if [[ -d ${dkr_dir} ]]; then
+    env_file_arg=""
+    for filebase in all $branch; do
+      file="${dkr_dir}/${filebase}.env"
+      if [[ -f $file ]]; then
+        source $file
+        env_file_arg="${env_file_arg} --env-file ${file}"
+      fi
+    done
+  fi
+}
+
+[[ ${stages[@]} =~ "services" ]] && do_services () {
+  services=${EXTRA_ARGV[@]}
+  if [[ -z $services ]]; then
+    cmd="${compose_base} ${profile_arg} config --services"
+    services=$(echo $(eval $cmd) | tr -d '\\n')
+  fi
+}
+
+[[ ${stages[@]} =~ "pre_build" ]] && do_pre_build () {
+  cmd="${dkr_dir}/pre-build"
+  showrun_cmd "$cmd"
+}
+
+[[ ${stages[@]} =~ "explicit_build" ]] && do_explicit_build () {
+  for svc in ${services[@]}; do
+    cmd="docker buildx build --target ${svc} -t ${branch}/${svc} --provenance=false ."
+    showrun_cmd "$cmd"
+  done
+}
+
+[[ ${stages[@]} =~ "explicit_run" ]] && do_explicit_run () {
+  cmd="${compose_base} ${profile_arg} ${env_file_arg} run --remove-orphans ${EXTRA_ARGV[@]} ${SERVICE}"
+  showrun_cmd "$cmd"
+}
+
+[[ ${stages[@]} =~ "explicit_up" ]] && do_explicit_up () {
+  cmd="${compose_base} ${profile_arg} ${env_file_arg} up --watch --remove-orphans ${EXTRA_ARGV[@]}"
+  showrun_cmd "$cmd"
+}
+
+[[ ${stages[@]} =~ "tag_services" ]] && do_tag_services () {
+  for svc in ${services[@]}; do
+    cmd="docker tag ${branch}/${svc} ${REPO_BASE}/${svc}"
+    showrun_cmd "$cmd"
+  done
+}
+
+[[ ${stages[@]} =~ "explicit_push" ]] && do_explicit_push () {
+  for svc in ${services[@]}; do
+    cmd="docker push ${REPO_BASE}/${svc}"
+    showrun_cmd "$cmd"
+  done
+}
+
+[[ ${stages[@]} =~ "interactive" ]] && do_interactive () {
+  IFS=":" read -r svc sh <<< "${INTERACTIVE}"
+  sh=${sh:-${DKR_SHELL:-sh}}
+  cmd="${compose_base} ${env_file_arg} run -i --entrypoint ${sh} --remove-orphans ${EXTRA_ARGV[@]} ${svc}"
+  showrun_cmd "$cmd"
+}
+
+[[ ${stages[@]} =~ "container_list" ]] && do_container_list () {
+  [[ $AUGMENT == "true" ]] && augment="--all"
+  cmd="docker container list ${augment} ${EXTRA_ARGV[@]}"
+  showrun_cmd "$cmd"
+}
+
+[[ ${stages[@]} =~ "image_list" ]] && do_image_list () {
+  format='--format "table {{.Repository}}\t{{.Tag}}\t{{.ID}}\t{{.CreatedAt}}\t{{.Size}}"'
+  [[ $AUGMENT == "true" ]] && augment="--digests"
+  cmd="docker image list ${format} ${augment} ${EXTRA_ARGV[@]}"
+  showrun_cmd "$cmd"
+}
+
+[[ ${stages[@]} =~ "prune" ]] && do_prune () {
+  cmd="docker container prune -f"
+  showrun_cmd "$cmd"
+  cmd="docker image prune -f"
+  showrun_cmd "$cmd"
+}
+
+[[ ${stages[@]} =~ "heroku_release" ]] && do_heroku_release () {
+  [[ -z $HEROKU_APP ]] && error_exit "No \$HEROKU_APP found."
+  cmd="heroku container:release ${services} --app ${HEROKU_APP}"
+  showrun_cmd "$cmd"
+}
+
+[[ ${stages[@]} =~ "run_compose" ]] && do_run_compose () {
+  cmd="${compose_base} ${profile_arg} ${env_file_arg} ${EXTRA_ARGV[@]}"
+  showrun_cmd "$cmd"
+}
+
+[[ $DRY_RUN == "true" ]] && echo "Would run the following:"
+
+for stage in ${stages[@]}; do
+  stage_fn="do_${stage}"
+  eval "${stage_fn}"
+done

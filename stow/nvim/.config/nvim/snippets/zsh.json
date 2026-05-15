@@ -1,0 +1,150 @@
+{
+  "hashbang zsh": {
+    "prefix": "#!",
+    "body": [
+      "#!/usr/bin/env zsh",
+      "",
+      "$0"
+    ]
+  },
+
+  "echo string": {
+    "prefix": "ps",
+    "body": [
+      "echo \"${1:xxx_string}$0\""
+    ]
+  },
+
+  "echo value": {
+    "prefix": "pv",
+    "body": [
+      "echo \"${1:xxx_val}: \\${$1}$0\""
+    ]
+  },
+
+  "add value to echo": {
+    "prefix": "pva",
+    "body": [
+      "${1:xxx_val}: #{$1}$0"
+    ]
+  },
+
+  "condition-and": {
+    "prefix": "&&",
+    "body": [
+      "[[ ${1:xxx_cond} ]] && ${2:xxx_todo}"
+    ]
+  },
+
+  "condition-or": {
+    "prefix": "||",
+    "body": [
+      "[[ ${1:xxx_cond} ]] || ${2:xxx_todo}"
+    ]
+  },
+
+  "if statement": {
+    "prefix": "if",
+    "body": [
+      "if [[ ${1:xxx_cond} ]]; then$0",
+      "  ${2:xxx_todo}",
+      "fi"
+    ]
+  },
+
+  "if/else statement": {
+    "prefix": "ife",
+    "body": [
+      "if [[ ${1:xxx_cond} ]]; then$0",
+      "  ${2:xxx_todo}",
+      "else",
+      "  ${3:xxx_todo}",
+      "fi"
+    ]
+  },
+
+  "elif insertion": {
+    "prefix": "elf",
+    "body": [
+      "elif [[ ${1:xxx_cond} ]]; then",
+      "  ${2:xxx_todo}"
+    ]
+  },
+
+  "else insertion": {
+    "prefix": "els",
+    "body": [
+      "else",
+      "  ${1:xxx_todo}"
+    ]
+  },
+
+  "variable": {
+    "prefix": "$",
+    "body": [
+      "\\${${1:xxx_var}}"
+    ]
+  },
+
+  "array loop": {
+    "prefix": "for",
+    "body": [
+      "for ${1:xxx_elem} in ${2:\\${${3:xxx_array}[@]\\}}; do",
+      "  ${4:xxx_todo}",
+      "done"
+    ]
+  },
+
+  "case statement": {
+    "prefix": "cs",
+    "body": [
+      "case ${1:xxx_var} in",
+        "  ${2:xxx_when}) ${3:xxx_todo};;$0",
+      "esac"
+    ]
+  },
+
+  "case when insertion": {
+    "prefix": "cs-",
+    "body": [
+      "${1:xxx_when}) ${2:xxx_todo};;"
+    ]
+  },
+
+  "case else insertion": {
+    "prefix": "cse",
+    "body": [
+      "*) ${1:xxx_todo};;"
+    ]
+  },
+
+  "getopts option parsing": {
+    "prefix": "getopts",
+    "body": [
+      "if [[ \\$1 =~ ^- ]]; then",
+      "  while getopts \"${1:xxx_opt_letters}\" opt; do",
+      "    case \"\\${opt}\" in",
+      "      ${2:xxx_when}) ${3:xxx_todo};;$0",
+      "    esac",
+      "  done",
+      "  shift \\$((OPTIND - 1))",
+      "fi"
+    ]
+  },
+
+  "getopts when-with-arg insertion": {
+    "prefix": "csa",
+    "body": [
+      "${1:xxx_when}) ${2:xxx_var}=\\${OPTARG};;"
+    ]
+  },
+
+  "stage function": {
+    "prefix": "stg",
+    "body": [
+      "$0[[ \\${stages[@]} =~ \"xxx_stage_name\" ]] && do_xxx_stage_name () {",
+      "  xxx_todo",
+      "}"
+    ]
+  }
+}

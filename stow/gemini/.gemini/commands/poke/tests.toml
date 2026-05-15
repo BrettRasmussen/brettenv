@@ -1,0 +1,4 @@
+description = "Remind the AI to work with tests as it goes."
+prompt = """
+Remember to edit and create the related test, spec, and factory files as you develop the main code.
+"""

@@ -1,0 +1,38 @@
+The files in this directory are config files for Karabiner Elements, the OSX key-mapping software.
+
+These are mappings of the type that Karabiner calls "complex modifications". The way that works is
+that key mappings are defined in json configuration files that live in
+~/.config/karabiner/assets/complex_modifications. As long as the config files are syntactically
+valid (which sometimes proves a headache), the configuration GUI, called Karabiner Elements
+Preferences, will see the key mapping rules in that directory and allow you to turn them on and off
+from within the GUI. That looks like this: go to the "Complex Modifications" tab and click "Add
+rule". Any file in the complex_modifications directory that is syntactically correct will show up as
+a group of rules in that popup, with each rule defined under "rules" in the json file getting a line
+that can be enabled and disabled individually.
+
+What actually happens at the moment of "enable" is that Karabiner merges the enabled json configs
+into ~/.config/karabiner/karabiner.json, the main config file for a running Karabiner instance.
+Which means it's probably best to stick to separate json files in assets/complex_modifications and
+simply enable or disable from the gui, rather than editing karabiner.json directly.
+
+Because I use a Kinesis keyboard and also do tons of stuff on the command line, including vim
+editing, life is a little tricky on OSX. Specifically, I want both control keys on my keyboard to
+act as command keys, but that takes away the ability to use control keys in the terminal. My
+solution is to use Karabiner's simultaneous keypress feature to map the middle+ring lower row keys
+on both sides (x+c and comma+period) to act as control keys.
+
+command_control.json is for remappping control to command, middle+ring combos to control, and, if
+desired, caps_lock to control.
+
+app_launchers.json sets up the shortcut keys to launch my favorite applications using
+cmd+opt+some_key. Since OSX generally distinguishes between switching to an app and opening up a new
+window in that app, I like to have the exact same key combinations as switch to an app also open up
+a new window once in that app (for those apps where opening up numerous windows is relevant). That
+way I can switch to an app and then immediately hit the same keys to open a window if I so desire.
+app_launchers.json sets the key combos for everywhere except within the given app, and
+app_new_window.json sets the same key combos for within it.
+
+private.xml is an old configuration file in the previous Karabiner format. It is useless now, but it
+contains a whole bunch of config stuff I had to work out, addressing some complex questions about
+what mappings had to be established in what order to make it all function, and it can serve as a
+reference for what might arise in the future. Thankfully, the new setup is much less complicated.

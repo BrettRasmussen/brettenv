@@ -1,0 +1,153 @@
+{
+  "multiline if": {
+    "prefix": "if",
+    "body": [
+      "if (${1:xxx_cond}) {",
+      "  ${2:xxx_todo}",
+      "}$0"
+    ]
+  },
+
+  "multiline if-else": {
+    "prefix": "ife",
+    "body": [
+      "if (${1:xxx_cond}) {",
+      "  ${2:xxx_todo}",
+      "} else {",
+      "  ${3:xxx_todo}",
+      "}$0"
+    ]
+  },
+
+  "for loop": {
+    "prefix": "for",
+    "body": [
+      "for (${1:xxx_const} ${2:xxx_elem} of ${3:xxx_array}) {",
+      "  ${4:xxx_todo}",
+      "}$0"
+    ]
+  },
+
+  "anonymous function": {
+    "prefix": "fn",
+    "body": [
+      "function(${1:xxx_params}) {",
+      "  ${2:xxx_todo}",
+      "}$0"
+    ]
+  },
+
+  "named function": {
+    "prefix": "fnn",
+    "body": [
+      "function ${1:xxx_name}(${2:xxx_params}) {",
+      "  ${3:xxx_todo}",
+      "}$0"
+    ]
+  },
+
+  "anonymous function assigned by equals": {
+    "prefix": "fne",
+    "body": [
+      "${1:xxx_name} = function(${2:xxx_params}) {",
+      "  ${3:xxx_todo}",
+      "}$0"
+    ]
+  },
+
+  "object key function": {
+    "prefix": "fnk",
+    "body": [
+      "${1:xxx_name}(${2:xxx_params}) {",
+      "  ${3:xxx_todo}",
+      "},$0"
+    ]
+  },
+
+  "object value function": {
+    "prefix": "fnv",
+    "body": [
+      "${1:xxx_name}: function(${2:xxx_params}) {",
+      "  ${3:xxx_todo}",
+      "},$0"
+    ]
+  },
+
+  "multiline arrow function": {
+    "prefix": "fna",
+    "body": [
+      "${1:xxx_param} => {",
+      "  ${2:xxx_todo}",
+      "},$0"
+    ]
+  },
+
+  "single-line arrow function": {
+    "prefix": "fns",
+    "body": [
+      "${1:xxx_param} => $0"
+    ]
+  },
+
+  "object key & value arrow function": {
+    "prefix": "fnr",
+    "body": [
+      "${1:xxx_name}: ${2:xxx_param} => {",
+      "  ${3:xxx_todo}",
+      "},$0"
+    ]
+  },
+
+  "single-line anonymous arrow argument function": {
+    "prefix": "(-",
+    "body": [
+      "(${1:xxx_param} => $2)$0"
+    ]
+  },
+
+  "multiline anonymous arrow argument function": {
+    "prefix": "(_",
+    "body": [
+      "(${1:xxx_param} => {",
+      "  ${2:xxx_todo}",
+      "})$0"
+    ]
+  },
+
+  "2nd-argument multiline function": {
+    "prefix": "(&",
+    "body": [
+      "(${1:xxx_param}, function(${2:xxx_param}) {",
+      "  ${3:xxx_todo}",
+      "})$0"
+    ]
+  },
+
+  "switch statement": {
+    "prefix": "switch",
+    "body": [
+      "switch (${1:xxx_expr}) {",
+      "  case ${2:xxx_cond}:",
+      "    ${3:xxx_todo}",
+      "    break",
+      "}$0"
+    ]
+  },
+
+  "case in switch": {
+    "prefix": "case",
+    "body": [
+      "case ${1:xxx_cond}:",
+      "  ${2:xxx_todo}",
+      "  break",
+      "}$0"
+    ]
+  },
+
+  "console log line": {
+    "prefix": "cl",
+    "body": [
+      "console.log(`$1`)$0"
+    ]
+  }
+}

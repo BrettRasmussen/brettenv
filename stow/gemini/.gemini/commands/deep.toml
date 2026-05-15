@@ -1,0 +1,9 @@
+description = "Get an in-depth response to a question."
+prompt = """
+Do a deep dive into the following question and give me an in-depth response whereby I can understand
+the main concepts, the important nuances, and any trade-offs that might be relevant. Take no action
+except what is necessary to answer the question, but do freely read files and execute web and
+documentation searches as you deem necessary to answer the question. Do not maintain this practice
+after this question unless explicitly asked again. Here is the question:
+{{args}}
+"""

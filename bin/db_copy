@@ -1,0 +1,360 @@
+#!/usr/bin/env ruby
+
+# Script to automate the various command-line commands used for copying postgres databases around in
+# a heroku-based project. The copying can happen between heroku servers, from a heroku database to a
+# local, or between local databases. Remote sources and targets are heroku app names to which you
+# have access. Local sources are either names of databases in your local postgres installation or
+# local paths to database dump files. Local targets are names of databases in your local postgres
+# installation. If your target is a local database, you'll need to handle by hand any dropping or
+# creating of that database in postgres you see necessary before running this command. Copying
+# between local databases will automatically cause a pg_dump operation on the source (the local
+# "capture"), so specifying capture on the command line in that case is unnecessary. Local-to-remote
+# copy is not supported. If specified, the --migrate, --company-reduce, --set-alt-passwords, and
+# --delete-dumpfile operations happen after the copying is done, and if needed they look in
+# database.yml for the RAILS_ENV and TEST_ENV_NUMBER of the specified database. In the script itself
+# is a PROHIBITED_TARGETS list that you can use to specify any target you want the script to refuse
+# to overwrite, which is useful for preventing someone from accidentally overwriting, say, the
+# production database.
+
+require 'delegate'
+require 'open3'
+require 'optparse'
+require 'psych'
+require 'erb'
+
+class DbCopy
+  class Loc < SimpleDelegator
+    # A class that acts like a string--specifically a source or a target--but
+    # that includes some extra convenience methods.
+    def initialize(name, type)
+      name ||= ""
+      super(name)
+      @type = type
+    end
+
+    def remote?
+      @type == :remote
+    end
+
+    def local?
+      @type == :local
+    end
+
+    def local_file?
+      self.local? && File.file?(self)
+    end
+
+    def local_exists?
+      return false if !self.local?
+      res = Open3.capture3("psql -d #{self} -c ''")[1]
+      database_found = !res.match(/database "\S+" does not exist/)
+      file_found = self.local_file?
+      database_found || file_found
+    end
+
+    def present?
+      !self.strip.empty?
+    end
+  end
+
+  PROHIBITED_TARGETS = {
+    remote: %w[],
+    local: %w[]
+  }
+
+  def initialize(argv)
+    @argv = argv
+
+    # These will get overwritten during option parsing.
+    @source = Loc.new(nil, nil)
+    @target = Loc.new(nil, nil)
+    @dumpfile = "latest.dump"
+
+    parse_options
+    set_rails_env
+    check_conditions
+    set_commands
+  end
+
+  # Sets up a list of all possible commands, from which will later be selected just the ones to run.
+  def set_commands
+    @commands = {
+      maintenance_on: {cmd: "heroku maintenance:on --app #{@target}"},
+      maintenance_off: {cmd: "heroku maintenance:off --app #{@target}"},
+      remote_capture: {cmd: "heroku pg:backups:capture --app #{@source}"},
+      local_capture: {cmd: "pg_dump -F custom -f #{@dumpfile} #{@source}"},
+      download: {cmd: "heroku pg:backups:download --app #{@source} -o #{@dumpfile}"},
+      copy_to_remote: {
+        cmd: "heroku pg:backups:restore $(heroku pg:backups:url --app #{@source}) DATABASE_URL --app #{@target}"
+      },
+      copy_to_local: {
+        cmd: "pg_restore --verbose --clean --no-acl --no-owner -d #{@target} #{@dumpfile}",
+        success_statuses: [0, 1],
+      },
+      remote_migrate: {cmd: "heroku run rake db:migrate --app #{@target}"},
+      local_migrate: {cmd: railsenv_command("rake db:migrate")},
+      remote_reduce: {cmd: "heroku run rake db:company_reduce --app #{@target}"},
+      local_reduce: {cmd: railsenv_command("rake db:company_reduce")},
+      remote_alt_passwords: {cmd: "heroku run rake db:set_alt_passwords --app #{@target}"},
+      local_alt_passwords: {cmd: railsenv_command("rake db:set_alt_passwords")},
+      delete_dumpfile: {cmd: "rm #{@dumpfile}"},
+    }
+  end
+
+  def parse_options
+    @options = {}
+    OptionParser.new do |opts|
+      opts.banner = <<~EOS
+        Usage:
+            db_copy [-c|-M|-m|-r|-p] -S remote_source -T remote_target
+            db_copy [-c|-m|-r|-p|-b] -S remote_source -t local_target
+            db_copy [-m|-r|-p|-b] -s local_source -t local_target
+            db_copy -d [-c] -S remote_source
+
+      EOS
+
+      opts.on("-S", "--remote-source [SOURCE]", "Name of heroku app whose database to copy.") do |val|
+        @source = Loc.new(val, :remote)
+      end
+
+      opts.on("-s", "--local-source [SOURCE]", "Name of local postgres database to copy",
+                                               "or dumpfile to import.") do |val|
+        @source = Loc.new(val, :local)
+      end
+
+      opts.on("-T", "--remote-target [TARGET]", "Name of heroku app whose database to", "overwrite.") do |val|
+        @target = Loc.new(val, :remote)
+      end
+
+      opts.on("-t", "--local-target [TARGET]", "Name of local database to overwrite.") do |val|
+        @target = Loc.new(val, :local)
+      end
+
+      opts.on("-c", "--capture", "Perform capture on remote source before", "copying.") do
+        @options[:capture] = true
+      end
+
+      opts.on("-M", "--maintenance", "Put target server into maintenance mode", "while copying.") do
+        @options[:maintenance] = true
+      end
+
+      opts.on("-d", "--download", "Perform only the download of the dumpfile", "from the source.") do
+        @options[:download] = true
+      end
+
+      opts.on("-f", "--dumpfile [FILE]", "Name of the database dump file to use on",
+                                         "the local system. Will be written to for",
+                                         "the download and read from for the import.",
+                                         "Default: latest.dump") do |filename|
+        @dumpfile = filename
+      end
+
+      opts.on("-m", "--migrate", "Run rake db:migrate on the target database.") do
+        @options[:migrate] = true
+      end
+
+      opts.on("-r", "--company-reduce", "Run rake db:company_reduce on the target", "database.") do
+        @options[:company_reduce] = true
+      end
+
+      opts.on("-a", "--set-alt-passwords", "Run rake db:set_alt_passwords for the", "target database.") do
+        @options[:set_alt_passwords] = true
+      end
+
+      opts.on("-b", "--use-bundler", "Prefix local rake commands with \"bundle exec\".") do
+        @options[:use_bundler] = true
+      end
+
+      opts.on("-x", "--delete-dumpfile", "Delete the dumpfile upon completion.") do
+        @options[:delete_dumpfile] = true
+      end
+
+      opts.on("-p", "--prompt-for-go", "Show a list of commands and ask for",
+                                       "confirmation before running the commands.") do
+        @options[:prompt_for_go] = true
+      end
+
+      opts.on("-n", "--dry-run", "Check conditions and list the commands that",
+                                 "would be run, but don't run them.") do
+        @options[:dry_run] = true
+      end
+    end.parse(@argv)
+  end
+
+  def check_conditions
+    case
+    when @argv.select {|arg| arg.downcase == "-s"}.size > 1
+      raise "Please provide only one source."
+    when @argv.select {|arg| arg.downcase == "-t"}.size > 1
+      raise "Please provide only one target."
+    when ((@target.remote? && PROHIBITED_TARGETS[:remote].include?(@target)) ||
+        (@target.local? && PROHIBITED_TARGETS[:local].include?(@target)))
+      raise "Can't use #{@target} as a target."
+    when @source.local? && !@source.local_exists?
+      raise "Local database or dumpfile #{@source} does not exist."
+    when @target.local? && !@target.local_exists?
+      raise "Local postgres database #{@target} does not exist."
+    when @source.local_file? && @options[:capture]
+      raise "Can't use a source dumpfile and --capture together. There's nothing to capture."
+    when @source.local_file? && @options[:download]
+      raise "Can't use a source dumpfile and --download together."
+    when @options[:download] && @options[:migrate]
+      raise "--download and --migrate can't be used together."
+    when @options[:download] && @options[:company_reduce]
+      raise "--download and --company-reduce can't be used together."
+    when @options[:download] && @options[:set_alt_passwords]
+      raise "--download and --set-alt-passwords can't be used together."
+    when @source.local? && @target.remote?
+      raise "Local-to-remote copying is not supported."
+    when @source.local_file? && !@target.present?
+      raise "Copying from a source dumpfile requires a local target."
+    when @options[:capture] && !@source.present?
+      raise "--capture requires a source (local or remote)."
+    when @options[:maintenance] && @target.local?
+      raise "Can't turn on maintenance mode on a local target."
+    when @options[:download] && (!@source.present? || @source.local? || @target.present?)
+      raise "--download needs a remote source and no target."
+    when ((@source.remote? && @target.local?) || @options[:download]) && File.file?(@dumpfile)
+      raise "Need to download #{@dumpfile} but one already exists. Please move/delete it."
+    when @options[:migrate] && !@target.present?
+      raise "--migrate requires a target (local or remote)."
+    when @options[:company_reduce] && !@target.present?
+      raise "--company-reduce requires a target (local or remote)."
+    when @options[:set_alt_passwords] && !@target.present?
+      raise "--set-alt-passwords requires a target (local or remote)."
+    when @target.local? && @rails_env.nil? &&
+        (@options[:migrate] || @options[:company_reduce] || @options[:set_alt_passwords])
+      raise "Couldn't find a RAILS_ENV with database #{@target}."
+    when @source.local? && !@source.local_file? && @target.local?
+      @options[:capture] = true
+    when @source.local_file? && @target.local?
+      @dumpfile = @source
+    end
+  rescue => msg
+    exit_with_message(msg)
+  end
+
+  def exit_with_message(msg)
+    puts msg
+    exit(1)
+  end
+
+  def run
+    pick_commands
+
+    case
+    when @options[:dry_run]
+      show_commands("The following commands would be run:")
+    when @options[:prompt_for_go]
+      show_commands("The following commands will be run:")
+      prompt_for_go
+      run_commands
+    else
+      run_commands
+    end
+  end
+
+  # Selects from the available commands those that will actually be run (or simulated) based on the
+  # conditions established by the user. These will be in the correct final order.
+  def pick_commands
+    @do_commands = []
+    if @options[:capture]
+      @do_commands << (@source.remote? ? @commands[:remote_capture] : @commands[:local_capture])
+    end
+    @do_commands << @commands[:maintenance_on] if @options[:maintenance]
+
+    case
+    when @options[:download]
+      @do_commands << @commands[:download]
+    when @source.remote? && @target.remote?
+      @do_commands << @commands[:copy_to_remote]
+    when @source.remote? && @target.local?
+      @do_commands << @commands[:download]
+      @do_commands << @commands[:copy_to_local]
+    when @source.local? && @target.local?
+      @do_commands << @commands[:copy_to_local]
+    end
+
+    if @options[:migrate]
+      @do_commands << (@target.remote? ? @commands[:remote_migrate] : @commands[:local_migrate])
+    end
+    if @options[:set_alt_passwords]
+      @do_commands << (@target.remote? ? @commands[:remote_alt_passwords] : @commands[:local_alt_passwords])
+    end
+    if @options[:company_reduce]
+      @do_commands << (@target.remote? ? @commands[:remote_reduce] : @commands[:local_reduce])
+    end
+    @do_commands << @commands[:maintenance_off] if @options[:maintenance]
+    @do_commands << @commands[:delete_dumpfile] if @options[:delete_dumpfile]
+  end
+
+  def prompt_for_go
+    puts "Continue? [y/n]: "
+    answer = STDIN.gets.chomp
+    exit_with_message("Quitting.") if answer != "y"
+  end
+
+  def run_commands
+    @do_commands.each.with_index do |command, idx|
+      success_statuses = command[:success_statuses] || [0]
+      cmd = command[:cmd]
+      puts "-" * 80
+      puts "executing: #{cmd}"
+      system(cmd)
+      if !success_statuses.include?($?.exitstatus)
+        puts
+        puts "\e[31m----- LAST COMMAND FAILED! -----\e[0m"
+        show_commands("The following is still left to be done:", idx)
+        break
+      end
+      puts
+    end
+  end
+
+  # Takes a command that needs the RAILS_ENV and possibly TEST_ENV_NUMBER environment variables set
+  # in order to run, and pieces the full command together. Especially useful for rake commands and
+  # the like.
+  def railsenv_command(cmd)
+    railsenv_cmd = "RAILS_ENV=#{@rails_env}"
+    railsenv_cmd += " bundle exec" if @options[:use_bundler]
+    railsenv_cmd += " TEST_ENV_NUMBER=#{@test_env_number}" if @test_env_number
+    railsenv_cmd + " #{cmd}"
+  end
+
+  # Figures out the local rails environment that uses the @target database, and sets the @rails_env
+  # and if need be @test_env_number instance variables to be used later for commands that need
+  # RAILS_ENV and TEST_ENV_NUMBER environment variables when run.
+  def set_rails_env
+    db_yml = File.expand_path(File.dirname(__FILE__)) + "/../config/database.yml"
+    db_config = Psych.load_file(db_yml)
+    db_config.each do |rails_env, config|
+      next if !config["database"]
+      database_erb = ERB.new(config["database"])
+      if @target.include?("test")
+        ["", *0..10].each do |n|
+          ENV["TEST_ENV_NUMBER"] = n.to_s  # affects what's in database_erb.result
+          if database_erb.result == @target
+            @rails_env = rails_env
+            @test_env_number = n if n.is_a?(Integer)
+            return
+          end
+        end
+      elsif database_erb.result == @target
+        @rails_env = rails_env
+        return
+      end
+    end
+  end
+
+  def show_commands(message = nil, idx = 0)
+    if @do_commands.empty?
+      puts "Nothing to do."
+    else
+      puts message if message
+      @do_commands[idx..-1].each {|command| puts "  #{command[:cmd]}"}
+    end
+  end
+end
+
+DbCopy.new(ARGV).run
+

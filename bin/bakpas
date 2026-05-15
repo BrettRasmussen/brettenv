@@ -1,0 +1,141 @@
+#!/usr/bin/env zsh
+
+setopt EXTENDED_GLOB
+
+DRYRUN=false
+BAKDIR="./.bakpas"
+
+help_text=$(cat << EOF
+available actions---------------------------------
+  bp - backup & paste
+  b - backup only
+  p - paste only
+  bc - backup to canonical
+  mc - mark canonical backup
+  rb - restore a backup
+  x - delete all backups except canonical
+  r - repeat the last action with the last file
+  h - show this help text
+  q - quit
+--------------------------------------------------
+EOF
+)
+echo "${help_text}"
+echo
+
+source "${BAKDIR}/000_files.env"
+
+showrun_cmd () {
+  echo "  ${1}"
+  [[ ! $DRYRUN == "true" ]] && eval $2
+}
+
+backup_canonical () {
+  filepath=$1
+  filename=${1:t}
+  bakpath="${BAKDIR}/${filename}.0"
+  showrun_cmd "  Backing up ${filepath} to ${bakpath}" "cp ${filepath} ${bakpath}"
+}
+
+backup () {
+  filepath=$1
+  filename=${1:t}
+  counter=1
+  bakpath="${BAKDIR}/${filename}.${counter}"
+  while [[ -e "$bakpath" ]]; do
+    ((counter++))
+    bakpath="${BAKDIR}/${filename}.${counter}"
+  done
+  showrun_cmd "  Backing up ${filepath} to ${bakpath}" "cp ${filepath} ${bakpath}"
+}
+
+paste_cb () {
+  filepath=$1
+  showrun_cmd "  Pasting clipboard to ${filepath}" "pbpaste > ${filepath}"
+}
+
+restore () {
+  filepath=$1
+  filename=${1:t}
+  ls -l $BAKDIR/$filename*
+  read "baknum?backup number to restore: "
+  bakpath="${BAKDIR}/${filename}.${baknum}"
+  showrun_cmd "  Recovering ${filepath} from ${bakpath}" "cp ${bakpath} ${filepath}"
+}
+
+mark () {
+  filepath=$1
+  filename=${1:t}
+  echo "This copies one backup to .0 to keep as the 'canonical' one."
+  ls -l $BAKDIR/$filename*
+  read "baknum?backup number to mark: "
+  bakpath="${BAKDIR}/${filename}.${baknum}"
+  markpath="${BAKDIR}/${filename}.0"
+  showrun_cmd "Marking ${bakpath} as ${markpath}." "cp ${bakpath} ${markpath}"
+}
+
+delete_baks () {
+  filepath=$1
+  filename=${1:t}
+  bakpath="${BAKDIR}/${filename}"
+  showrun_cmd "Removing all ${filename} backups besides ${filename}.0" "rm ${bakpath}.^0"
+}
+
+set_action () {
+  if [[ $repeat_state == 1 ]]; then
+    repeat_state=2
+    action=$last_action
+  else
+    read "action?action: "
+    [[ $action != "r" && $action != "h" ]] && last_action=$action
+  fi
+}
+
+set_file () {
+  if [[ $repeat_state == 2 ]]; then
+    file=$last_file
+  else
+    local choice
+    for i in {1..${#FILES[@]}}; do
+      printf "%d) %s\n" "$i" "${FILES[$i]}" >&2
+    done
+    print -n "Select a file: " >&2
+    read choice
+    if [[ "$choice" -ge 1 && "$choice" -le "${#FILES[@]}" ]]; then
+      last_file="${FILES[$choice]}"
+      file=$last_file
+    fi
+  fi
+}
+
+repeat_state=0
+last_action=""
+last_file=""
+
+while true; do
+  local action=""
+  local file=""
+
+  set_action
+
+  file_actions=(bp b p bc mc rb x)
+  if [[ -n ${file_actions[(r)$action]} ]]; then
+    set_file
+  fi
+
+  case $action in
+    bp) backup "${file}" && paste_cb "${file}";;
+    b) backup "${file}";;
+    p) paste_cb "${file}";;
+    bc) backup_canonical "${file}";;
+    mc) mark "${file}";;
+    rb) restore "${file}";;
+    x) delete_baks "${file}";;
+    r) repeat_state=1;;
+    h) echo "${help_text}";;
+    q) exit;;
+  esac
+
+  [[ $repeat_state != 1 ]] && echo
+  [[ $repeat_state == 2 ]] && repeat_state=0
+done

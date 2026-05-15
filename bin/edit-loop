@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+do_show_help () {
+echo "
+  edit-loop: Repeatedly open up the files given on the command line in your
+  \$EDITOR until you hit ctrl+c. Useful for developing your editor, snippets,
+  shell environment, and the like: edit some config file in its own terminal
+  window, save a change, come back to the window running edit-loop, exit your
+  \$EDITOR, watch it auto-reopen, and look to see what effect your change had.
+
+  Usage:
+    $ edit-loop file1 file2 ...
+    $ EDITOR="nvim -p -u path/to/init.vim" edit-loop file1 file2 ...
+
+  Options:
+    -h: Show this help text.
+"
+exit
+}
+
+while true; do
+  $EDITOR $@
+  echo 'ctrl+c now to exit'
+  sleep 1
+done

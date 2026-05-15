@@ -1,0 +1,6 @@
+description = "Use shell utilities for now."
+prompt = """
+From now on in this session, use only native shell utilities (cat, ls, etc.) for filesystem reading,
+querying and manipulation, instead of internal AI chatbot tools (read_file, glob, replace, etc.).
+Maintain this practice until either you receive a "/sh:off" command or the session is ended.
+"""

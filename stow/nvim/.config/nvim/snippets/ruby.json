@@ -1,0 +1,215 @@
+{
+  "hashbang ruby": {
+    "prefix": "#!",
+    "body": [
+      "#!/usr/bin/env ruby",
+      "$0"
+    ]
+  },
+
+  "byebug debugging breakpoint": {
+    "prefix": "bb",
+    "body": ["if ${1:true}; require 'byebug'; byebug; end$0"]
+  },
+
+  "rspec test": {
+    "prefix": "it",
+    "body": [
+      "it \"${1:spec name}\" do$0",
+      "end"
+    ]
+  },
+
+  "puts string": {
+    "prefix": "ps",
+    "body": [
+      "puts \"${1:xxx_string}$0\""
+    ]
+  },
+
+  "puts value": {
+    "prefix": "pv",
+    "body": [
+      "puts \"${1:xxx_val}: #{$1}$0\""
+    ]
+  },
+
+  "add value to puts": {
+    "prefix": "pva",
+    "body": [
+      "${1:xxx_val}: #{$1}$0"
+    ]
+  },
+
+  "do..end block": {
+    "prefix": "do",
+    "body": [
+      "do$0",
+      "end"
+    ]
+  },
+
+  "do..end w/variable": {
+    "prefix": "dov",
+    "body": [
+      "do |${1:xxx_var}|$0",
+      "end"
+    ]
+  },
+
+  "block": {
+    "prefix": "b",
+    "body": ["{${1:|${2:xxx_var}| }$0}"]
+  },
+
+  "multiline if": {
+    "prefix": "if",
+    "body": [
+      "if ${1:xxx_cond}$0",
+      "end"
+    ]
+  },
+
+  "if..else": {
+    "prefix": "ife",
+    "body": [
+      "if ${1:xxx_cond}$2",
+      "else$0",
+      "end"
+    ]
+  },
+
+  "elsif insertion": {
+    "prefix": "eif",
+    "body": ["elsif ${1:xxx_cond}$0"]
+  },
+
+  "def <name>...": {
+    "prefix": "def",
+    "body": [
+      "def ${1:xxx_name}${2:(${3:*args})}$0",
+      "end"
+    ]
+  },
+
+  "def <name> ... rescue ...": {
+    "prefix": "defr",
+    "body": [
+      "def ${1:xxx_name}${2:(${3:*args})}$4",
+      "rescue$0",
+      "end"
+    ]
+  },
+
+  "until <expression> ... end": {
+    "prefix": "until",
+    "body": [
+      "until ${1:xxx_expr}$0",
+      "end"
+    ]
+  },
+
+  "begin ... end until <expression>": {
+    "prefix": "Until",
+    "body": [
+      "begin$0",
+      "end until ${1:xxx_expr}"
+    ]
+  },
+
+  "while <expression> ... end": {
+    "prefix": "while",
+    "body": [
+      "while ${1:xxx_expr}$0",
+      "end"
+    ]
+  },
+
+  "begin ... end while <expression>": {
+    "prefix": "While",
+    "body": [
+      "begin$0",
+      "end while ${1:xxx_expr}"
+    ]
+  },
+
+  "begin ... rescue ... end": {
+    "prefix": "begin",
+    "body": [
+      "begin$1",
+      "rescue$0",
+      "end"
+    ]
+  },
+
+  "rescue": {
+    "prefix": "rescue",
+    "body": [
+      "rescue Exception => e",
+      "  puts e.message",
+      "  puts e.backtrace.inspect${0:# Rescue}"
+    ]
+  },
+
+  "case statement": {
+    "prefix": "cs",
+    "body": [
+      "case ${1:xxx_var}$0",
+      "when ${2:xxx_expr}",
+      "  ${3:xxx_todo}",
+      "else",
+      "  ${4:xxx_todo}",
+      "end"
+    ]
+  },
+
+  "case when insertion": {
+    "prefix": "csw",
+    "body": [
+      "when ${1:xxx_expr}",
+      "  ${2:xxx_todo}"
+    ]
+  },
+
+  "case else insertion": {
+    "prefix": "cse",
+    "body": [
+      "else",
+      "  ${1:xxx_todo}"
+    ]
+  },
+
+  "case statement one-line mode": {
+    "prefix": "cs1",
+    "body": [
+      "case ${1:xxx_var}$0",
+      "when ${2:xxx_expr} then ${3:xxx_todo}",
+      "else ${4:xxx_todo}",
+      "end"
+    ]
+  },
+
+  "case statement one-line when insertion": {
+    "prefix": "cs1w",
+    "body": [
+      "when ${1:xxx_expr} then ${2:xxx_todo}"
+    ]
+  },
+
+  "case statement one-line else insertion": {
+    "prefix": "cs1e",
+    "body": [
+      "else ${1:xxx_todo}"
+    ]
+  },
+
+  "class <class_name> def initialize ... end end": {
+    "prefix": "class",
+    "body": [
+      "class ${1:xxx_name}",
+      "  def initialize(${2:*args})$0",
+      "  end",
+      "end"
+    ]
+  }
+}

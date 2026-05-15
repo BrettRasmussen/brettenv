@@ -1,0 +1,40 @@
+#---------------------------------------------------------------------------------------------------
+# bash shell config file. NOTE: My new preferred shell is zsh. This file is still around for those
+# rare cases where I still need to use bash. Normally, just ignore this file and look in zshrc
+# instead.
+#---------------------------------------------------------------------------------------------------
+
+# prompt with git branch displayed
+__git_ps1 ()
+{
+  local b="$(git symbolic-ref HEAD 2>/dev/null)"
+  if [ -n "$b" ]; then
+    if [ -n "$1" ]; then
+      printf "$1" "${b##refs/heads/}"
+    else
+      printf " (%s)" "${b##refs/heads/}"
+    fi
+  fi
+}
+
+# customized prompt.
+# basic alternative, in case something goes wrong:
+#   export PS1='[\u@\h:\W]$ '
+# or the colorized, git-aware version:
+export PS1="\[\033[38;5;222m\][\u@\h:\W]\$(__git_ps1 '(%s)')$\[\033[00m\] "
+
+# use vi mode for bash. set vi mode for *all* readline programs--bash, irb, etc--with "set
+# editing-mode vi" in inputrc. keeping this here for when no inputrc is around (docker image?).
+set -o vi
+
+# case-insensitive globbing in bash
+shopt -s nocaseglob
+
+# include timestamps with command history
+export HISTTIMEFORMAT='(%F %T) '
+
+# set the aliases
+[[ -f "${HOME}/.brettenv/aliases" ]] && source "${HOME}/.brettenv/aliases"
+
+# set the environment variables
+[[ -f "${HOME}/.brettenv/env_vars" ]] && source "${HOME}/.brettenv/env_vars"

@@ -1,0 +1,8 @@
+description = "Remind the AI about coding conventions."
+prompt = """
+Remind yourself of my instructions about the following:
+* code indentation
+* maximum textwidth in code files
+* trailing whitespace
+* end-of-file newlines
+"""

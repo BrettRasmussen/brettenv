@@ -1,0 +1,5 @@
+description = "Remind the AI about mode rules."
+prompt = """
+Remind yourself of the following from my global "Core Instructions":
+* Modes
+"""

@@ -1,0 +1,6 @@
+description = "Set architecture mode."
+prompt = """
+We are now in architecture mode. Immediately remind yourself of my "Architecture Mode" instructions
+under "Specific Mode Instructions" under "Modes" of my "Core Instructions" and abide by those rules
+until I switch you to a different mode.
+"""

@@ -1,0 +1,26 @@
+[env]
+TERM = "xterm-256color"
+
+[window]
+option_as_alt = "Both"
+dimensions = { columns = 110, lines = 45 }
+padding = { x = 5, y = 5 }
+
+[font]
+# NOTE: Alacritty has bolder-looking fonts than other terminals by default. The fix:
+#   prompt$ defaults write org.alacritty AppleFontSmoothing -int 0
+normal.family = "Agave Nerd Font Mono"
+bold.family = "Agave Nerd Font Mono"
+italic.family = "Agave Nerd Font Mono"
+bold_italic.family = "Agave Nerd Font Mono"
+size = 18.0
+
+[mouse]
+hide_when_typing = true
+
+[keyboard]
+bindings = [
+  { key = "ArrowLeft", mods = "Command|Alt", action = "SelectPreviousTab" },
+  { key = "ArrowRight", mods = "Command|Alt", action = "SelectNextTab" },
+  { key = "N", mods = "Command", action = "CreateNewWindow" },
+]

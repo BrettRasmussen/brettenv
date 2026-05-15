@@ -1,0 +1,5 @@
+#command
+\ej forw-scroll
+\ek back-scroll
+^[J forw-line
+^[K back-line

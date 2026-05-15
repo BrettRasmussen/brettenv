@@ -1,0 +1,5 @@
+description = "Save the last AI response as a note."
+prompt = """
+Remind yourself of my global "Notes" instructions and save the very most recent response you gave me
+as a "last_response"-style note.
+"""
