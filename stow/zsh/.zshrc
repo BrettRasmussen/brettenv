@@ -1,7 +1,7 @@
 # ~/.zshrc (managed by GNU Stow from ~/.brettenv)
 
 # Only execute for interactive shells
-if [[ -n "$PS1" ]]; then
+if [[ -o interactive ]]; then
 
   # 1. Source the main environment payload
   if [[ -f "$HOME/.brettenv/zshrc.main" ]]; then
