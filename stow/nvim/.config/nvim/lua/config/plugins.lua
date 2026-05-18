@@ -273,7 +273,16 @@ local plugins = {
   { "tpope/vim-repeat" },
   { "easymotion/vim-easymotion" },
   { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
-  { "jessekelighine/vindent.vim", init = function() vim.g.vindent_jumps = 1 end },
+  {
+    "echasnovski/mini.indentscope",
+    version = "*",
+    config = function()
+      require("mini.indentscope").setup({
+        symbol = "│",
+        options = { try_as_border = true },
+      })
+    end,
+  },
   { "AndrewRadev/splitjoin.vim" },
   {
     "andymass/vim-matchup",
