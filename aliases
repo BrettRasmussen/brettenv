@@ -74,6 +74,7 @@ alias gsh='git show'
 alias gst='git stash'
 alias gstl='git stash list'
 alias gstp='git stash pop'
+alias gsw='git switch'
 
 # echo commonly looked-at ruby-related environment variables
 alias sgh='echo $GEM_HOME'
