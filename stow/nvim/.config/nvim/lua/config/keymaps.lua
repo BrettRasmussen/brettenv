@@ -28,19 +28,41 @@ keymap({ "n", "i", "v" }, "<m-h>", function()
   bullets.unindent(vim.api.nvim_get_mode().mode)
 end, { desc = "Bullet/Normal Unindent" })
 
--- buffer & tab switching
-keymap("n", "<m-y>", ":tabp<cr>", { desc = "Previous tab" })
-keymap("n", "<m-o>", ":tabn<cr>", { desc = "Next tab" })
-keymap("v", "<m-y>", "<esc>:tabp<cr>", { desc = "Previous tab" })
-keymap("v", "<m-o>", "<esc>:tabn<cr>", { desc = "Next tab" })
-keymap("i", "<m-y>", "<c-o>:tabp<cr>", { desc = "Previous tab" })
-keymap("i", "<m-o>", "<c-o>:tabn<cr>", { desc = "Next tab" })
-keymap("n", "<m-6>", "<c-6>")
-keymap("n", "<m-5>", function()
-  if vim.g.lasttab then
-    vim.cmd("tabn " .. vim.g.lasttab)
+local function cycle_prev()
+  if vim.fn.tabpagenr("$") > 1 then
+    vim.cmd("tabp")
+  else
+    vim.cmd("bp")
   end
-end, { desc = "Jump to last tab" })
+end
+
+local function cycle_next()
+  if vim.fn.tabpagenr("$") > 1 then
+    vim.cmd("tabn")
+  else
+    vim.cmd("bn")
+  end
+end
+
+local function toggle_recent()
+  if vim.fn.tabpagenr("$") > 1 then
+    if vim.g.lasttab then
+      vim.cmd("tabn " .. vim.g.lasttab)
+    end
+  else
+    -- Equivalent to <c-6> or <c-^> for buffers
+    vim.cmd("e #")
+  end
+end
+
+-- buffer & tab switching
+keymap("n", "<m-y>", cycle_prev, { desc = "Previous tab/buffer" })
+keymap("n", "<m-o>", cycle_next, { desc = "Next tab/buffer" })
+keymap("v", "<m-y>", "<cmd>lua cycle_prev()<cr>", { desc = "Previous tab/buffer" })
+keymap("v", "<m-o>", "<cmd>lua cycle_next()<cr>", { desc = "Next tab/buffer" })
+keymap("i", "<m-y>", "<c-o><cmd>lua cycle_prev()<cr>", { desc = "Previous tab/buffer" })
+keymap("i", "<m-o>", "<c-o><cmd>lua cycle_next()<cr>", { desc = "Next tab/buffer" })
+keymap("n", "<m-6>", toggle_recent, { desc = "Toggle last tab/buffer" })
 
 -- closing tabs & windows
 keymap("n", "<leader>w", ":q<cr>")
