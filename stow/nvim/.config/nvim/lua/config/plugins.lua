@@ -187,20 +187,14 @@ local plugins = {
   },
 
   -- FZF-Lua with Exclusions
-  { "junegunn/fzf", build = "./install --bin" },
   {
     "ibhagwan/fzf-lua",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
       require("fzf-lua").setup({
         winopts = { preview = { layout = "vertical" } },
-        file_ignore_patterns = {
-          "node_modules/", "%.git/", "%.DS_Store", "%.bakpas/", "%.devinfo/backups/",
-          "target/", "dist/", "build/", "%.o", "%.pyc",
-          "vendor/bundle/", "%.gemini_work/", "tmp/", "public/assets/", "public/ckeditor/",
-        },
         files = {
-          fd_opts = "--color=never --type f --hidden --follow --exclude .git --exclude node_modules",
+          fd_opts = "--color=never --type f --hidden --follow --ignore-file " .. vim.fn.expand("~/.fzfignore"),
         },
         buffers = {
           file_ignore_patterns = false,

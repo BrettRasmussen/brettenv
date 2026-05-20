@@ -19,6 +19,11 @@ export MANPAGER=less
 # settings for the "less" pager
 export LESS='-iRFMx4'
 
+# FZF default command (uses fd and a shared ignore file)
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --ignore-file ~/.fzfignore'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --ignore-file ~/.fzfignore'
+
 # colors for ls output
 export LSCOLORS="GxFxCxDxBxegedabagacad"
 

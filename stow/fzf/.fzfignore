@@ -1,0 +1,18 @@
+# FZF shared ignore patterns
+# Used by both command-line fzf and Neovim fzf-lua (via fd)
+
+node_modules/
+.git/
+.DS_Store
+.bakpas/
+.devinfo/backups/
+target/
+dist/
+build/
+*.o
+*.pyc
+vendor/bundle/
+.gemini_work/
+tmp/
+public/assets/
+public/ckeditor/
