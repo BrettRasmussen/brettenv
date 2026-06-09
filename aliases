@@ -46,6 +46,8 @@ alias htl='cd ~/tmp/loop'
 
 # neovim stuff
 alias nv='nvim'
+alias nvn='nv-notes'
+alias nvr='nv-read'
 
 # docker stuff
 alias dk='dkr'
