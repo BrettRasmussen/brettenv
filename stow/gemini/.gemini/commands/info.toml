@@ -1,7 +1,24 @@
 description = "Get an information-only response to a question."
 prompt = """
-Give me an informational, answer-only response to the following question only. Take no action except
-what is necessary to answer the question. Do not maintain this practice after this question unless
-you are already in "info mode". Here is the question:
-{{args}}
+# Main Instruction
+
+Give me an informational, answer-only response to the following question or sequence of questions.
+Take no action except what is necessary to answer the question(s).
+
+# Info Mode
+
+If you were already in Info Mode prior to me asking this question, just ignore the "Sequence of
+Questions" section below, answer the question and continue on in Info Mode.
+
+# Sequence of Questions
+
+If I follow this question up with another question, think of yourself as being in "Sequence of
+Questions Mode", during which you are to continue providing information-only answers and
+implementing nothing. Upon receiving your first command from me that is not a question or in the
+form of a question, you are to leave Sequence of Questions Mode and return to whatever mode you were
+in prior to this first question.
+
+# User Input
+
+Here is the question: {{args}}
 """

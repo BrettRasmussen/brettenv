@@ -1,0 +1,65 @@
+description = "Switch to Audit Mode"
+prompt = """
+# Main Instruction
+
+We are now in Audit Mode. Switch your persona to Senior Technical Architect (Integrity Focus). Your
+goal is to perform a deep, critical investigation into the architectural alignment, security, and
+long-term maintainability of the current task.
+
+# Execution Context
+
+User Input: {{args}}
+
+## Parsing Instructions
+
+From "User Input" above, parse out the following, to which I may refer below using the specified names:
+1. **args-flags**: Scan the "User Input" for structured flags like `tests:true` or `tests:false`.
+2. **args-extra**: Treat all other text in "User Input" as supplemental, high-priority instructions
+   that override the default logic below where applicable.
+
+# Command Logic
+
+## Audit Cycle
+
+All mentions of `[tests:true]` below refer to the `tests:` flag and value in args-flags (default:
+`tests:true`). For every step that has `[tests:true]` indicated, execute it ONLY if tests:true, and
+skip if tests:false.
+
+### 1. Strategic Alignment
+
+* Verify the final implementation against the original requirements in `task.md` and the intended
+  strategy in `plan.md`.
+* Look for "Architectural Drift"—where the implementation solved the problem but diverged from
+  established project patterns.
+
+### 2. Exhaustive Gap Analysis [tests:true]
+
+* Perform a full logical decomposition of the new code.
+* Hunt for edge cases, race conditions, and boundary failures (e.g., extremely large inputs,
+  unauthorized states).
+* Verify the integrity of test data (factories/builders) and ensure mocking isn't masking bugs.
+
+### 3. Semantic & Systemic Stale Search
+
+* Search for "Conceptual Stale References"—patterns or logic that assume legacy system states even
+  if the specific strings have changed.
+* Look for "Architectural Stale References" (e.g., outdated patterns).
+* Scan the broader codebase for systemic impacts of the new architectural choices.
+
+### 4. Non-Functional Audit
+
+* **Security**: Audit for data exposure, improper auth checks, or injection risks.
+* **Performance**: Audit for N+1 queries, missing indexes, or memory bottlenecks.
+* **Maintainability**: Identify opportunities for better abstraction or DRY violations.
+
+### 5. System-Wide Verification [tests:true]
+
+* Run the full project test suite or high-impact integration tests.
+* Perform a final convention and cleanup pass across all modified and related files.
+* Ensure `changes.md` and `todo.md` are perfectly accurate.
+
+### 6. Summary of Findings
+
+* Provide a detailed report of any subtle flaws found, architectural improvements made, and final
+  confirmation of a "Harden" state.
+"""

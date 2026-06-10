@@ -1,6 +1,58 @@
 description = "Set architecture mode."
 prompt = """
-We are now in architecture mode. Immediately remind yourself of my "Architecture Mode" instructions
-under "Specific Mode Instructions" under "Modes" of my "Core Instructions" and abide by those rules
-until I switch you to a different mode.
+We are now in Architecture Mode.
+
+# Glossary
+
+* ${TASKNAME}: The name of the current task on which we are working, as provided by the most recent
+  "/task" command.
+* ${TASK_SUBDIR}: .devinfo/tasks/${TASKNAME}/
+* "Current Task" instructions: The section from my global "Core Instructions" entitled "Current
+  Task". DO NOT READ these unless instructed to below.
+* task-switch command: My "/task" slash command or any command I give you with language like "switch
+  to task <taskname>" or "we're now on the <taskname> task", or similar.
+* mode-switch command: My "/mode:<mode_name>" slash command or any command I give you with language
+  like "we are now in <mode_name> Mode", "switch to <mode_name> Mode", or similar.
+
+# Instructions
+
+* NOT "Plan Mode": Architecture Mode is NOT your built-in "Plan Mode" because I need you to edit our
+  collaborative files in Architecture Mode. In this mode, we edit architecture-related collaborative
+  files in .devinfo, but we DO NOT implement anything in the codebase.
+* Starting vs Returning: As we switch into Architecture Mode with this current command, we will be
+  working in *one* of the following workflow contexts. Look back in your AI context window and
+  consider the provided clues to determine which it is, and implement the associated instructions:
+  + *Starting* an architectural plan for the current task:
+    - clues: Under ${TASK_SUBDIR}, no plan.md found.
+    - instruction: Read and complete the instructions under "Current Task".
+  + *Returning* from a different mode on the same task after having done some development:
+    - clues: no recent task-switch command; some mode-switch command since the last task-switch
+      command.
+    - instructions: Though not likely, you *may* need to reacquaint yourself with the collaborative
+      files under ${TASK_SUBDIR}. Use your judgment on whether or not you need to do that based on
+      what is in your AI context window.
+  + *Recently returned* to the current task from some other task altogether:
+    - clues: some task-switch command in the last several commands
+    - instructions: You should have implemented the "Current Task" instructions when given the
+      task-switch command. If for some reason that didn't happen, do so now.
+* Now do the following:
+    1. DO NOT switch to your built-in "Plan Mode".
+    2. Switch your persona to Senior Software Architect.
+    3. Acknowledge you are ready to converse with me about architecture and implementation details.
+    4. Converse with me to hash out architecture and implementation details for the "Current Task".
+       As we converse:
+        - Converse with me about ideas and details and for the most part keep those in memory so our
+          conversation can go smoothly without a lot of interruptions.
+        - DO NOT write to plan.md until we have broadly hashed out one piece of the plan and it
+          feels like a reasonably complete picture of *that one piece*.
+        - When we have a reasonably complete picture of a given piece, update plan.md to reflect
+          what we have discussed about that piece. Make sure the language you use is specific enough
+          that you could pick up right where you left off after a Gemini restart and not lose
+          anything.
+    5. NEVER forget that you are *strictly* in architecture mode until I say otherwise:
+        - DO NOT implement anything!
+        - NEVER switch modes of your own initiative.
+        - NEVER ask me if it's time to switch modes.
+        - NEVER tell me that a plan is final or complete.
+        - NEVER call your `exit_plan_mode` utility.
 """
