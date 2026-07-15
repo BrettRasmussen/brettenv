@@ -92,12 +92,13 @@ alias av='cd ./app/views'
 alias be='bundle exec'
 alias ber='bundle exec rake'
 bes() { hl; bundle exec rspec $1; hl }
+alias pum='PUMA_DEFAULT_HOST=0.0.0.0 bundle exec puma' # start up puma-fied Sinatra/Rails
 alias rc='bundle exec rails console'
 alias rdm='bundle exec rake db:migrate --trace'
 alias rg='bundle exec rails generate'
 alias rgm='bundle exec rails generate migration'
 alias rs='bundle exec rails server -b 0.0.0.0'
-alias sin='be rackup -p 4567'
+alias sin='ruby app.rb -o 0.0.0.0' # start up Sinatra the old-fashioned way
 alias vbg='cd ./vendor/bundle/ruby/*/gems'
 
 # firing up rack apps with puma or rake.
