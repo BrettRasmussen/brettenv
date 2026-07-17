@@ -19,7 +19,7 @@ help_text=$(cat << EOF
     Env Files (in the order read by dkr): DKR_DIR/all.env, DKR_DIR/BRANCH.env.
 
   THE BASIC WORK-CYCLE (these dkr commands can also take -P; eg. "dkr -bP all")
-    1. Edit Dockerfile.
+    1. Edit Dockerfile and/or your code.
     2. dkr -b: Build image(s) named "BRANCH/SVC" with "docker buildx".
     3. dkr -u: Run images (as SVCS) with "docker compose" to test.
     4. Rinse and repeat as necessary.
