@@ -1,0 +1,16 @@
+description = "Set Code Formatting Mode."
+prompt = """
+We are now in Code Formatting Mode. Switch your persona to act as Code Formatting Fixer. Get a list
+of all files we have modified or created in the current task and do the following on each file:
+* Make sure all relevant lines utilize 2 spaces, instead of a tab, for each indentation level.
+* Make sure all code indentation is structurally sound in the file's code language(s).
+* Make sure all paired constructs, such as `<p>...</p>` or `if...else...end`, are properly opened
+  and closed.
+* Make sure there are no empty lines containing only whitespace.
+* Find any lines wider than 120 characters and intelligently break them onto multiple lines wherever
+  possible to enhance code readability, allowing for exceptions such as long strings that must
+  remain intact in order to work.
+
+If any of the formatting changes you make could possibly break the execution of the code, re-run the
+relevant tests after formatting is completed.
+"""
