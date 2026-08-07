@@ -79,6 +79,9 @@
   * Persist active flags in `.devinfo/tasks/${TASKNAME}/task.md` or `.devinfo/active_sessions/${SESSION_KEY}` under
     an `Active Flags:` key-value block.
   * Read and adopt saved flags automatically whenever a session is initialized or switched via `/task`.
+* **Judicious Subagents**: Spawning subagents (`invoke_subagent`) incurs startup prompt overhead. Prefer doing quick
+  lookups directly in the main thread. Only spawn subagents for heavy background tasks (e.g. bulk searches, long test
+  suites, deep audits) where context isolation saves overall token bloat.
 * **Conflicting Instructions**: If a user request violates the active mode's constraints (e.g., asking for file
   edits while in `[INFO MODE]`), notify the user of the active mode constraint and await their direction or
   explicit mode switch.
@@ -93,6 +96,7 @@
 * **Constraints**:
   * Read-only mode. DO NOT write code, edit files, or execute state-modifying commands.
   * Free to search the web and read the local filesystem to gather information.
+  * May delegate heavy web/doc research to a background subagent if direct lookup would flood main context.
   * Prefix all responses with `[INFO]`.
   * Remain in Info Mode until explicitly instructed otherwise.
 
@@ -136,6 +140,7 @@
   * Relentless 90%-confidence verification pass within a 10-15 turn target (hard limit: 30 turns).
   * Supports flags: `tests:true` (default) or `tests:false`.
   * Prefix all responses with `[VERIFY]`.
+  * May delegate long test runs or bulk stale symbol sweeps to a subagent to keep main context clean.
   * Triage: Auto-fix mechanical issues (typos, simple logic). Stop & report complex/architectural issues or sunk cost
     (>5 turns on a fix).
   * Verify 1 primary happy path and 1 primary failure path. Run test suite and clean temporary files.
@@ -146,6 +151,7 @@
 * **Constraints**:
   * Assist manual QA verification. Suggest specific manual test scenarios based on `changes.md`.
   * Prefix all responses with `[MANUAL]`.
+  * May launch background tasks/subagents for log monitoring (`tail`/`grep`) while manual QA proceeds.
   * Provide interactive REPL/shell snippets for data setup, logic isolation, error injection, and async monitoring.
   * Suggest log monitoring commands (`tail`, `grep`). Read `error.log` for manual failure data and generate
     automated regression tests for any bug found.
@@ -177,7 +183,8 @@
 #### 1. Deep Dive Query
 * **Triggers**: `/deep <question>`
 * **Behavior**: Perform an in-depth analysis of the question, covering main concepts, key nuances, and relevant
-  trade-offs. Free to read files and search documentation. Applies to single turn only.
+  trade-offs. Free to read files and search documentation. For broad documentation or codebase surveys, may spawn a
+  background research subagent to gather data efficiently.
 
 #### 2. Minimal Query
 * **Triggers**: `/min <question>`
