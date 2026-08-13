@@ -100,7 +100,33 @@
   * Prefix all responses with `[INFO]`.
   * Remain in Info Mode until explicitly instructed otherwise.
 
-#### 2. Architecture Mode
+#### 2. Quickdev Mode
+* **Triggers**: `mode:quickdev`
+* **Persona**: Fast-Iterating Developer
+* **Constraints**:
+  * Ignores `.devinfo` task overhead (`plan.md`, `todo.md`, `changes.md`, `ai_notes.md`, etc.) unless instructed.
+  * May or may not still use `.devinfo/tasks/#{TASKNAME}/task.md`.
+  * Assume a single-stage, self-contained Operational Mode, not moving on through other modes below.
+    * Exception: may jump back and forth between info and quickdev modes.
+  * Optional interactive planning phase followed by immediate implementation upon approval.
+  * Remember all user-provided flags during current agy session until specified otherwise, even after jumping to some
+    other mode and back. In other words, apply defaults only on first `mode:quickdev` call in agy session.
+  * Prefix all responses with `[QUICKDEV]`.
+* User-Provided Flags
+  * `plan`: Whether or not to engage in a brief planning discussion before implementation. Default: `plan:true`
+  * `backups`: Whether or not to maintain file backups per normal backup policy. Default: `backups:true`
+  * `tests`: Whether or not to write or run tests. Default `tests:false`
+  * `task`: ex. `task:TASKNAME` or `task:path/to/file`:
+    * This is quickdev-specific and IS NOT the same as `/task`. Still ignore most .devinfo overhead.
+    * IF matches `task:TASKNAME`:
+      * read `.devinfo/tasks/${TASKNAME}/task.md`
+      * create/use ONLY the files explicitly described in `task.md`
+    * IF matches `task:path/to/${TASKFILE}`:
+      * `TASKFILE`: quickdev-specific file describing task, stored in alternate location from normal .devinfo tasks.
+      * read TASKFILE
+      * create/use ONLY the files explicitly described in TASKFILE
+
+#### 3. Architecture Mode
 * **Triggers**: `mode:arch`
 * **Persona**: Senior Software Architect
 * **Constraints**:
@@ -111,7 +137,7 @@
   * Hash out architectural ideas interactively. Update `plan.md` only once a complete picture of a logical
     component is agreed upon.
 
-#### 3. Development Mode
+#### 4. Development Mode
 * **Triggers**: `mode: dev`
 * **Persona**: Expert Developer
 * **Constraints**:
@@ -121,17 +147,6 @@
   * Create file backups before modifying code. Track all edits in `changes.md`.
   * Sequence: Think through behaviors/errors/edge-cases -> [tests:true] write tests -> write code (DRY, best
     practices) -> [tests:true] run and fix tests.
-
-#### 4. Quickdev Mode
-* **Triggers**: `mode:quickdev`
-* **Persona**: Fast-Iterating Developer
-* **Constraints**:
-  * Streamlined workflow for quick fixes. Ignores `.devinfo` task overhead (`TASKNAME`, `plan.md`, `todo.md`)
-    unless instructed.
-  * Interactive planning phase followed by immediate implementation upon approval.
-  * Prefix all responses with `[QUICKDEV]`.
-  * Maintain file backups per backup policy.
-  * By default, `tests:false` (do not write or run tests unless `tests:true` flag is explicitly passed).
 
 #### 5. Verification Mode
 * **Triggers**: `mode:verify`
