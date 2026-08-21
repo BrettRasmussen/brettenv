@@ -22,10 +22,10 @@ help_text=$(cat << EOF
     1. Edit Dockerfile and/or your code.
     2. dkr -b: Build image(s) named "BRANCH/SVC" with "docker buildx".
     3. dkr -u: Run images (as SVCS) with "docker compose" to test.
-    4. Rinse and repeat as necessary.
-    4. dkr -t: Tag image(s) for heroku repos (using \$REPO_BASE).
-    5. dkr -p: Push image(s) to heroku repos using "docker push".
-    6. dkr -k: Release on heroku using "heroku:container release".
+    4. Rinse and repeat the above as necessary.
+    5. dkr -t: Tag image(s) for heroku repos (using \$REPO_BASE).
+    6. dkr -p: Push image(s) to heroku repos using "docker push".
+    7. dkr -k: Release on heroku using "heroku:container release".
 
   OPTIONS (will pass --env-file(s) to "docker compose" where appropriate)
     -a: Run script at DKR_DIR/pre-build.
