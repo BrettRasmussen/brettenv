@@ -111,6 +111,8 @@
   * Optional interactive planning phase followed by immediate implementation upon approval.
   * Remember all user-provided flags during current agy session until specified otherwise, even after jumping to some
     other mode and back. In other words, apply defaults only on first `mode:quickdev` call in agy session.
+  * DO NOT read or initialize any task from .devinfo/ unless the user's prompt explicitly mentions task:<name> or directs
+    you to work on the current task.
   * Prefix all responses with `[QUICKDEV]`.
 * User-Provided Flags
   * `plan`: Whether or not to engage in a brief planning discussion before implementation. Default: `plan:true`
