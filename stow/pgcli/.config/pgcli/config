@@ -257,27 +257,27 @@ ci = SELECT COUNT(*) FROM $1 WHERE id=$2
 cmn = SELECT COUNT(*) FROM $1 WHERE $2=(SELECT MIN($2) FROM $1)
 cmx = SELECT COUNT(*) FROM $1 WHERE $2=(SELECT MAX($2) FROM $1)
 cw = SELECT COUNT(*) FROM $1 WHERE $2
-d = SELECT DISTINCT($1) FROM $2
-di = SELECT DISTINCT($1) FROM $2 WHERE id=$3
-dmn = SELECT DISTINCT($1) FROM $2 WHERE $3=(SELECT MIN($3) FROM $2)
-dmx = SELECT DISTINCT($1) FROM $2 WHERE $3=(SELECT MAX($3) FROM $2)
-dw = SELECT DISTINCT($1) FROM $2 WHERE $3
+d = SELECT DISTINCT($2) FROM $1
+di = SELECT DISTINCT($2) FROM $1 WHERE id=$3
+dmn = SELECT DISTINCT($2) FROM $1 WHERE $3=(SELECT MIN($3) FROM $1)
+dmx = SELECT DISTINCT($2) FROM $1 WHERE $3=(SELECT MAX($3) FROM $1)
+dw = SELECT DISTINCT($2) FROM $1 WHERE $3
 i = SELECT id FROM $1
 ii = SELECT id FROM $1 WHERE id=$2
 iw = SELECT id FROM $1 WHERE $2
-mn = SELECT MIN($1) FROM $2
+mn = SELECT MIN($2) FROM $1
 mni = SELECT MIN(id) FROM $1
 mniw = SELECT MIN(id) FROM $1 WHERE $2
-mnw = SELECT MIN($1) FROM $2 WHERE $3
-mx = SELECT MAX($1) FROM $2
+mnw = SELECT MIN($2) FROM $1 WHERE $3
+mx = SELECT MAX($2) FROM $1
 mxi = SELECT MAX(id) FROM $1
 mxiw = SELECT MAX(id) FROM $1 WHERE $2
-mxw = SELECT MAX($1) FROM $2 WHERE $3
-v = SELECT $1 FROM $2
-vi = SELECT $1 FROM $2 WHERE id=$3
-vmn = SELECT $1 FROM $2 WHERE $3=(SELECT MIN($3) FROM $1)
-vmx = SELECT $1 FROM $2 WHERE $3=(SELECT MAX($3) FROM $1)
-vw = SELECT $1 FROM $2 WHERE $3
+mxw = SELECT MAX($2) FROM $1 WHERE $3
+v = SELECT $2 FROM $1
+vi = SELECT $2 FROM $1 WHERE id=$3
+vmn = SELECT $2 FROM $1 WHERE $3=(SELECT MIN($3) FROM $1)
+vmx = SELECT $2 FROM $1 WHERE $3=(SELECT MAX($3) FROM $1)
+vw = SELECT $2 FROM $1 WHERE $3
 cmp_by_id = "select id, company, guid from companies where id=$1"
 cmp_by_name = "select id, company, guid from companies where company ilike '%$1%' or guid ilike '%$1%'"
 emp_by_id = "select e.id, e.company_id, c.company, c.guid, e.first_name, e.last_name, e.login, e.active from employees e, companies c  where c.id=e.company_id and e.id=$1"
