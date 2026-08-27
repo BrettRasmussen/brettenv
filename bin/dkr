@@ -147,7 +147,7 @@ showrun_cmd () {
 
 [[ ${stages[@]} =~ "explicit_build" ]] && do_explicit_build () {
   for svc in ${services[@]}; do
-    cmd="docker buildx build --target ${svc} -t ${branch}/${svc} --provenance=false ."
+    cmd="docker buildx build --platform linux/amd64 --target ${svc} -t ${branch}/${svc} --provenance=false ."
     showrun_cmd "$cmd"
   done
 }
