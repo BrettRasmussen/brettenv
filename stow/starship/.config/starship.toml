@@ -6,7 +6,7 @@ palette = "volcanic_yellow"
 
 # Define the custom Powerline format
 format = """
-[ $username@$hostname ](bg:color_user fg:color_fg)\
+[ $username@$hostname ](bg:color_user fg:color_fg_dark)\
 [](fg:color_user bg:color_time)\
 [ $time ](bg:color_time fg:color_fg)\
 [](fg:color_time bg:color_dir)\
@@ -62,7 +62,8 @@ color_time = "#5E0B0B"
 color_dir  = "#A31621"
 color_git  = "#E36414"
 color_char = "#E36414"
-color_fg   = "#0D0D0D"
+color_fg   = "#B8B8B8"
+color_fg_dark = "#0D0D0D"
 
 # Configure the username module
 [username]
@@ -91,12 +92,12 @@ truncation_symbol = "…/"
 # Configure the Git branch module (Green background)
 [git_branch]
 symbol = "git:"
-style = "bg:color_git fg:color_fg"
+style = "bg:color_git fg:color_fg_dark"
 format = "[ $symbol$branch ]($style)"
 
 # Configure the Git status module (Green background)
 [git_status]
-style = "bg:color_git fg:color_fg"
+style = "bg:color_git fg:color_fg_dark"
 format = "[$all_status$ahead_behind ]($style)"
 
 # Configure the character module (The final pointer)

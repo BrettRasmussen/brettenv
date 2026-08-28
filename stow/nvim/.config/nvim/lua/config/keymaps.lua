@@ -17,8 +17,10 @@ keymap("i", "<m-j>", "<esc>25j")
 keymap("i", "<m-k>", "<esc>25k")
 
 -- Scrolling
-keymap({ "n", "v" }, "<s-m-j>", "<c-e>")
-keymap({ "n", "v" }, "<s-m-k>", "<c-y>")
+keymap({ "n", "v" }, "<s-m-j>", "25<c-e>25j")
+keymap({ "n", "v" }, "<s-m-k>", "25<c-y>25k")
+keymap({ "n", "v" }, "<c-m-j>", "<c-e>j")
+keymap({ "n", "v" }, "<c-m-k>", "<c-y>k")
 
 -- Custom Bullet Indentation (from utils)
 keymap({ "n", "i", "v" }, "<m-l>", function()

@@ -131,7 +131,12 @@
               {
                 "key_code": "v"
               }
-            ]
+            ],
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
           },
           "to": [
             {
@@ -155,7 +160,12 @@
               {
                 "key_code": "m"
               }
-            ]
+            ],
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
           },
           "to": [
             {
@@ -181,7 +191,12 @@
               {
                 "key_code": "c"
               }
-            ]
+            ],
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
           },
           "to": [
             {
@@ -199,7 +214,12 @@
               {
                 "key_code": "period"
               }
-            ]
+            ],
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
           },
           "to": [
             {
@@ -222,7 +242,12 @@
               {
                 "key_code": "v"
               }
-            ]
+            ],
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
           },
           "to": [
             {
@@ -240,7 +265,12 @@
               {
                 "key_code": "m"
               }
-            ]
+            ],
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
           },
           "to": [
             {
