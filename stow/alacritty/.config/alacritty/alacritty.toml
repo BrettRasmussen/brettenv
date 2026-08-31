@@ -43,6 +43,7 @@ bindings = [
   { key = "Comma", mods = "Control", chars = "\u001b[44;5u" },
   { key = "Equals", mods = "Control", chars = "\u001b[61;5u" },
   { key = "I", mods = "Control", chars = "\u001b[105;5u" },
+  { key = "U", mods = "Control", chars = "\u001b[117;5u" },
   { key = "M", mods = "Control", chars = "\u001b[109;5u" },
   { key = "H", mods = "Control", chars = "\u001b[104;5u" },
   { key = "J", mods = "Control", chars = "\u001b[106;5u" },
