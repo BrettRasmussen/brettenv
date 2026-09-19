@@ -126,39 +126,6 @@
       ]
     },
     {
-      "description": "Kitty Terminal cmd+opt+k",
-      "manipulators": [
-        {
-          "type": "basic",
-          "from": {
-            "key_code": "k",
-            "modifiers": {
-              "mandatory": [
-                "command",
-                "option"
-              ],
-              "optional": [
-                "caps_lock"
-              ]
-            }
-          },
-          "to": [
-            {
-              "shell_command": "open -a 'kitty.app'"
-            }
-          ],
-          "conditions": [
-            {
-              "type": "frontmost_application_unless",
-              "bundle_identifiers": [
-                "^net\\.kovidgoyal\\.kitty$"
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
       "description": "TextEdit cmd+opt+n",
       "manipulators": [
         {
@@ -310,7 +277,7 @@
       ]
     },
     {
-      "description": "iTerm2 cmd+opt+t",
+      "description": "Kitty Terminal cmd+opt+t",
       "manipulators": [
         {
           "type": "basic",
@@ -328,14 +295,14 @@
           },
           "to": [
             {
-              "shell_command": "open -a 'iTerm.app'"
+              "shell_command": "open -a 'kitty.app'"
             }
           ],
           "conditions": [
             {
               "type": "frontmost_application_unless",
               "bundle_identifiers": [
-                "^com\\.googlecode\\.iterm2$"
+                "^net\\.kovidgoyal\\.kitty$"
               ]
             }
           ]
@@ -343,7 +310,7 @@
       ]
     },
     {
-      "description": "Alacritty Terminal shift+cmd+opt+t",
+      "description": "iTerm2 shift+cmd+opt+t",
       "manipulators": [
         {
           "type": "basic",
@@ -362,14 +329,14 @@
           },
           "to": [
             {
-              "shell_command": "open -a 'Alacritty.app'"
+              "shell_command": "open -a 'iTerm.app'"
             }
           ],
           "conditions": [
             {
               "type": "frontmost_application_unless",
               "bundle_identifiers": [
-                "^org\\.alacritty$"
+                "^com\\.googlecode\\.iterm2$"
               ]
             }
           ]

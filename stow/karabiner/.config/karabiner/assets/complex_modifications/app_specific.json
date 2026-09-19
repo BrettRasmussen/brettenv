@@ -110,42 +110,6 @@
       ]
     },
     {
-      "description": "Kitty Terminal new window cmd+opt+k",
-      "manipulators": [
-        {
-          "type": "basic",
-          "from": {
-            "key_code": "k",
-            "modifiers": {
-              "mandatory": [
-                "command",
-                "option"
-              ],
-              "optional": [
-                "caps_lock"
-              ]
-            }
-          },
-          "to": [
-            {
-            "key_code": "n",
-            "modifiers": [
-                "command"
-              ]
-            }
-          ],
-          "conditions": [
-            {
-              "type": "frontmost_application_if",
-              "bundle_identifiers": [
-                "^net\\.kovidgoyal\\.kitty$"
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
       "description": "TextEdit new window cmd+opt+n",
       "manipulators": [
         {
@@ -219,7 +183,7 @@
       ]
     },
     {
-      "description": "iTerm2 new window cmd+opt+t",
+      "description": "Kitty Terminal new window cmd+opt+t",
       "manipulators": [
         {
           "type": "basic",
@@ -247,7 +211,7 @@
             {
               "type": "frontmost_application_if",
               "bundle_identifiers": [
-                "^com\\.googlecode\\.iterm2$"
+                "^net\\.kovidgoyal\\.kitty$"
               ]
             }
           ]
@@ -255,7 +219,7 @@
       ]
     },
     {
-      "description": "Alacritty Terminal new window shift+cmd+opt+t",
+      "description": "iTerm2 new window shift+cmd+opt+t",
       "manipulators": [
         {
           "type": "basic",
@@ -284,7 +248,7 @@
             {
               "type": "frontmost_application_if",
               "bundle_identifiers": [
-                "^org\\.alacritty$"
+                "^com\\.googlecode\\.iterm2$"
               ]
             }
           ]
