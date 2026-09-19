@@ -118,7 +118,7 @@
   * `plan`: Whether or not to engage in a brief planning discussion before implementation. Default: `plan:true`
   * `backups`: Whether or not to maintain file backups per normal backup policy. Default: `backups:true`
   * `tests`: Whether or not to write or run tests. Default `tests:false`
-  * `task`: ex. `task:TASKNAME` or `task:path/to/file`:
+  * `task`: ex. `task:TASKNAME`, `task:path/to/file`, `task:false`:
     * This is quickdev-specific and IS NOT the same as `/task`. Still ignore most .devinfo overhead.
     * IF matches `task:TASKNAME`:
       * read `.devinfo/tasks/${TASKNAME}/task.md`
@@ -127,6 +127,10 @@
       * `TASKFILE`: quickdev-specific file describing task, stored in alternate location from normal .devinfo tasks.
       * read TASKFILE
       * create/use ONLY the files explicitly described in TASKFILE
+    * IF matches `task:false`:
+      + DO NOT read or initialize any task from .devinfo/
+      + DO NOT try to read TASKFILE
+      + DO NOT create any directories or files
 
 #### 3. Architecture Mode
 * **Triggers**: `mode:arch`
