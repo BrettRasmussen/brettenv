@@ -21,6 +21,7 @@ brew "postgresql@16", restart_service: :changed
 brew "rbenv"
 brew "reattach-to-user-namespace"
 brew "redis", restart_service: :changed
+brew "rsync"
 brew "starship"
 brew "stow"
 brew "tmux"
