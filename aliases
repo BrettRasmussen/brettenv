@@ -39,6 +39,9 @@ alias k='tmx -b'
 [[ "${OSTYPE}" =~ "darwin" ]] && alias ack='ack -i'
 [[ "${OSTYPE}" =~ "linux" ]] && alias ack='ack-grep -i'
 
+# aliases for rsync
+alias rsync="rsync --exclude-from=$HOME/.config/rsync/exclude"
+
 # aliases for changing to commonly used directories
 alias hbe="cd ${BRETTENV_DIR}"
 alias ht='cd ~/tmp'

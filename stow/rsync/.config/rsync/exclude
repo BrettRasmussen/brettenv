@@ -1,0 +1,14 @@
+# macOS Volume Metadata & System Caches
+.Spotlight-V100
+.DocumentRevisions-V100
+.TemporaryItems
+.Trashes
+.fseventsd
+.VolumeIcon.icns
+.DS_Store
+._*
+
+# Camera & SD Card System Directories
+MISC/
+CANONMSC/
+NIKON/
