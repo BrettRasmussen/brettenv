@@ -85,7 +85,17 @@ alias gsw='git switch'
 alias sgh='echo $GEM_HOME'
 alias sgp='echo $GEM_PATH'
 
-# rails/sinatra stuff
+# aliases for firing up rack apps (rails, sinatra, etc) with puma or rake in useful configurations
+# for local development
+alias pum='PUMA_DEFAULT_HOST=0.0.0.0 bundle exec puma'
+alias pum1='WEB_CONCURRENCY=1 RAILS_MAX_THREADS=1 PUMA_DEFAULT_HOST=0.0.0.0 bundle exec puma'
+alias pum9='WEB_CONCURRENCY=9 PUMA_DEFAULT_HOST=0.0.0.0 bundle exec puma'
+alias rc='bundle exec rails console'
+alias rjw='bundle exec rake jobs:work'
+alias rs='bundle exec rails server -b 0.0.0.0'
+alias sin='ruby app.rb -o 0.0.0.0' # start up Sinatra the old-fashioned way
+
+# other rails/sinatra conveniences
 alias ac='cd ./app/controllers'
 alias am='cd ./app/models'
 alias aj='cd ./app/javascript'
@@ -95,19 +105,10 @@ alias av='cd ./app/views'
 alias be='bundle exec'
 alias ber='bundle exec rake'
 alias bes='bundle exec rspec'
-alias pum='PUMA_DEFAULT_HOST=0.0.0.0 bundle exec puma' # start up puma-fied Sinatra/Rails
-alias rc='bundle exec rails console'
 alias rdm='bundle exec rake db:migrate --trace'
 alias rg='bundle exec rails generate'
 alias rgm='bundle exec rails generate migration'
-alias rs='bundle exec rails server -b 0.0.0.0'
-alias sin='ruby app.rb -o 0.0.0.0' # start up Sinatra the old-fashioned way
 alias vbg='cd ./vendor/bundle/ruby/*/gems'
-
-# firing up rack apps with puma or rake.
-alias pum1='WEB_CONCURRENCY=1 bundle exec puma'
-alias pum9='WEB_CONCURRENCY=9 bundle exec puma'
-alias rjw='bundle exec rake jobs:work'
 
 # make possible the vim bindings in elixir's iex
 alias iex='rlwrap -a foo iex'
